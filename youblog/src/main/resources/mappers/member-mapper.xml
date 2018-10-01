@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberMapper">
+
+		<resultMap type="Member" id="resultMember">
+			<id property="memberid" column="member_id" />
+			<result property="memberpwd" column="member_pw" />
+			<result property="membername" column="member_name" />
+			<result property="memberphone" column="member_phone" />
+			<result property="memberemail" column="member_email" />
+			<result property="birthday" column="birthday" />
+			<result property="gender" column="gender" />
+			<result property="membergoogleno" column="member_googleno" />
+			<result property="membergoogleid" column="member_googleid" />
+			<result property="manager" column="manager" />
+			<result property="profilephoto" column="profile_photo" />
+			<result property="banner" column="banner" />
+			<result property="readercount" column="reader_count" />
+			<result property="reader_open" column="reader_open" />
+			<result property="formula" column="formula" />
+			<result property="partner" column="partner" />
+			<result property="state" column="state" />
+			<result property="memberdeletedate" column="member_deletedate" />
+			<result property="formula" column="formula" />
+		</resultMap>
+		
+		<resultMap type="Member" id="resultMember">
+			<result property="memberid" column="member_id" />
+			<result property="memberpwd" column="member_pw" />
+			<result property="membername" column="member_name" />
+			<result property="memberphone" column="member_phone" />
+			<result property="memberemail" column="member_email" />
+			<result property="birthday" column="birthday" />
+			<result property="gender" column="gender" />
+			<result property="membergoogleno" column="member_googleno" />
+			<result property="membergoogleid" column="member_googleid" />
+			<result property="manager" column="manager" />
+			<result property="profilephoto" column="profile_photo" />
+			<result property="banner" column="banner" />
+			<result property="readercount" column="reader_count" />
+			<result property="reader_open" column="reader_open" />
+			<result property="formula" column="formula" />
+			<result property="partner" column="partner" />
+			<result property="state" column="state" />
+			<result property="memberdeletedate" column="member_deletedate" />
+			<result property="formula" column="formula" />
+		</resultMap>
+
+</mapper>
