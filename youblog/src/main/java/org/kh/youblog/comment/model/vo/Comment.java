@@ -1,7 +1,7 @@
 package org.kh.youblog.comment.model.vo;
 
 public class Comment implements java.io.Serializable {
-	private final static long SerialVersionUID = 12L;
+	private final static long serialVersionUID = 12L;
 	
 	private String cmtNo;
 	private String blogNo;
@@ -82,7 +82,7 @@ public class Comment implements java.io.Serializable {
 	}
 
 	public static long getSerialversionuid() {
-		return SerialVersionUID;
+		return serialVersionUID;
 	}
 
 	@Override

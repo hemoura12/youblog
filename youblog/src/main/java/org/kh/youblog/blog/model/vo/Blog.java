@@ -23,6 +23,13 @@ public class Blog implements java.io.Serializable{
 	   private String notice;
 	   private String subscribeshare;
 	   private int bestno;
+	   
+	  private int catelevel;
+	  private int cateparent;
+	   
+	  private int likegood;
+	  
+	   
 	public Blog(String blogno, String title, String writerid, String contents, String contentstag, Date writerdate,
 			String thumbnail, String titleimage, String catename1, String catename2, String tag, int hits, int hitstime,
 			int likecount, String state, String notice, String subscribeshare, int bestno) {
