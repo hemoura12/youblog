@@ -23,6 +23,8 @@ public class Member implements java.io.Serializable{
 	private String partner;
 	private String state;
 	private Date memberdeletedate;
+	private Date alarmcheck;
+	
 	
 	public Member(){}
 
