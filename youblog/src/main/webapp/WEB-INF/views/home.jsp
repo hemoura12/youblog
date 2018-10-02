@@ -13,8 +13,11 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<div>
-<h1></h1>
-</div>
+<form action="login.do" method="post">
+	<h1>Test</h1>
+	<input type="text" name="blogno"> <br>
+	<input type="submit" value="test">	
+</form>
+<div>${ blog.title } </div>
 </body>
 </html>
