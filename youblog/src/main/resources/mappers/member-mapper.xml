@@ -27,7 +27,7 @@
 			<result property="formula" column="formula" />
 		</resultMap>
 		
-		<resultMap type="Member" id="resultMember">
+		<resultMap type="Member" id="resultList">
 			<result property="memberid" column="member_id" />
 			<result property="memberpwd" column="member_pw" />
 			<result property="membername" column="member_name" />
