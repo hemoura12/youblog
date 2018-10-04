@@ -46,10 +46,10 @@
 		<result property="bestno" column="bestno"/>
 	</resultMap>
 	
-	<select id="selectBlog" parameterType="String" resultMap="resulBlog">
+	<select id="selectBlog" parameterType="String" resultMap="resultBlog">
 		select * 
 		from TB_BLOG
-		where blog_no = #{blogno};
+		where blog_no = #{blogno}
 	</select>
 	
 </mapper>

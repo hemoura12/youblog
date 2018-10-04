@@ -19,7 +19,9 @@ public class BlogDao {
 	}
 
 	public Blog infoBlog(String blogno) {
-		return sqlSession.selectOne("blogMapper.selectBlog", blogno);
+		
+		System.out.println("dao blogno : " + blogno);
+		return (Blog)sqlSession.selectOne("blogMapper.selectBlog", blogno);
 	}
 
 	public List<Blog> selectList() {
