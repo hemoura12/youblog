@@ -5,10 +5,12 @@
 <configuration>
 	<typeAliases>		
 		<typeAlias type="org.kh.youblog.member.model.vo.Member" alias="Member" />		
+		<typeAlias type="org.kh.youblog.blog.model.vo.Blog" alias="Blog" />	
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/blog-mapper.xml" />
 	</mappers>
 	
 	
