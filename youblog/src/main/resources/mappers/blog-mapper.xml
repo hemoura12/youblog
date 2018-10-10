@@ -6,47 +6,50 @@
 <mapper namespace="blogMapper">
 
 		<resultMap type="Blog" id="resultBlog">
-			<result property="blog_no" column="blog_no" />
+			<id property="blog_no" column="blog_no" />
 			<result property="title" column="title" />
-			<result property="writer_id	" column="writer_id	" />
+			<result property="writerid" column="writer_id	" />
 			<result property="contents" column="contents" />
-			<result property="contents_tag" column="contents_tag" />
-			<result property="write_date" column="write_date" />
+			<result property="contentstag" column="contents_tag" />
+			<result property="writerdate" column="write_date" />
 			<result property="thumbnail" column="thumbnail" />
-			<result property="title_image" column="title_image" />
-			<result property="cate_name1" column="cate_name1" />
-			<result property="cate_name2" column="cate_name2" />
+			<result property="titleimage" column="title_image" />
+			<result property="catename1" column="cate_name1" />
+			<result property="catename2" column="cate_name2" />
 			<result property="tag" column="tag" />
 			<result property="hits" column="hits" />
-			<result property="like_count" column="like_count" />
-			<result property="bed_count" column="bed_count" />
-			<result property="hits_time" column="hits_time" />
+			<result property="likecount" column="like_count" />
+			<result property="bedcount" column="bed_count" />
+			<result property="hitstime" column="hits_time" />
 			<result property="state" column="state" />
 			<result property="notice" column="notice" />
-			<result property="subscribe_share" column="subscribe_share" />
 			<result property="bestno" column="bestno" />
 		</resultMap>
 		
-		<resultMap type="Blog" id="resultBlogList">
-			<result property="blog_no" column="blog_no" />
+		<resultMap type="Blog" id="resultList">
+			<result property="blogno" column="blog_no" />
 			<result property="title" column="title" />
-			<result property="writer_id	" column="writer_id	" />
+			<result property="writerid" column="writer_id	" />
 			<result property="contents" column="contents" />
-			<result property="contents_tag" column="contents_tag" />
-			<result property="write_date" column="write_date" />
+			<result property="contentstag" column="contents_tag" />
+			<result property="writerdate" column="write_date" />
 			<result property="thumbnail" column="thumbnail" />
-			<result property="title_image" column="title_image" />
-			<result property="cate_name1" column="cate_name1" />
-			<result property="cate_name2" column="cate_name2" />
+			<result property="titleimage" column="title_image" />
+			<result property="catename1" column="cate_name1" />
+			<result property="catename2" column="cate_name2" />
 			<result property="tag" column="tag" />
 			<result property="hits" column="hits" />
-			<result property="like_count" column="like_count" />
-			<result property="bed_count" column="bed_count" />
-			<result property="hits_time" column="hits_time" />
+			<result property="likecount" column="like_count" />
+			<result property="bedcount" column="bed_count" />
+			<result property="hitstime" column="hits_time" />
 			<result property="state" column="state" />
 			<result property="notice" column="notice" />
-			<result property="subscribe_share" column="subscribe_share" />
 			<result property="bestno" column="bestno" />
 		</resultMap>
 
+	<select id="selectCategoryBlog" resultMap="resultList" resultType="Blog">
+<!-- 		select * from TB_BLOG -->
+			select * from TB_BLOG where blog_no='1'
+	</select>
+	
 </mapper>
