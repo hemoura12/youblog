@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
-<script type="text/javascript" src="/youblog/resources/js/jquery-3.3.1.min.js"/>
+
 <head>
 	<title>Home</title>
 </head>
@@ -21,8 +21,6 @@
 </form>
 </body>
 
-<script type="text/javascript">
-	
-</script>
+
 
 </html>
