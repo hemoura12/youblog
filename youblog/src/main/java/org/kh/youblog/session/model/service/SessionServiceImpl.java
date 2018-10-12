@@ -18,4 +18,10 @@ public class SessionServiceImpl implements SessionService{
 		return sessionDao.insertSession(memberid);
 	}
 
+	@Override
+	public int updateSession(String sessionname) {
+		
+		return sessionDao.updateSession(sessionname);
+	}
+
 }

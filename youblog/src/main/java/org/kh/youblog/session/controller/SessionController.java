@@ -29,6 +29,14 @@ public class SessionController {
 		return mv;
 	}
 	
+	public ModelAndView updateSession(ModelAndView mv, @RequestParam(value="sessionname") String sessionname){
+		
+		sessionService.updateSession(sessionname);
+		
+		mv.setViewName("home");
+		
+		return mv;
+	}
 	
 	
 	

@@ -31,4 +31,9 @@ public class SessionDao {
 		return result;
 	}
 
+	public int updateSession(String sessionname) {
+		
+		return (int)sqlSession.update("session-mapper.updateSession", sessionname);
+	}
+
 }
