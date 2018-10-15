@@ -31,9 +31,16 @@ public class SessionDao {
 		return result;
 	}
 
-	public int updateSession(String sessionname) {
+	public int updateSession(ArrayList<Session> updateSessionList) {
+		int result = 0;
 		
-		return (int)sqlSession.update("session-mapper.updateSession", sessionname);
+		for(int i = 0 ; i < updateSessionList.size(); i++){
+			Session s = new Session();
+			s = updateSessionList.get(i);
+			
+			result += (int)sqlSession.update("session-mapper.updateSession",s.getSessionname());
+		}
+		return result;
 	}
 
 }

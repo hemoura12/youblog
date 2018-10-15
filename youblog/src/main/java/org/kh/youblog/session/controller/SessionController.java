@@ -1,6 +1,9 @@
 package org.kh.youblog.session.controller;
 
+import java.util.ArrayList;
+
 import org.kh.youblog.session.model.service.SessionService;
+import org.kh.youblog.session.model.vo.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,9 @@ public class SessionController {
 		return mv;
 	}
 	
-	public ModelAndView updateSession(ModelAndView mv, @RequestParam(value="sessionname") String sessionname){
+	public ModelAndView updateSession(ModelAndView mv, @RequestParam(value="updateSessionList") ArrayList<Session> updateSessionList){
 		
-		sessionService.updateSession(sessionname);
+		sessionService.updateSession(updateSessionList);
 		
 		mv.setViewName("home");
 		

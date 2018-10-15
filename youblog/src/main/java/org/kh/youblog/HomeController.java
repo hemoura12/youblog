@@ -40,6 +40,12 @@ public class HomeController {
 	public String mainView(){
 		return "home";
 	}*/
+	
+	@RequestMapping("test2.do")
+	public String test(){
+		
+		return "test";
+	}
 }
 
 
