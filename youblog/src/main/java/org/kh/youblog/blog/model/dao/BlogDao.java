@@ -1,7 +1,9 @@
 package org.kh.youblog.blog.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.kh.youblog.blog.model.vo.Blog;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,9 +18,32 @@ public class BlogDao {
 	
 	public BlogDao(){}
 
-	public List<Blog> categoryBlog() {
-		List<Blog> result = sqlSession.selectList("blogMapper.selectCategoryBlog");
-		return result;
+	public ArrayList<Blog> categoryBlog(String cate1, String cate2) {
+		Map map = new HashMap();
+		map.put("cate1", cate1);
+		map.put("cate2", cate2);
+		List<Blog> result = sqlSession.selectList("blogMapper.selectCategoryBlog", map);
+		return (ArrayList<Blog>)result;
+	}
+	
+	public ArrayList<HashMap<String, String>> categoryList_Level1() {
+		List<HashMap<String, String>> result = sqlSession.selectList("blogMapper.categoryListLev1");
+		return (ArrayList<HashMap<String, String>>)result;
+	}
+
+	public ArrayList<HashMap<String, String>> categoryList_Level2() {
+		List<HashMap<String, String>> result = sqlSession.selectList("blogMapper.categoryList");
+		return (ArrayList<HashMap<String, String>>)result;
+	}
+
+	public ArrayList<Blog> bestBlogList() {
+		List<Blog> result = sqlSession.selectList("blogMapper.bestBlogList");
+		return (ArrayList<Blog>)result;
+	}
+
+	public ArrayList<Blog> subsBlogList(String memberid) {
+		List<Blog> result = sqlSession.selectList("blogMapper.subsBlogList", memberid);
+		return (ArrayList<Blog>)result;
 	}
 
 }

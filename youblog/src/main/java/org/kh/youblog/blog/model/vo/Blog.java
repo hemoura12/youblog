@@ -24,7 +24,26 @@ public class Blog implements java.io.Serializable{
 	   private String notice;
 	   private int bestno;
 	   
-	  private int catelevel;
+	   private int readercount;
+	   private String readerid;
+	   
+	  public int getReadercount() {
+		return readercount;
+	}
+
+	public void setReadercount(int readercount) {
+		this.readercount = readercount;
+	}
+
+	public String getReaderid() {
+		return readerid;
+	}
+
+	public void setReaderid(String readerid) {
+		this.readerid = readerid;
+	}
+
+	private int catelevel;
 	  private int cateparent;
 	   
 	  private int likegood;
