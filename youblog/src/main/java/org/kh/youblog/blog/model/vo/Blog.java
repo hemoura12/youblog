@@ -2,32 +2,56 @@ package org.kh.youblog.blog.model.vo;
 
 import java.sql.Date;
 
-public class Blog implements java.io.Serializable{
+public class Blog implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
+	private String rowno;
 	private String blogno;
-	   private String title;
-	   private String writerid;
-	   private String contents;
-	   private String contentstag;
-	   private Date writerdate;
-	   private String thumbnail;
-	   private String titleimage;
-	   private String catename1;
-	   private String catename2;
-	   private String tag;
-	   private int hits;
-	   private int hitstime;
-	   private int likecount;
-	   private int bedcount;
-	   private String state;
-	   private String notice;
-	   private int bestno;
-	   
-	   private int readercount;
-	   private String readerid;
-	   
-	  public int getReadercount() {
+	private String title;
+	private String writerid;
+	private String membername;
+	private String contents;
+	private String contentstag;
+	private Date writerdate;
+	private String thumbnail;
+	private String titleimage;
+	private String catename1;
+	private String catename2;
+	private String tag;
+	private int hits;
+	private int hitstime;
+	private int likecount;
+	private int bedcount;
+	private String state;
+	private String notice;
+	private int bestno;
+
+	private int readercount;
+	private String readerid;
+
+	private int catelevel;
+	private int cateparent;
+
+	private int likegood;
+
+	
+	public String getRowno() {
+		return rowno;
+	}
+
+	public void setRowno(String rowno) {
+		this.rowno = rowno;
+	}
+
+	public String getMembername() {
+		return membername;
+	}
+
+	public void setMembername(String membername) {
+		this.membername = membername;
+	}
+
+	public int getReadercount() {
 		return readercount;
 	}
 
@@ -42,11 +66,6 @@ public class Blog implements java.io.Serializable{
 	public void setReaderid(String readerid) {
 		this.readerid = readerid;
 	}
-
-	private int catelevel;
-	  private int cateparent;
-	   
-	  private int likegood;
 
 	public String getBlogno() {
 		return blogno;
@@ -225,7 +244,5 @@ public class Blog implements java.io.Serializable{
 				+ bedcount + ", state=" + state + ", notice=" + notice + ", bestno=" + bestno + ", catelevel="
 				+ catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + "]";
 	}
-	  
-	  
-	   
+
 }

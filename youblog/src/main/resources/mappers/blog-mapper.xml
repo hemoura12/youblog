@@ -7,8 +7,10 @@
 
 		<resultMap type="Blog" id="resultBlog">
 			<id property="blogno" column="blog_no" />
+			<result property="rowno" column="rowno" />
 			<result property="title" column="title" />
 			<result property="writerid" column="writer_id" />
+			<result property="membername" column="member_name" />
 			<result property="contents" column="contents" />
 			<result property="contentstag" column="contents_tag" />
 			<result property="writerdate" column="write_date" />
@@ -30,8 +32,10 @@
 		
 		<resultMap type="Blog" id="resultList">
 			<result property="blogno" column="blog_no" />
+			<result property="rowno" column="rowno" />
 			<result property="title" column="title" />
 			<result property="writerid" column="writer_id" />
+			<result property="membername" column="member_name" />
 			<result property="contents" column="contents" />
 			<result property="contentstag" column="contents_tag" />
 			<result property="writerdate" column="write_date" />
@@ -51,10 +55,26 @@
 			<result property="readerid" column="reader_id" />
 		</resultMap>
 		
+	<select id="allCategory" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST)
+		WHERE rowno <![CDATA[ > ]]> #{row1}
+		and rowno <![CDATA[ < ]]>= #{row2}
+	</select>		
+		
+	<select id="selectCategoryAll" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS NO, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST)
+		WHERE CATE_NAME1 = #{cate1}
+	</select>	
 		
 	<select id="selectCategoryBlog" resultMap="resultList" resultType="Blog">
-		select * from TB_BLOG
-		where CATE_NAME1 = #{cate1}
+		select * from V_BLOG_LIST
+		WHERE CATE_NAME1 = #{cate1}
 		and CATE_NAME2 = #{cate2}
 	</select>
 	
@@ -67,7 +87,9 @@
 	</select>
 	
 	<select id="bestBlogList" resultMap="resultList" resultType="Blog">
-		SELECT * FROM TB_BLOG WHERE rownum <![CDATA[ < ]]> =10 order by BESTNO
+		SELECT * FROM TB_BLOG
+		WHERE STATE = 'N'
+		AND rownum <![CDATA[ < ]]> =10 order by BESTNO
 	</select>
 		
 	<select id="subsBlogList" resultMap="resultList" resultType="Blog">

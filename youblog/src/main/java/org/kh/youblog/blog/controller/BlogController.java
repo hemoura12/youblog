@@ -1,11 +1,18 @@
 package org.kh.youblog.blog.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.kh.youblog.HomeController;
 import org.kh.youblog.blog.model.service.BlogService;
 import org.kh.youblog.blog.model.vo.Blog;
@@ -33,7 +40,6 @@ public class BlogController {
 			@RequestParam(value="cate2") String cate2,
 			/*HttpServletRequest request,*/
 			ModelAndView mv){
-
 		
 		mv.addObject("blog", blogService.categoryBlog(cate1, cate2));
 		
@@ -42,18 +48,82 @@ public class BlogController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "categoryList.do")
+	@RequestMapping(value = "categoryAll.do")
 	public ModelAndView categoryList(
 			/*HttpServletRequest request,*/
 			ModelAndView mv){
 
-		mv.addObject("cate_lev1", blogService.categoryList_Level1());
-		mv.addObject("cate_lev2", blogService.categoryList_Level2());
+		mv.addObject("blog", blogService.categoryAllBlog(0, 20));
 		
-		mv.setViewName("category/categoryList");
+		mv.setViewName("category/categoryAll");
 		
 		return mv;
 	}
+	
+	@RequestMapping(value="pagingCTG.do", method=RequestMethod.POST)
+	public void pagingCTG(HttpServletResponse response, 
+			@RequestParam(value="cate1") String cate1,
+			@RequestParam(value="cate2") String cate2,
+			@RequestParam(value="rowno1") int rowno1,
+			@RequestParam(value="rowno2") int rowno2) throws IOException{
+		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
+
+		ArrayList<Blog> list;
+		
+		if(cate1.equals("all") && cate1.equals("all"))
+			list =	blogService.categoryAllBlog(rowno1, rowno2);
+		else
+			list =	blogService.categoryBlog(cate1, cate2);
+		//json 배열 객체 생성
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr 로 옮기기
+		for(Blog blog : list){
+			//추출한 user 를 json 객체에 저장하기
+			JSONObject juser = new JSONObject();
+			
+			juser.put("blogno", blog.getBlogno());
+			juser.put("rowno", blog.getRowno());
+			juser.put("title", blog.getTitle());
+			juser.put("writerid", blog.getWriterid());
+			juser.put("memberName", blog.getMembername());
+			juser.put("contents", blog.getContents());
+			juser.put("writerdate", blog.getWriterdate().toString());
+			juser.put("hits", blog.getHits());
+			
+			//json 배열에 json 객체 저장
+			jarr.add(juser);
+		}
+		
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		//jarr 을 전송 객체에 저장
+		sendJson.put("list", jarr);
+		
+		//직접 요청자에게 내보내기
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value = "categoryLife.do")
+	public ModelAndView categoryLife(@RequestParam(value="cate2") String cate2,
+			/*HttpServletRequest request,*/
+			ModelAndView mv){
+		
+		if(cate2.equals("All"))
+			mv.addObject("blog", blogService.categoryBlog("라이프"));
+		else
+			mv.addObject("blog", blogService.categoryBlog("라이프", cate2));
+		//mv.addObject("cate_lev2", blogService.categoryList_Level2());
+		
+		mv.setViewName("category/lifeCTG");
+		
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "bestList.do")
 	public ModelAndView bestBlogList(ModelAndView mv){
@@ -88,4 +158,6 @@ public class BlogController {
 		
 		return mv;
 	}
+	
+
 }

@@ -18,6 +18,19 @@ public class BlogDao {
 	
 	public BlogDao(){}
 
+	public ArrayList<Blog> categoryAllBlog(int row1, int row2) {
+		Map map = new HashMap();
+		map.put("row1", row1);
+		map.put("row2", row2);
+		List<Blog> result = sqlSession.selectList("blogMapper.allCategory", map);
+		return (ArrayList<Blog>)result;
+	}
+	
+	public ArrayList<Blog> categoryBlog(String cate1) {
+		List<Blog> result = sqlSession.selectList("blogMapper.selectCategoryAll", cate1);
+		return (ArrayList<Blog>)result;
+	}
+	
 	public ArrayList<Blog> categoryBlog(String cate1, String cate2) {
 		Map map = new HashMap();
 		map.put("cate1", cate1);
@@ -45,5 +58,8 @@ public class BlogDao {
 		List<Blog> result = sqlSession.selectList("blogMapper.subsBlogList", memberid);
 		return (ArrayList<Blog>)result;
 	}
+
+
+
 
 }

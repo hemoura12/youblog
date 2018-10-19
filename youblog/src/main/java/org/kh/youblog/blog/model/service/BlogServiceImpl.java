@@ -14,6 +14,14 @@ public class BlogServiceImpl implements BlogService{
 	@Autowired
 	private BlogDao blogDao;
 	
+	public ArrayList<Blog> categoryAllBlog(int row1, int row2){
+		return blogDao.categoryAllBlog(row1, row2);
+	}
+	
+	public ArrayList<Blog> categoryBlog(String cate1){
+		return blogDao.categoryBlog(cate1);
+	}
+	
 	public ArrayList<Blog> categoryBlog(String cate1, String cate2){
 		return blogDao.categoryBlog(cate1, cate2);
 	}
