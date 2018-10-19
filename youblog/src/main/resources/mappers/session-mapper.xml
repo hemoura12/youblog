@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sessionMapper">
+
+   <resultMap type="Session" id="resultSession">
+      <id property="sessionname" column="SESSION_NAME"/>
+      <result property ="memberid" column="MEMBER_ID"/>
+      <result property = "sessionorder" column = "SESSION_ORDER"/>
+      <result property="blogorder" column = "BLOG_ORDER"/>
+      <result property="title" column = "TITLE"/>
+      <result property="writer_ir" column="CONTENTS"/>
+      <result property="hits" column="HITS"/>
+      <result property="writedate" column = "WRITE_DATE"/>
+      <result property="thumbnail" column="THUMBNAIL"/>
+   </resultMap>
+   
+   <resultMap type="Session" id="resultList">
+      <result property="sessionname" column="SESSION_NAME"/>
+      <result property ="memberid" column="MEMBER_ID"/>
+      <result property = "sessionorder" column = "SESSION_ORDER"/>
+      <result property="blogorder" column = "BLOG_ORDER"/>
+      <result property="title" column = "TITLE"/>
+      <result property="writer_ir" column="CONTENTS"/>
+      <result property="hits" column="HITS"/>
+      <result property="writedate" column = "WRITE_DATE"/>
+      <result property="thumbnail" column="THUMBNAIL"/>
+   </resultMap>
+   
+   <select id="selectSession" parameterType="String" resultMap="resultSession">
+      select * 
+      from TB_SESSION
+      where member_id = #{memberid}
+   </select>
+   
+   <insert id="insertSessionNull" parameterType="string" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
+      INSERT into TB_SESSION VALUES ('게시판', #{memberid}, 1);   
+   </insert>
+   
+   <insert id="insertSessionNotNull" parameterType="string" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
+      INSERT into tb_session VALUES ('게시판', #{memberid}, (select max(session_order) 
+                                                                                         from tb_session 
+                                                                                         where member_id = #{memberid})+1);
+   </insert>
+   
+   
+   
+   
+</mapper>

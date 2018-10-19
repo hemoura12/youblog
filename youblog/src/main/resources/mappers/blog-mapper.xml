@@ -21,7 +21,6 @@
 		<result property="hitstime" column="htis_time"/>
 		<result property="state" column="state"/>
 		<result property="notice" column="notice"/>
-		<result property="subscribeshare" column="subscribe_share"/>
 		<result property="bestno" column="bestno"/>
 	</resultMap>
 	
@@ -42,7 +41,6 @@
 		<result property="hitstime" column="htis_time"/>
 		<result property="state" column="state"/>
 		<result property="notice" column="notice"/>
-		<result property="subscribeshare" column="subscribe_share"/>
 		<result property="bestno" column="bestno"/>
 	</resultMap>
 	
@@ -50,6 +48,17 @@
 		select * 
 		from TB_BLOG
 		where blog_no = #{blogno}
+	</select>
+	
+	<!-- <select id="myBlogUpdate" parameterType="String" resultMap="resultBlog">
+		select * 
+		from TB_BLOG
+		where blog_no = #{blogno}
+	</select> -->
+	
+	<select id="myBlogList" resultMap="resultList">
+		select * from
+		tb_blog
 	</select>
 	
 </mapper>

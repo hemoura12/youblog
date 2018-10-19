@@ -11,4 +11,7 @@ public interface BlogService {
 	
 	ArrayList<Blog> selectList();
 	
+	/*Blog myBlogUpdate(String blogno);*/
+	ArrayList<Blog> myBlogList();
+	
 }

@@ -7,7 +7,7 @@
 
 		<resultMap type="Member" id="resultMember">
 			<id property="memberid" column="member_id" />
-			<result property="memberpwd" column="member_pw" />
+			<result property="memberpw" column="member_pw" />
 			<result property="membername" column="member_name" />
 			<result property="memberphone" column="member_phone" />
 			<result property="memberemail" column="member_email" />
@@ -19,17 +19,18 @@
 			<result property="profilephoto" column="profile_photo" />
 			<result property="banner" column="banner" />
 			<result property="readercount" column="reader_count" />
-			<result property="reader_open" column="reader_open" />
+			<result property="chanelopen" column="chanel_open" />
+			<result property="subscribeshare" column="subscribe_share"/>
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
+			<result property="alarmcheck" column="alram_check" />
 			<result property="memberdeletedate" column="member_deletedate" />
-			<result property="formula" column="formula" />
 		</resultMap>
 		
 		<resultMap type="Member" id="resultList">
 			<result property="memberid" column="member_id" />
-			<result property="memberpwd" column="member_pw" />
+			<result property="memberpw" column="member_pw" />
 			<result property="membername" column="member_name" />
 			<result property="memberphone" column="member_phone" />
 			<result property="memberemail" column="member_email" />
@@ -41,12 +42,24 @@
 			<result property="profilephoto" column="profile_photo" />
 			<result property="banner" column="banner" />
 			<result property="readercount" column="reader_count" />
-			<result property="reader_open" column="reader_open" />
+			<result property="chanelopen" column="chanel_open" />
+			<result property="subscribeshare" column="subscribe_share"/>
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
+			<result property="alarmcheck" column="alram_check" />
 			<result property="memberdeletedate" column="member_deletedate" />
-			<result property="formula" column="formula" />
-		</resultMap>
+		 </resultMap>
+		
+		<update id="updateChanel" parameterType="Member" >
+			update tb_member set subscribe_share = #{subscribeshare}
+			where member_id = 'user03'
+			<!-- where member_id = #{memberid} -->
+		</update>
+		
+		
+		
+		<!-- flushCache="true" statementType="PREPARED" -->
+
 
 </mapper>

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public class BlogDao {
 	
 	@Autowired
-	SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;
 		
 
 	public Blog selectBlog(Blog blog) {
@@ -28,5 +28,16 @@ public class BlogDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<Blog> myBlogList() {
+		return sqlSession.selectList("blogMapper.myBlogList");
+	}
+
+	
+	/*public Blog myBlogUpdate(String blogno) {
+		return (Blog)sqlSession.selectOne("blogMapper.myBlogUpdate", blogno);
+	}*/
+	
+	
 
 }

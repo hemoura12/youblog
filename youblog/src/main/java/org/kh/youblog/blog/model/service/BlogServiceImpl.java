@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class BlogServiceImpl implements BlogService {
 	
 	@Autowired
-	BlogDao blogDao;
+	private BlogDao blogDao;
 	
 	public BlogServiceImpl(){}
 
@@ -31,5 +31,16 @@ public class BlogServiceImpl implements BlogService {
 		List<Blog> list = blogDao.selectList();
 		return (ArrayList<Blog>)list;
 	}
+
+	@Override
+	public ArrayList<Blog> myBlogList(){
+		List<Blog> list = blogDao.myBlogList();
+		return (ArrayList<Blog>) list;
+	}
+
+	/*@Override
+	public Blog myBlogUpdate(String blogno) {
+		return blogDao.myBlogUpdate(blogno);
+	}*/
 
 }

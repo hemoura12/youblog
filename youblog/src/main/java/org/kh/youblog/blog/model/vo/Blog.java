@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Blog implements java.io.Serializable{
 	private final static long serialversionUID = 11L;
 	
-	private String blogno;
+	   private String blogno;
 	   private String title;
 	   private String writerid;
 	   private String contents;
@@ -19,24 +19,18 @@ public class Blog implements java.io.Serializable{
 	   private int hits;
 	   private int hitstime;
 	   private int likecount;
+	   private int bedcount;
 	   private String state;
 	   private String notice;
-	   private String subscribeshare;
 	   private int bestno;
 	   
-	  private int catelevel;
-	  private int cateparent;
-	   
-	  private int likegood;
-	  
 	  
 	  public Blog(){}
 
 
 	public Blog(String blogno, String title, String writerid, String contents, String contentstag, Date writedate,
 			String thumbnail, String titleimage, String catename1, String catename2, String tag, int hits, int hitstime,
-			int likecount, String state, String notice, String subscribeshare, int bestno, int catelevel,
-			int cateparent, int likegood) {
+			int likecount, int bedcount, String state, String notice, int bestno) {
 		super();
 		this.blogno = blogno;
 		this.title = title;
@@ -52,13 +46,10 @@ public class Blog implements java.io.Serializable{
 		this.hits = hits;
 		this.hitstime = hitstime;
 		this.likecount = likecount;
+		this.bedcount = bedcount;
 		this.state = state;
 		this.notice = notice;
-		this.subscribeshare = subscribeshare;
 		this.bestno = bestno;
-		this.catelevel = catelevel;
-		this.cateparent = cateparent;
-		this.likegood = likegood;
 	}
 
 
@@ -202,6 +193,16 @@ public class Blog implements java.io.Serializable{
 	}
 
 
+	public int getBedcount() {
+		return bedcount;
+	}
+
+
+	public void setBedcount(int bedcount) {
+		this.bedcount = bedcount;
+	}
+
+
 	public String getState() {
 		return state;
 	}
@@ -222,16 +223,6 @@ public class Blog implements java.io.Serializable{
 	}
 
 
-	public String getSubscribeshare() {
-		return subscribeshare;
-	}
-
-
-	public void setSubscribeshare(String subscribeshare) {
-		this.subscribeshare = subscribeshare;
-	}
-
-
 	public int getBestno() {
 		return bestno;
 	}
@@ -239,36 +230,6 @@ public class Blog implements java.io.Serializable{
 
 	public void setBestno(int bestno) {
 		this.bestno = bestno;
-	}
-
-
-	public int getCatelevel() {
-		return catelevel;
-	}
-
-
-	public void setCatelevel(int catelevel) {
-		this.catelevel = catelevel;
-	}
-
-
-	public int getCateparent() {
-		return cateparent;
-	}
-
-
-	public void setCateparent(int cateparent) {
-		this.cateparent = cateparent;
-	}
-
-
-	public int getLikegood() {
-		return likegood;
-	}
-
-
-	public void setLikegood(int likegood) {
-		this.likegood = likegood;
 	}
 
 
@@ -282,12 +243,10 @@ public class Blog implements java.io.Serializable{
 		return "Blog [blogno=" + blogno + ", title=" + title + ", writerid=" + writerid + ", contents=" + contents
 				+ ", contentstag=" + contentstag + ", writedate=" + writedate + ", thumbnail=" + thumbnail
 				+ ", titleimage=" + titleimage + ", catename1=" + catename1 + ", catename2=" + catename2 + ", tag="
-				+ tag + ", hits=" + hits + ", hitstime=" + hitstime + ", likecount=" + likecount + ", state=" + state
-				+ ", notice=" + notice + ", subscribeshare=" + subscribeshare + ", bestno=" + bestno + ", catelevel="
-				+ catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + "]";
+				+ tag + ", hits=" + hits + ", hitstime=" + hitstime + ", likecount=" + likecount + ", bedcount="
+				+ bedcount + ", state=" + state + ", notice=" + notice + ", bestno=" + bestno + "]";
 	}
-	  
-	
+
 	
 
 }
