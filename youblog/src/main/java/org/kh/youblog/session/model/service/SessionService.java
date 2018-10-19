@@ -9,6 +9,8 @@ public interface SessionService {
 	public int insertSession(String memberid);
 
 	public int updateSession(ArrayList<Session> updateSessionList);
+
+	public int deleteSession(String sessionname, String memberid);
 		
 	
 }

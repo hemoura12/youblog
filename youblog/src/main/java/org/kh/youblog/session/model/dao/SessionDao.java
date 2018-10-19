@@ -20,12 +20,12 @@ public class SessionDao {
 	public int insertSession(String memberid) {
 		int result = 0;
 		
-		List<Session> check= sqlSession.selectList("session-mapper.selectSession", memberid);
+		List<Session> check= sqlSession.selectList("sessionMapper.selectSession", memberid);
 		
 		if(!check.isEmpty())
-			result = (int)sqlSession.insert("session-mapper.insertSessionNotNull", memberid);
+			result = (int)sqlSession.insert("sessionMapper.insertSessionNotNull", memberid);
 		else
-			result = (int)sqlSession.insert("session-mapper.insertSessionNull", memberid);
+			result = (int)sqlSession.insert("sessionMapper.insertSessionNull", memberid);
 				
 		
 		return result;
@@ -38,9 +38,16 @@ public class SessionDao {
 			Session s = new Session();
 			s = updateSessionList.get(i);
 			
-			result += (int)sqlSession.update("session-mapper.updateSession",s.getSessionname());
+			result += (int)sqlSession.update("sessionMapper.updateSession",s.getSessionname());
 		}
 		return result;
 	}
+
+	public int deleteSession(String sessionname, String memberid) {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.delete("sessionMapper.deleteSession", sessionname);
+	}
+	
+	
 
 }

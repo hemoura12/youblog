@@ -11,31 +11,31 @@
 	<ul style="width: 500px; height: 373px;" id="tree">
 		<li><!-- class="first-child tree-node tree-selected"> -->
 			<div tabindex="0" class="tree-div-selected">
-				<label><span>카테고리 전체보기</span> <em>(3)</em></label>
+				<label><span>카테고리 전체보기</span></label>
 			</div>
 		</li>
 
 		<li ><!-- class="tree-tree-data-15395983380168828028 tree-node  _nclk(edt_blog.category)"> -->
 			<div class="drag-label list" tabindex="0">
-				<label><span>일상</span><em> (1)</em></label>
+				<label><span>일상</span></label>
 
 
 			</div>
 		</li>
 
 		<li> <!-- class="tree-tree-data-15395983380164375988 tree-node  _nclk(edt_blog.category)"> -->
-			<div class="drag-label list" tabindex="0">
-				<label><span>맛집</span><em> (1)</em></label>
-			</div>
+			
 		</li>
-		<li> <!-- class="tree-tree-data-15395983380164259332 tree-node  _nclk(edt_blog.category)"> -->
+		<div class="drag-label list" tabindex="0">
+				<label><span>맛집</span></label>
+			</div><li> <!-- class="tree-tree-data-15395983380164259332 tree-node  _nclk(edt_blog.category)"> -->
 			<div class="drag-label list" tabindex="0">
-				<label><span>[쇼핑]가전/휴대폰</span><em> (1)</em></label>
+				<label><span>[쇼핑]가전/휴대폰</span></label>
 			</div>
 		</li>
 		<li> <!-- class="tree-tree-data-15395983380167242253 tree-node  _nclk(edt_blog.category)"> -->
 			<div class="drag-label list" tabindex="0">
-				<label><span>게시판</span><em> (0)</em></label>
+				<label><span>게시판</span></label>
 			</div>
 		</li>
 		<li> <!-- class="tree-tree-data-15395983380164366207 tree-node  _nclk(edt_blog.category) tree-last-node"> -->
@@ -44,7 +44,7 @@
 			</div>
 		</li>
 	</ul>
-	<button id ="moveTop">맨위</button>
+	<button id ="moveTop" onclick="javascript:movetop()">맨위</button>
 	<button id = "moveUp">위</button>
 	<button id = "moveDown">아래</button>
 	<button id = "moveBottom">맨아래</button>
@@ -54,7 +54,9 @@
 
 <script type="text/javascript" src="/youblog/resources/js/jquery-3.3.1.min.js"/>
 <script type="text/javascript">
-	$()
+	function movetop(){
+		
+	}
 </script>
 
 </html>

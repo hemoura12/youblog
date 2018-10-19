@@ -28,7 +28,7 @@
 		<result property="thumbnail" column="THUMBNAIL"/>
 	</resultMap>
 	
-	<select id="selectSession" parameterType="String" resultMap="resultSesion">
+	<select id="selectSession" parameterType="String" resultMap="resultSession">
 		select * 
 		from TB_SESSION
 		where member_id = #{memberid}

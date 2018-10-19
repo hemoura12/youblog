@@ -26,5 +26,11 @@ public class SessionServiceImpl implements SessionService{
 		
 		return sessionDao.updateSession(updateSessionList);
 	}
+	
+	@Override
+	public int deleteSession(String sessionname, String memberid) {
+		return sessionDao.deleteSession(sessionname, memberid);
+		
+	}
 
 }

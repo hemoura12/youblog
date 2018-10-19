@@ -13,7 +13,6 @@
 </h1>
 
 
-
 <P>  The time on the server is ${serverTime}. </P>
 
 <form action="test1.do" method="post">
