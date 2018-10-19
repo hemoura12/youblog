@@ -21,8 +21,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="org.kh.youblog" />
-	
-	
+	<context:component-scan base-package="org.kh.youblog" />	
+
+	<!-- 파일 업로드시 파일 용량 제한 설정 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="maxUploadSize" value="10000000" />
+	</beans:bean>
 	
 </beans:beans>
