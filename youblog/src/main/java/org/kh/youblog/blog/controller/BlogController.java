@@ -31,6 +31,8 @@ public class BlogController {
 		return mv;
 	}
 	
+	
+	
 	//
 	/*@RequestMapping(value="myblogupdate.do", method=RequestMethod.POST)
 	public ModelAndView myBlogupdate(ModelAndView mv, @RequestParam(value="blogno") String blogno) {

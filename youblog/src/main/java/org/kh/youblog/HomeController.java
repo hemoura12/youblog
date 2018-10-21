@@ -18,16 +18,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-<<<<<<< HEAD
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	/*@RequestMapping(value = "main.do", method = RequestMethod.GET)
+	public String home1(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
-=======
+		return "main";
+	}*/
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
@@ -131,7 +130,13 @@ public class HomeController {
 		return "personblog/personboard";
 	}
 	
-<<<<<<< HEAD
+	/*@RequestMapping(value="update1.do", method = RequestMethod.GET)
+	public String update1(Locale locale, Model model) {
+		
+		return "manager/chanelManage";
+	}*/
+	
+	
 	/*@RequestMapping(value="main.do")
 	public String mainView(){
 		return "home";
@@ -142,22 +147,5 @@ public class HomeController {
 		
 		return "test";
 	}
-=======
-	
-	
-	
-	
->>>>>>> refs/remotes/origin/기경욱
 }
-<<<<<<< HEAD
 
-
-
-
-
-
-
-
-=======
-	
->>>>>>> refs/remotes/origin/기경욱

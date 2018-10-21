@@ -17,13 +17,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping(value="update1.do", method=RequestMethod.POST)
+	@RequestMapping(value="update1.do", method=RequestMethod.GET)
 	public ModelAndView updatechanelMethod(ModelAndView mv , @RequestParam(value="subscribeshare") String check) {
 		System.out.println("controller : " + check);
 		memberService.mychanelupdate(check);
 		
-		//mv.addObject("member", memberService.mychanelupdate(check));
-		mv.setViewName("update1");
+		mv.addObject("member", memberService.mychanelupdate(check));
+		mv.setViewName("chanelManage");
 		
 		return mv;
 	}
@@ -36,16 +36,4 @@ public class MemberController {
 		return mv;
 	}*/
 
-	// @ResponseBody
-	// @RequestBody Map<Member, Member> map,
-
-	/*
-	 * public ResponseEntity<String> updatechanelMethod(@RequestBody String param)
-	 * throws Exception{ System.out.println("param : " + param); //전송온 json 문자열을
-	 * json객체로 바꿈 JSONParser jparser = new JSONParser(); JSONArray jarr =
-	 * (JSONArray)jparser.parse(param); System.out.println("jarr size : " +
-	 * jarr.size());
-	 * 
-	 * return new ResponseEntity<String>("sucess", HttpStatus.OK); }
-	 */
 }
