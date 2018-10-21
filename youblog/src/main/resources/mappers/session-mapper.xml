@@ -44,7 +44,5 @@
                                                                                          where member_id = #{memberid})+1);
    </insert>
    
+   </mapper>
    
-   
-   
-</mapper>
