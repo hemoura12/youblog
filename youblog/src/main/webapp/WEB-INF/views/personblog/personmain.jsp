@@ -64,6 +64,7 @@
                     </div>-->
                     <ul class="channel_list">
                         <li>
+                         <a class = "movepage" href ="detailpage.do" >
                             <div class="leftTextBox">
                                 <img src="resources/images/arial.jpg" alt="프로필이미지" class="profileImg">
                                 <div class="infoBox">
@@ -104,7 +105,9 @@
                             <div class="rightImgBox">
                                 <img src="resources/images/4k.jpg" alt="이미지" class="mainImg">
                             </div>
+                            </a>
                         </li>
+                        
 
                         <li>
                             <div class="leftTextBox">

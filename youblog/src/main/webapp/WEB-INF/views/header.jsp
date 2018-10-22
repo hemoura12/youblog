@@ -59,8 +59,8 @@
                 </button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="personmain.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
+                <li><a href="writepage.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                <li><a href="personmain.do"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
                 <li><a href="info.do"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
                 <a href ="login.do"><button class="btn btn-primary_1" type="button">
                     로그인
