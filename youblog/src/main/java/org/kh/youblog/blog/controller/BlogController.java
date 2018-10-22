@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.kh.youblog.HomeController;
 import org.kh.youblog.blog.model.service.BlogService;
 import org.kh.youblog.blog.model.vo.Blog;
+import org.kh.youblog.member.model.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 //@SessionAttributes("blog")
 public class BlogController {
@@ -34,28 +36,15 @@ public class BlogController {
 	private BlogService blogService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
-
-	@RequestMapping(value = "category_view.do")
-	public ModelAndView categorySelect(@RequestParam(value="cate1") String cate1,
-			@RequestParam(value="cate2") String cate2,
-			/*HttpServletRequest request,*/
-			ModelAndView mv){
-		
-		mv.addObject("blog", blogService.categoryBlog(cate1, cate2));
-		
-		mv.setViewName("category/categorySelect");
-		
-		return mv;
-	}
 	
-	@RequestMapping(value = "categoryAll.do")
-	public ModelAndView categoryList(
-			/*HttpServletRequest request,*/
+	@RequestMapping(value = "categorySelect.do")
+	public ModelAndView categorySelect(
+			@RequestParam(value="views") String views, 
+			@RequestParam(value="cate2") String cate2, 
 			ModelAndView mv){
 
-		mv.addObject("blog", blogService.categoryAllBlog(0, 20));
-		
-		mv.setViewName("category/categoryAll");
+		mv.addObject("cate2", cate2);
+		mv.setViewName("category/"+views);
 		
 		return mv;
 	}
@@ -69,11 +58,13 @@ public class BlogController {
 		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
 
 		ArrayList<Blog> list;
-		
-		if(cate1.equals("all") && cate1.equals("all"))
+		if(cate1.equals("all") && cate2.equals("all")){
 			list =	blogService.categoryAllBlog(rowno1, rowno2);
-		else
-			list =	blogService.categoryBlog(cate1, cate2);
+		} else if(cate2.equals("all")){
+			System.out.println("레벨2올");
+			list =	blogService.categoryLev2All(cate1, rowno1, rowno2);
+		} else
+			list =	blogService.categoryBlog(cate1, cate2, rowno1, rowno2);
 		//json 배열 객체 생성
 		JSONArray jarr = new JSONArray();
 		
@@ -106,22 +97,6 @@ public class BlogController {
 		out.println(sendJson.toJSONString());
 		out.flush();
 		out.close();
-	}
-	
-	@RequestMapping(value = "categoryLife.do")
-	public ModelAndView categoryLife(@RequestParam(value="cate2") String cate2,
-			/*HttpServletRequest request,*/
-			ModelAndView mv){
-		
-		if(cate2.equals("All"))
-			mv.addObject("blog", blogService.categoryBlog("라이프"));
-		else
-			mv.addObject("blog", blogService.categoryBlog("라이프", cate2));
-		//mv.addObject("cate_lev2", blogService.categoryList_Level2());
-		
-		mv.setViewName("category/lifeCTG");
-		
-		return mv;
 	}
 	
 	

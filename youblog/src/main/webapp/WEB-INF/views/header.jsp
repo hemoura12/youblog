@@ -83,22 +83,32 @@
 </nav><!--/.navbar navbar-default-->
 
 <!-- 파라메터셋팅 -->
-<c:url var="lifeAll" value="categoryLife.do">
+<c:url var="categoryAll" value="categorySelect.do">
+	<c:param name="views" value="categoryAll" />
+	<c:param name="cate2" value="all" />
+</c:url>
+<c:url var="lifeAll" value="categorySelect.do">
+	<c:param name="views" value="lifeCTG" />
     <c:param name="cate2" value="all" />
 </c:url>
-<c:url var="travelAll" value="categoryTravel.do">
+<c:url var="travelAll" value="categorySelect.do">
+	<c:param name="views" value="travelCTG" />
     <c:param name="cate2" value="all" />
 </c:url>
-<c:url var="culturelifeAll" value="categoryCulture.do">
+<c:url var="culturelifeAll" value="categorySelect.do">
+	<c:param name="views" value="cultureCTG" />
     <c:param name="cate2" value="all" />
 </c:url>
-<c:url var="itAll" value="categoryIT.do">
+<c:url var="itAll" value="categorySelect.do">
+	<c:param name="views" value="itCTG" />
     <c:param name="cate2" value="all" />
 </c:url>
-<c:url var="sportAll" value="categorySport.do">
+<c:url var="sportAll" value="categorySelect.do">
+	<c:param name="views" value="sportCTG" />
     <c:param name="cate2" value="all" />
 </c:url>
-<c:url var="currentAll" value="categoryCurrent.do">
+<c:url var="currentAll" value="categorySelect.do">
+	<c:param name="views" value="currentCTG" />
     <c:param name="cate2" value="all" />
 </c:url>
 
@@ -120,7 +130,7 @@
                 <a href="#"><i class="fa fa-gift fa-lg"></i> 주제별</a>
             </li>
             <ul class="sub-menu collapse" id="products">
-                <li class="#"><a href="categoryAll.do">전체</a></li>
+                <li class="#"><a href="${categoryAll }">전체</a></li>
                 <li><a href="${lifeAll }">라이프</a></li>
                 <li><a href="${travelAll }">여행·맛집</a></li>
                 <li><a href="${culturelifeAll }">문화·연예</a></li>

@@ -18,13 +18,14 @@ public class BlogServiceImpl implements BlogService{
 		return blogDao.categoryAllBlog(row1, row2);
 	}
 	
-	public ArrayList<Blog> categoryBlog(String cate1){
-		return blogDao.categoryBlog(cate1);
+	public ArrayList<Blog> categoryLev2All(String cate1, int row1, int row2) {
+		return blogDao.categoryLev2All(cate1, row1, row2);
 	}
 	
-	public ArrayList<Blog> categoryBlog(String cate1, String cate2){
-		return blogDao.categoryBlog(cate1, cate2);
+	public ArrayList<Blog> categoryBlog(String cate1, String cate2, int rowno1, int rowno2){
+		return blogDao.categoryBlog(cate1, cate2, rowno1, rowno2);
 	}
+	
 	
 	public ArrayList<HashMap<String, String>> categoryList_Level1(){
 		return blogDao.categoryList_Level1();
@@ -41,4 +42,6 @@ public class BlogServiceImpl implements BlogService{
 	public ArrayList<Blog> subsBlogList(String memberid){
 		return blogDao.subsBlogList(memberid);
 	}
+
+
 }

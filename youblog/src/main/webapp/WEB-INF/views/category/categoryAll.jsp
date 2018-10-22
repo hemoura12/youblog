@@ -25,21 +25,8 @@
 
 <script type="text/javascript">
 	var rowno = 0;
-/* $(document).ready(function () {
-	  $(document).scroll(function() {
-	    var maxHeight = $(document).height();
-	    var currentScroll = $(window).scrollTop() + $(window).height();
+	var cate2 = "<c:out value="${cate2}" />";
 
-		if (maxHeight <= currentScroll + 100) {
- 	      $.ajax({
-	        // Append next contents
-	        ...
-	      }) 
-			console.log("추가");
-			$("#enters").append("추가");
-	    }
-	  })
-	}); */
 	$( document ).ready(function() {
 
         if(document.location.hash) {
@@ -63,26 +50,23 @@
 				rowno += parseInt(20);
 				/*rowno = parseInt(document.location.hash.replace("#", "")) + parseInt(20); */
 			}
-		console.log("추가"); 
-		getList(parseInt(rowno)-parseInt(20), rowno);
+		getList(cate2, parseInt(rowno)-parseInt(20), rowno);
 		/* document.location.hash = "#" + rowno; */
 		}
 	});
 
-	function getList(rowno1, rowno2) {
-		console.log(rowno1+" "+rowno2);
+	function getList(cate2, rowno1, rowno2) {
 		$.ajax({
 			url : "pagingCTG.do",
 			data : {
 				cate1 : "all",
-				cate2 : "all",
+				cate2 : cate2,
 				rowno1 : rowno1,
 				rowno2 : rowno2
 			},
 			type : "post",
 			dataType: "json",
 			success: function(obj){
-				console.log(obj); //object 라고 출력함
 				//리턴된 객체를 문자열로 변환함
 				var objStr = JSON.stringify(obj);
 				//문자열을 json 객체로 바꿈
@@ -94,7 +78,6 @@
 				var outValues = "";
 				for(var i in jsonObj.list){
  					if(i==0){
- 						console.log("작동");
 						outValues += "<div class = 'ul-table'><div class='ul-row'><div class='ul-table__tables'>";
 					}
 					outValues += "<div class='table_1' onclick='location.href=\"selectBlog("+jsonObj.list[i].blogno+")\"''><img src='resources/images/라이언 썸네일.png'/>"
@@ -121,15 +104,10 @@
 	}
 	
 	$( document ).ready(function() {
-
-		getList(0, 20);
+		getList(cate2, 0, 20);
+		rowno=20;
     });
 </script>
-
-
-
-
-
 
 	<title>Main</title>
 
@@ -144,12 +122,12 @@
                     &nbsp;<!--<span class="glyphicon glyphicon-menu-right"></span>-->
                 </div>
                 <div class="category_nav2">
-                    <a class="first_link" href="lifeCTG.html" style="text-decoration:none">라이프</a>
-                    <a class="first_link" href="travelCTG.html" style="text-decoration:none">여행·맛집</a>
-                    <a class="first_link" href="cultureCTG.html" style="text-decoration:none">문화·연예</a>
-                    <a class="first_link" href="itCTG.html" style="text-decoration:none">IT</a>
-                    <a class="first_link" href="sportCTG.html" style="text-decoration:none">스포츠</a>
-                    <a class="first_link" href="currentCTG.html" style="text-decoration:none">시사</a>
+                    <a class="first_link" href="categorySelect.do?views=lifeCTG&cate2=all" style="text-decoration:none">라이프</a>
+                    <a class="first_link" href="categorySelect.do?views=travelCTG&cate2=all" style="text-decoration:none">여행·맛집</a>
+                    <a class="first_link" href="categorySelect.do?views=cultureCTG&cate2=all" style="text-decoration:none">문화·연예</a>
+                    <a class="first_link" href="categorySelect.do?views=itCTG&cate2=all" style="text-decoration:none">IT</a>
+                    <a class="first_link" href="categorySelect.do?views=sportCTG&cate2=all" style="text-decoration:none">스포츠</a>
+                    <a class="first_link" href="categorySelect.do?views=currentCTG&cate2=all" style="text-decoration:none">시사</a>
                 </div>
             </div>
             <div class="division_line"></div>

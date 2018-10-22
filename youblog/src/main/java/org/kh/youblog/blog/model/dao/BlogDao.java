@@ -26,18 +26,25 @@ public class BlogDao {
 		return (ArrayList<Blog>)result;
 	}
 	
-	public ArrayList<Blog> categoryBlog(String cate1) {
-		List<Blog> result = sqlSession.selectList("blogMapper.selectCategoryAll", cate1);
+	public ArrayList<Blog> categoryLev2All(String cate1, int row1, int row2) {
+		Map map = new HashMap();
+		map.put("cate1", cate1);
+		map.put("row1", row1);
+		map.put("row2", row2);
+		List<Blog> result = sqlSession.selectList("blogMapper.selectCTGLev2All", map);
 		return (ArrayList<Blog>)result;
 	}
 	
-	public ArrayList<Blog> categoryBlog(String cate1, String cate2) {
+	public ArrayList<Blog> categoryBlog(String cate1, String cate2, int row1, int row2) {
 		Map map = new HashMap();
 		map.put("cate1", cate1);
 		map.put("cate2", cate2);
-		List<Blog> result = sqlSession.selectList("blogMapper.selectCategoryBlog", map);
+		map.put("row1", row1);
+		map.put("row2", row2);
+		List<Blog> result = sqlSession.selectList("blogMapper.selectCTG", map);
 		return (ArrayList<Blog>)result;
 	}
+	
 	
 	public ArrayList<HashMap<String, String>> categoryList_Level1() {
 		List<HashMap<String, String>> result = sqlSession.selectList("blogMapper.categoryListLev1");
