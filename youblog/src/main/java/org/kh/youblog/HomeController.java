@@ -122,6 +122,36 @@ public class HomeController {
 		
 		return "personblog/personboard";
 	}
+	//member
+	@RequestMapping(value = "login.do", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {		
+		return "member/loginView";
+	}
+	@RequestMapping(value = "join.do", method = RequestMethod.GET)
+	public String join(Locale locale, Model model) {		
+		return "member/join";
+	}
+	@RequestMapping(value = "sec_join.do", method = RequestMethod.GET)
+	public String sec_join(Locale locale, Model model) {		
+		return "member/join2";
+	}
+	@RequestMapping(value = "info.do", method = RequestMethod.GET)
+	public String info(Locale locale, Model model) {		
+		return "member/memberinfo";
+	}	
+	@RequestMapping(value = "passchange.do", method = RequestMethod.GET)
+	public String passchange(Locale locale, Model model) {		
+		return "member/passwordchange";
+	}
+	@RequestMapping(value = "detailpage.do", method = RequestMethod.GET)
+	public String detailpage(Locale locale, Model model) {		
+		return "page/detailpage";
+	}
+	@RequestMapping(value = "writepage.do", method = RequestMethod.GET)
+	public String wirtepage(Locale locale, Model model) {		
+		return "page/writepage";
+	}
+	
 	
 
 	/*@RequestMapping(value="main.do")

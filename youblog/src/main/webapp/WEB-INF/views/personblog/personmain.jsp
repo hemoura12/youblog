@@ -66,6 +66,7 @@
                     <ul class="channel_list">
                     <c:set var="m" value="${member }"/>
 						<c:forEach items="${blog }" var="b">
+							<a class = "movepage" href ="detailpage.do" >
 							<li>
 								<div class="leftTextBox">
 									<img src="resources/images/arial.jpg" alt="프로필이미지"
@@ -84,6 +85,7 @@
 									<img src="resources/images/4k.jpg" alt="이미지" class="mainImg">
 								</div>
 							</li>
+							</a>
 						</c:forEach>
 					</ul>
                 </div> <!--channel_conbox-->

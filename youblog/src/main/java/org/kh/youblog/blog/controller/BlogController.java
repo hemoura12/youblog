@@ -26,7 +26,7 @@ public class BlogController {
 	private MemberService memberService;
 	
 	
-	@RequestMapping(value="personmain.do", method=RequestMethod.POST) //개인 블로그 리스트 호출
+	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView infoBlog(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
 		writerid = "user01";
