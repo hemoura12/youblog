@@ -49,7 +49,7 @@
 	<select id="selectBlog" parameterType="String" resultMap="resultBlog">
 		select * 
 		from TB_BLOG
-		where blog_no = #{blogno}
+		where writer_id = #{writerid}
 	</select>
 	
 </mapper>

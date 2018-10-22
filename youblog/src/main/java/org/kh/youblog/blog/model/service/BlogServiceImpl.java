@@ -22,8 +22,8 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Blog infoBlog(String blogno) {
-		return blogDao.infoBlog(blogno);
+	public ArrayList<Blog> selectBlogList(String writerid) {
+		return (ArrayList<Blog>) blogDao.selectBlogList(writerid);
 	}
 
 	@Override

@@ -59,7 +59,15 @@
                 </button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="personmain.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+            	<c:set var="m" value="${member }"/>
+                <li>
+	                <c:url var="personmain" value="personmain.do">
+						<c:param name="writerid" value="${m.memberid }" />
+					</c:url>
+					<a href = "${personmain }">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+					</a>
+				</li>
                 <li><a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
                 <button class="btn btn-primary_1" type="button">

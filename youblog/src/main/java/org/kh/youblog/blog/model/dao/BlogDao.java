@@ -18,10 +18,10 @@ public class BlogDao {
 		return null;
 	}
 
-	public Blog infoBlog(String blogno) {
+	public List<Blog> selectBlogList(String writerid) {
 		
-		System.out.println("dao blogno : " + blogno);
-		return (Blog)sqlSession.selectOne("blogMapper.selectBlog", blogno);
+		System.out.println("Blog dao writerid : " + writerid);
+		return sqlSession.selectList("blogMapper.selectBlog", writerid);
 	}
 
 	public List<Blog> selectList() {

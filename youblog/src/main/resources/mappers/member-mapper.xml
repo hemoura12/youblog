@@ -48,5 +48,11 @@
 			<result property="memberdeletedate" column="member_deletedate" />
 			<result property="formula" column="formula" />
 		</resultMap>
+		
+		<select id="selectBlogMember" parameterType="string" statementType="PREPARED" resultMap="resultMember">
+			Select *
+			from TB_MEMBER
+			where member_id = #{writerid}
+		</select>
 
 </mapper>
