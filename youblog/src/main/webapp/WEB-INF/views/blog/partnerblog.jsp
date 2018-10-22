@@ -3,35 +3,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<title>sportCTG</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
+    <title>partnerblog</title>
 </head>
-
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
 <div class="conWrap">
-        <!--4x4 배열 시작-->
     <div class="conBox">
+        <!--4x4 배열 시작-->
         <div class = "ul-table">
             <div class="ul-row">
-                <div class="category_nav"><a href="categoryall.do" >전체</a>
-                    &nbsp;<span class="glyphicon glyphicon-menu-right"></span>
-                    <a class="second_ctg" href="categorySport.do" >스포츠</a>
-
-
+                <div class="top_text">
+                    <span class="top_text_title">파트너블로그에 대하여</span>
+                    <span class="#" aria-hidden="true"><img src ="resources/images/secondecheck.jpg" class = "check_img"/></span>
+                    <br><br><br>
+                    <span class="top_text_content">
+                            경험과 정보의 공유, 열정적인 활동, 따뜻한 이웃맞이로 블로그 세상을 더욱 풍요롭게 해준 파트너블로그입니다.<br>
+                            YouBlog와 정식으로 계약을 맺은 파트너로서 YouBlog의 공식적인 라이센스를 사용할 수 있습니다. <br>
+                     </span><br><br><br>
+                    <a href="#" class="btn_src"><button class="official_btn" href="#">파트너 신청하기</button></a>
                 </div>
-                <div class="category_nav2">
-                    <a class="first_link active" href="categorySport.do">전체</a>
-                    <a class="first_link" href="#">축구</a>
-                    <a class="first_link" href="#">야구</a>
-                    <a class="first_link" href="#">농구</a>
-                    <a class="first_link" href="#">배구</a>
-                    <a class="first_link" href="#">골프</a>
-                    <a class="first_link" href="#">스포츠 일반</a>
-                </div>
-                <!--<div class="session_name">인기</div>-->
                 <div class="ul-table__tables">
                     <div class="table_1"><img  src="resources/images/라이언 썸네일.png"/>
                         <label class ="blog_title">Title</label>

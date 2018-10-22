@@ -3,35 +3,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<title>sportCTG</title>
+    <title>officialblog</title>
 </head>
-
 <body>
+
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
 <div class="conWrap">
-        <!--4x4 배열 시작-->
+
     <div class="conBox">
+        <!--4x4 배열 시작-->
         <div class = "ul-table">
             <div class="ul-row">
-                <div class="category_nav"><a href="categoryall.do" >전체</a>
-                    &nbsp;<span class="glyphicon glyphicon-menu-right"></span>
-                    <a class="second_ctg" href="categorySport.do" >스포츠</a>
-
+                <div class="top_text">
+                    <span class="top_text_title">공식블로그에 대하여</span>
+                    <span class="#" aria-hidden="true"><img src ="resources/images/check.png" class = "check_img"/></span>
+                        <br><br><br>
+                     <span class="top_text_content">
+                            기관, 기업, 단체 등 각 분야에서 직접 운영하는 블로그로 알려오는 경우 확인하여 공식블로그로 안내하고 있습니다.<br>
+                            분야별로 등록 대상에 포함되는 경우, 기준에 따라 직접 운영하는지 여부를 확인하여 공식 엠블럼을 표시합니다.<br>
+                            공식블로그의 신뢰성, 적법성 등을 YouBlog가 보증하는 것은 아니며, 운영되는 내용은 YouBlog의 입장과 다를 수 있습니다.
+                     </span><br><br><br>
+                    <a href="#" class="btn_src"><button class="official_btn" href="#">공식블로그 신청하기</button></a>
 
                 </div>
-                <div class="category_nav2">
-                    <a class="first_link active" href="categorySport.do">전체</a>
-                    <a class="first_link" href="#">축구</a>
-                    <a class="first_link" href="#">야구</a>
-                    <a class="first_link" href="#">농구</a>
-                    <a class="first_link" href="#">배구</a>
-                    <a class="first_link" href="#">골프</a>
-                    <a class="first_link" href="#">스포츠 일반</a>
-                </div>
-                <!--<div class="session_name">인기</div>-->
                 <div class="ul-table__tables">
                     <div class="table_1"><img  src="resources/images/라이언 썸네일.png"/>
                         <label class ="blog_title">Title</label>
