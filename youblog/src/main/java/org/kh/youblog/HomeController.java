@@ -18,26 +18,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-<<<<<<< HEAD
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-=======
+
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		/*logger.info("Welcome home! The client locale is {}.", locale);	
->>>>>>> refs/remotes/origin/기경욱
+>>>>>>> refs/remotes/origin/湲곌꼍�슧
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);	
 		String formattedDate = dateFormat.format(date);	
 		model.addAttribute("serverTime", formattedDate );
-		System.out.println("요청확인");*/
+		System.out.println("�슂泥��솗�씤");*/
 		return "main";
 	}
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
@@ -130,8 +125,7 @@ public class HomeController {
 		
 		return "personblog/personboard";
 	}
-	
-<<<<<<< HEAD
+
 	/*@RequestMapping(value="main.do")
 	public String mainView(){
 		return "home";
@@ -142,22 +136,5 @@ public class HomeController {
 		
 		return "test";
 	}
-=======
-	
-	
-	
-	
->>>>>>> refs/remotes/origin/기경욱
+
 }
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-=======
-	
->>>>>>> refs/remotes/origin/기경욱
