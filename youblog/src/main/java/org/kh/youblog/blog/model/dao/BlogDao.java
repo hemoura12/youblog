@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 package org.kh.youblog.blog.model.dao;
 
 import java.util.List;
 
 import org.kh.youblog.blog.model.vo.Blog;
+import org.kh.youblog.category.model.vo.Category;
+import org.kh.youblog.session.model.vo.Session;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

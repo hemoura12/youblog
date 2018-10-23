@@ -1,9 +1,11 @@
-<<<<<<< HEAD
 package org.kh.youblog.blog.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.kh.youblog.blog.model.vo.Blog;
+import org.kh.youblog.category.model.vo.Category;
+import org.kh.youblog.session.model.vo.Session;
 
 public interface BlogService {
 	ArrayList<Blog> selectBlogList(String writerid);

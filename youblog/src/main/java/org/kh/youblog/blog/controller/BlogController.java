@@ -1,18 +1,38 @@
 package org.kh.youblog.blog.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.kh.youblog.blog.model.service.BlogService;
 import org.kh.youblog.blog.model.vo.Blog;
+import org.kh.youblog.category.model.vo.Category;
 import org.kh.youblog.member.model.service.MemberService;
 import org.kh.youblog.member.model.vo.Member;
+import org.kh.youblog.session.model.vo.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
 @SessionAttributes({"blog", "member"})
@@ -76,7 +96,7 @@ public class BlogController {
 	
 	@RequestMapping(value = "blogread.do")
     public ModelAndView reading(ModelAndView mv){
-      mv.addObject("resultList", blogService.getBlogList());
+      mv.addObject("resultList", blogSerivce.getBlogList());
        mv.setViewName("blogread");
       return mv;
    }
@@ -85,7 +105,7 @@ public class BlogController {
 	@RequestMapping(value = "/coding.do")
 	public ModelAndView list(ModelAndView mv) {
 
-		ArrayList<Category> list = blogService.selectList1();
+		ArrayList<Category> list = blogSerivce.selectList1();
 		mv.addObject("list", list);
 		mv.setViewName("view");
 		
@@ -96,7 +116,7 @@ public class BlogController {
 	// 에디터 글쓰기
 	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
 	public String insertBoard(String contents, Blog vo) {
-		blogService.create(contents, vo);
+		blogSerivce.create(contents, vo);
 		
 		return "redirect:/coding.do";
 
@@ -106,7 +126,7 @@ public class BlogController {
 	@RequestMapping(value="subject.do", method = RequestMethod.POST)
 	public void read(HttpServletResponse response,@RequestParam(value="sub") String sub) throws IOException{
 		Category category = new Category();
-		List<Category> list = blogService.selectList2(sub);
+		List<Category> list = blogSerivce.selectList2(sub);
 		JSONObject json = new JSONObject();
 		
 		//System.out.println("List 오는지: " + list);
@@ -138,7 +158,7 @@ public class BlogController {
 	@RequestMapping(value="memberSession.do", method = RequestMethod.POST)
 	public void session(HttpServletResponse response,@RequestParam(value="memberSession") String memberSession) throws IOException{
 		Session sess = new Session();
-		List<Session> list = blogService.selectList3(memberSession);
+		List<Session> list = blogSerivce.selectList3(memberSession);
 		JSONObject json = new JSONObject();
 		
 		System.out.println("List 오는지: " + list);

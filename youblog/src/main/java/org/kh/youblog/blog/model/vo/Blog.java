@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package org.kh.youblog.blog.model.vo;
 
 import java.sql.Date;
