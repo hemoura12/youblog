@@ -66,10 +66,10 @@
 		
 	<select id="selectCategoryAll" resultMap="resultList" resultType="Blog">
 		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS NO, 
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
 		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
-		from V_BLOG_LIST)
-		WHERE CATE_NAME1 = #{cate1}
+		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
+		ORDER BY rowno ASC;
 	</select>	
 		
 	<select id="selectCTGLev2All" resultMap="resultList" resultType="Blog">
@@ -79,6 +79,7 @@
 		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
 		WHERE rowno <![CDATA[ > ]]> #{row1}
 		and rowno <![CDATA[ < ]]>= #{row2}
+		ORDER BY NO ASC;
 	</select>	
 	
 	<select id="selectCTG" resultMap="resultList" resultType="Blog">
@@ -92,7 +93,9 @@
 		and rowno <![CDATA[ < ]]>= #{row2}
 	</select>
 	
-
+	<select id="favoriteList" resultMap="resultList" resultType="Blog">
+		SELECT * FROM V_FAVORITE_BLOG
+	</select>
 	
 	
 	
@@ -104,11 +107,7 @@
 		select distinct cate_name1 from TB_CATEGORY
 	</select>
 	
-	<select id="bestBlogList" resultMap="resultList" resultType="Blog">
-		SELECT * FROM TB_BLOG
-		WHERE STATE = 'N'
-		AND rownum <![CDATA[ < ]]> =10 order by BESTNO
-	</select>
+
 		
 	<select id="subsBlogList" resultMap="resultList" resultType="Blog">
 		SELECT * FROM V_SUBSCRIBE_BLOG

@@ -15,7 +15,7 @@ public interface BlogService {
 	ArrayList<HashMap<String, String>> categoryList_Level1();
 	ArrayList<HashMap<String, String>> categoryList_Level2();
 
-	ArrayList<Blog> bestBlogList();
+	ArrayList<Blog> favoriteList();
 	ArrayList<Blog> subsBlogList(String memberid);
 
 

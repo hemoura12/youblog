@@ -126,7 +126,7 @@
                 </a>
             </li>
 
-            <li  data-toggle="collapse" data-target="#products" class="collapsed">
+            <li data-toggle="collapse" data-target="#products" class="collapsed">
                 <a href="#"><i class="fa fa-gift fa-lg"></i> 주제별</a>
             </li>
             <ul class="sub-menu collapse" id="products">
@@ -139,13 +139,13 @@
                 <li><a href="${currentAll }">시사</a></li>
             </ul>
                     <li class="#">
-                        <a href="favorite.do">
+                        <a href="favoriteList.do">
                             <i class="fa fa-fire fa-lg"></i> 인기
                         </a>
                     </li>
 
                     <li class="sub_li">
-                        <a href="subscription.do">
+                        <a href="subscriptionList.do">
                             <i class="fa fa-bell fa-lg"></i> 구독
                         </a>
                     </li>

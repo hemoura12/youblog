@@ -51,7 +51,6 @@
 				/*rowno = parseInt(document.location.hash.replace("#", "")) + parseInt(20); */
 			}
 		getList(cate2, parseInt(rowno)-parseInt(20), rowno);
-		/* document.location.hash = "#" + rowno; */
 		}
 	});
 
@@ -110,7 +109,7 @@
 </script>
 
 	<title>Main</title>
-
+</head>
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
 

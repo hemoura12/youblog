@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+@SessionAttributes("memberid")
 //@SessionAttributes("blog")
 public class BlogController {
 	@Autowired
@@ -100,11 +101,36 @@ public class BlogController {
 	}
 	
 	
-	@RequestMapping(value = "bestList.do")
-	public ModelAndView bestBlogList(ModelAndView mv){
+	@RequestMapping(value = "favoriteList.do")
+	public ModelAndView favoriteList(ModelAndView mv){
 
-		mv.addObject("blog", blogService.bestBlogList());
-		mv.setViewName("category/bestList");
+		mv.addObject("blog", blogService.favoriteList());
+		mv.setViewName("favorite/favorite");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "subscriptionList.do")
+	public ModelAndView subscriptionList(@RequestParam(value="memberid") String memberid, 
+			ModelAndView mv){
+
+		ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
+		LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
+
+		for(Blog list : blogList){
+			writerSet.add(list.getWriterid());
+		}
+		ArrayList<String> writerList = new ArrayList<String>();
+		for(String w : writerSet){
+			writerList.add(w);
+		}
+		
+		//저장된 아이디 리스트 넘김
+		//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
+		//System.out.println(writerArr);
+		
+		mv.addObject("blog", blogService.subsBlogList(memberid));
+		mv.setViewName("subsBlog/subsList");
 		
 		return mv;
 	}

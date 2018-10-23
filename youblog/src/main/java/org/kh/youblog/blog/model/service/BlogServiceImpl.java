@@ -26,6 +26,9 @@ public class BlogServiceImpl implements BlogService{
 		return blogDao.categoryBlog(cate1, cate2, rowno1, rowno2);
 	}
 	
+	public ArrayList<Blog> favoriteList(){
+		return blogDao.favoriteList();
+	}
 	
 	public ArrayList<HashMap<String, String>> categoryList_Level1(){
 		return blogDao.categoryList_Level1();
@@ -35,9 +38,7 @@ public class BlogServiceImpl implements BlogService{
 		return blogDao.categoryList_Level2();
 	}
 	
-	public ArrayList<Blog> bestBlogList(){
-		return blogDao.bestBlogList();
-	}
+
 	
 	public ArrayList<Blog> subsBlogList(String memberid){
 		return blogDao.subsBlogList(memberid);

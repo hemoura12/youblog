@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    <script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
+<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	var rowno = 0;
 	var cate2 = "<c:out value="${cate2}" />";
-	var lev2select = "all"
 	
 	function selectBlog(blogno) {
 		var url = "selectBlog/"+blogno+".do";
@@ -25,13 +24,12 @@
 				rowno += parseInt(20);
 				/*rowno = parseInt(document.location.hash.replace("#", "")) + parseInt(20); */
 			}
-		getList("all", parseInt(rowno)-parseInt(20), rowno);
+			getList(cate2, parseInt(rowno)-parseInt(20), rowno);
 		/* document.location.hash = "#" + rowno; */
 		}
 	});
 
 	function getList(cate2, rowno1, rowno2) {
-		console.log(cate2 + " " + rowno1+" "+rowno2);
 		$.ajax({
 			url : "pagingCTG.do",
 			data : {
@@ -43,7 +41,6 @@
 			type : "post",
 			dataType: "json",
 			success: function(obj){
-				console.log(obj); //object 라고 출력함
 				//리턴된 객체를 문자열로 변환함
 				var objStr = JSON.stringify(obj);
 				//문자열을 json 객체로 바꿈
@@ -55,7 +52,6 @@
 				var outValues = "";
 				for(var i in jsonObj.list){
  					if(i==0){
- 						console.log("작동");
 						outValues += "<div class = 'ul-table'><div class='ul-row'><div class='ul-table__tables'>";
 					}
 					outValues += "<div class='table_1' onclick='location.href=\"selectBlog("+jsonObj.list[i].blogno+")\"''><img src='resources/images/라이언 썸네일.png'/>"
@@ -89,6 +85,8 @@
 	
 </script>
     <title>Main</title>
+</head>
+
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp" %>
 <div class="conWrap">
@@ -96,9 +94,9 @@
     <div class="conBox" id="ctdiv">
             <div class = "ul-table">
                 <div class="ul-row">
-                    <div class="category_nav"><a href="categoryall.do" >전체</a>
+                    <div class="category_nav"><a href="categorySelect.do?views=categoryAll&cate2=all" >전체</a>
                         &nbsp;<span class="glyphicon glyphicon-menu-right"></span>
-                        <a class="second_ctg" href="categoryLife.do">라이프</a>
+                        <a class="second_ctg" href="categorySelect.do?views=lifeCTG&cate2=all">라이프</a>
                     </div>
                     
                     <div class="category_nav2">
@@ -151,7 +149,6 @@
 			 //document.location.hash = "#" + all;
 		});
 	});
-	
 	
 </script> -->
 </html>

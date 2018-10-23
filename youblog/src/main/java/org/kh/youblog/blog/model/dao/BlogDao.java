@@ -56,8 +56,8 @@ public class BlogDao {
 		return (ArrayList<HashMap<String, String>>)result;
 	}
 
-	public ArrayList<Blog> bestBlogList() {
-		List<Blog> result = sqlSession.selectList("blogMapper.bestBlogList");
+	public ArrayList<Blog> favoriteList() {
+		List<Blog> result = sqlSession.selectList("blogMapper.favoriteList");
 		return (ArrayList<Blog>)result;
 	}
 
