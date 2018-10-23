@@ -1,3 +1,4 @@
+
 package org.kh.youblog.blog.model.vo;
 
 import java.sql.Date;
@@ -185,3 +186,4 @@ public class Blog implements java.io.Serializable{
 	
 
 }
+

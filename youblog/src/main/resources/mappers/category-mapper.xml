@@ -17,10 +17,15 @@
      
    </resultMap>
    
- 
-   
+
    <select id="selectList"  resultMap="resultList" >
+     select distinct cate_name1 from tb_category
+     
+   </select>
+   
+    <select id="selectList1" parameterType="String" resultMap="resultList" >
      select distinct cate_name1, cate_name2 from tb_category
+     where cate_name1 = #{cate_name1}
      
    </select>
    

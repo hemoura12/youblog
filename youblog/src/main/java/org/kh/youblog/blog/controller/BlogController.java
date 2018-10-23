@@ -1,22 +1,28 @@
-
 package org.kh.youblog.blog.controller;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.kh.youblog.blog.model.service.BlogService;
 import org.kh.youblog.blog.model.vo.Blog;
 import org.kh.youblog.category.model.vo.Category;
 import org.kh.youblog.member.model.service.MemberService;
 import org.kh.youblog.member.model.vo.Member;
+import org.kh.youblog.session.model.vo.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,12 +54,12 @@ public class BlogController {
 	public ModelAndView list(ModelAndView mv) {
 
 		ArrayList<Category> list = blogService.selectList1();
-		System.out.println("대주제출력"+list);
 		mv.addObject("list", list);
 		mv.setViewName("view");
 		
 		return mv;
 	}
+
 
 	// 에디터 글쓰기
 	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
@@ -61,6 +67,70 @@ public class BlogController {
 		blogService.create(contents, vo);
 		
 		return "redirect:/coding.do";
+
+	}
+	
+	//소주제 불러오기
+	@RequestMapping(value="subject.do", method = RequestMethod.POST)
+	public void read(HttpServletResponse response,@RequestParam(value="sub") String sub) throws IOException{
+		Category category = new Category();
+		List<Category> list = blogService.selectList2(sub);
+		JSONObject json = new JSONObject();
+		
+		//System.out.println("List 오는지: " + list);
+		//System.out.println("sub 나오는지" + sub);
+		
+		JSONArray jarr = new JSONArray();
+	
+		
+		for(Category c : list){
+			JSONObject job = new JSONObject();
+			job.put("cate2", c.getCate_name2());
+			
+			jarr.add(job);
+		}
+		
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+
+	}
+	
+	//회원세션불러오기
+	@RequestMapping(value="memberSession.do", method = RequestMethod.POST)
+	public void session(HttpServletResponse response,@RequestParam(value="memberSession") String memberSession) throws IOException{
+		Session sess = new Session();
+		List<Session> list = blogService.selectList3(memberSession);
+		JSONObject json = new JSONObject();
+		
+		System.out.println("List 오는지: " + list);
+		System.out.println("memberSession 나오는지" + memberSession);
+		
+		JSONArray jarr = new JSONArray();
+	
+		
+		for(Session s : list){
+			JSONObject job = new JSONObject();
+			job.put("cate3", s.getSessionname());
+			
+			jarr.add(job);
+		}
+		
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
 
 	}
 
@@ -99,6 +169,9 @@ public class BlogController {
 		}
 		return sb.toString();
 	}
+	
+	
+	
     
     
     //테스트 코드들

@@ -59,7 +59,7 @@
    </select>
    
    <select id="selectList"  resultMap="resultList" >
-     select cate_name1 from tb_category
+     select distinct cate_name1 from tb_category
    </select>
    
    <insert id="insert">
@@ -79,8 +79,8 @@
     sysdate,
    #{catename1},
    #{catename2}
-
    )   
+   where asc
    </insert>
    
    <select id="view" resultType="org.kh.youblog.blog.model.vo.Blog">
@@ -89,6 +89,7 @@
    </select>
    
 </mapper>
+
 
 
 

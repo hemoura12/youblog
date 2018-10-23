@@ -6,6 +6,7 @@ import java.util.List;
 import org.kh.youblog.blog.controller.BlogController;
 import org.kh.youblog.blog.model.vo.Blog;
 import org.kh.youblog.category.model.vo.Category;
+import org.kh.youblog.session.model.vo.Session;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,20 @@ public class BlogDao {
 	
 	//대주제 출력
 	public List<Category> selectList1(){ 
+		
 		return sqlSession.selectList("categoryMapper.selectList");
+	}
+
+	//소주제 출력
+	public List<Category> selectList2(String sub) {
+		
+		return sqlSession.selectList("categoryMapper.selectList1", sub);
+	}
+
+	//회원세션출력
+	public List<Session> selectList3(String memberSession) {
+		
+		return sqlSession.selectList("sessionMapper.selectList", memberSession);
 	}
 	
 

@@ -5,8 +5,8 @@ public class Category implements java.io.Serializable{
 	
 	public Category(){}
 	
-	private String cate_name1;
-	private String cate_name2;
+	private String cate_name1;	//대주제
+	private String cate_name2;	//소주제
 
 	public Category(String cate_name1, String cate_name2) {
 		super();
