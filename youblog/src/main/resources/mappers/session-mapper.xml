@@ -44,7 +44,13 @@
 					                                                               	        where member_id = #{memberid})+1);
 	</insert>
 	
+	<select id="selectList" parameterType="String" resultMap="resultList" >
+     select  SESSION_NAME from TB_SESSION
+     where MEMBER_ID = #{memberid};
+     
+   </select>
 	
+	 
 	
 	
 </mapper>

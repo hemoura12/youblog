@@ -10,5 +10,4 @@
 <%
 	request.getRequestDispatcher("main.do").forward(request, response);
 %>
-
 </html>

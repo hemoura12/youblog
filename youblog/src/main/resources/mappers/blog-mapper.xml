@@ -52,5 +52,46 @@
 		where writer_id = #{writerid}
 	</select>
 	
+	<select id="selectBlog" parameterType="String" resultMap="resultBlog">
+      select * 
+      from TB_BLOG
+      where blog_no = #{blogno}
+   </select>
+   
+   <select id="selectBlogList" resultType="Blog" resultMap="resultList">
+      select *
+      from TB_BLOG
+   </select>
+   
+   <select id="selectList"  resultMap="resultList" >
+     select distinct cate_name1 from tb_category
+   </select>
+   
+   <insert id="insert">
+   insert into TB_BLOG(
+   blog_no,
+   title,
+   writer_id,
+   contents,
+    write_date,
+   cate_name1,
+   cate_name2)
+   values
+   (blog_no_seq.nextval,
+   #{title},
+   #{writerid},
+   #{contents},
+    sysdate,
+   #{catename1},
+   #{catename2}
+   )   
+   where asc
+   </insert>
+   
+   <select id="view" resultType="org.kh.youblog.blog.model.vo.Blog">
+   select * from tb_board
+   where blog_no = #{blogno}
+   </select>
+	
 </mapper>
 
