@@ -17,6 +17,7 @@ public class commentController {
    @Autowired
    private CommentService commentService;   
    
+   //댓글 전체 불러오기
    @RequestMapping(value = "list.do")
    public ModelAndView list(ModelAndView mv){
 
@@ -29,6 +30,7 @@ public class commentController {
 
    }
 
+   //댓글 선택삭제
    @DeleteMapping(value = "list.do")
    @ResponseBody
    public Object delete(@RequestParam List<Long> ids){

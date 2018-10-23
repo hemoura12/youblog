@@ -32,6 +32,7 @@ public class BlogServiceImpl implements BlogService {
 		return (ArrayList<Blog>)list;
 	}
 
+	//블로그 불러오기
 	@Override
 	public ArrayList<Blog> myBlogList(){
 		List<Blog> list = blogDao.myBlogList();

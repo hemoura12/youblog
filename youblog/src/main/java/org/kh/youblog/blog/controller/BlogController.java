@@ -44,6 +44,8 @@ public class BlogController {
 		
 		return mv;
 	}*/
+	
+	//블로그 불러오기
 	@RequestMapping(value="myBlogList.do")
 	public ModelAndView myBlogList(ModelAndView mv) {
 		

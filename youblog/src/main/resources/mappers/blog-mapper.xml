@@ -56,6 +56,7 @@
 		where blog_no = #{blogno}
 	</select> -->
 	
+	<!-- 블로그 불러오기 -->
 	<select id="myBlogList" resultMap="resultList">
 		select * from
 		tb_blog

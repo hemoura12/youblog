@@ -22,16 +22,18 @@ public class CommentServiceImpl implements CommentService{
       return (ArrayList<Comment>) list;
    }*/
 
+   //댓길 삭제
    @Override
    public void remove(List<Long> ids) {
       CommentDao.delete(ids);
    }
 
-@Override
-public ArrayList<Comment> selectList(String blogno) {
-	List<Comment> list = CommentDao.selectList(blogno);
-    return (ArrayList<Comment>) list;
-}
+   //댓글 불러오기
+   @Override
+   public ArrayList<Comment> selectList(String blogno) {
+	   List<Comment> list = CommentDao.selectList(blogno);
+	   return (ArrayList<Comment>) list;
+   }
 
 
 }

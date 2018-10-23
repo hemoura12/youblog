@@ -19,6 +19,7 @@ public class CommentDao {
       return sqlSession.selectList("commentMapper.selectList");
    }*/
 
+   //댓글 삭제
    public void delete(List<Long> ids) {
       ids.forEach(new Consumer<Long>() {
          @Override
@@ -29,7 +30,8 @@ public class CommentDao {
 
    }
 
-public List<Comment> selectList(String blogno) {
-	return sqlSession.selectList("commentMapper.selectList", blogno);
-}
+   //댓글 불러오기
+   public List<Comment> selectList(String blogno) {
+	   return sqlSession.selectList("commentMapper.selectList", blogno);
+   }
 }

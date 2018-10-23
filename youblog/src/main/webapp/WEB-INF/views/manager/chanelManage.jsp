@@ -1,3 +1,4 @@
+<!-- 채널관리 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -160,10 +161,34 @@
 
         <div class="channel_contents">
             <div class="channel_box_1">
-                <div class="subscription_Box">
-                     <c:forEach items="${list }" var="m" varStatus="i">
-                     <%-- <c:when test="${loop.count%4==0}"></c:when> --%>
+                <div class="subscription_Box" style="width: 100%">
+                	<c:set var="i" value="0" />
+					<c:set var="j" value="4" />
+				<table border="0" style="width: 90%">
+	  				<c:forEach items="${list }" var="m">
+	    			<c:if test="${i%j == 0 }">
+	    			<tr>
+	    			</c:if>
+	       			<td >
+	       				<div class="sub_channel_img"><img src="resources/images/rion2.png" /></div>
+                        <p class="channel_name">${m.membername }</p>
+                        <p>
+                            <span class="">구독자</span>
+                            <span class="sub_title">${m.readercount }</span>
+                        </p>
+                         <a href="#" class="subscript_tag_1">
+                             <span>구독중<%-- ${m.subscribeshare } --%></span>
+                         </a>
+                    </td>
+	    			<c:if test="${i%j == j-1 }">
+	    			</tr>
+	    			</c:if>
+	    			<c:set var="i" value="${i+1 }" />
+	  				</c:forEach>
+					</table>
+                    <%-- <c:forEach items="${list }" var="m" >
                     <div class="sub_channel_img"><img src="resources/images/rion2.png" /></div>
+                
                         <p class="channel_name">${m.membername }</p>
                         <p>
                             <span class="">구독자</span>
@@ -172,9 +197,8 @@
                          <a href="#" class="subscript_tag_1">
                              <span>${m.subscribeshare }</span>
                          </a>
-                     </c:forEach>
+                     </c:forEach> --%>
                 </div> <!-- subscription_Box -->
-						
             </div> <!--channel_box -->
         </div> <!--channel_contents-->
     </div> <!--channel_conbox-->

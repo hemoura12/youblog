@@ -29,6 +29,7 @@ public class BlogDao {
 		return null;
 	}
 	
+	//블로그 불러오기
 	public List<Blog> myBlogList() {
 		return sqlSession.selectList("blogMapper.myBlogList");
 	}
