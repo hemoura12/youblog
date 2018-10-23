@@ -10,7 +10,8 @@ public interface SessionService {
 
 	public int updateSession(ArrayList<Session> updateSessionList);
 
-	public int deleteSession(String sessionname, String memberid);
+	public int deleteSession(Session session);
+
 		
 	
 }

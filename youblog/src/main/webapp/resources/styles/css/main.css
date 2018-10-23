@@ -80,9 +80,8 @@ img
     border-radius: 1px;
     outline: none;
     background: white;
-    font-size: 11.8px;
+    font-size: 16.8px;
     width: 90px;
-
 }
 
 .navbar-form
@@ -975,6 +974,9 @@ ul.contentsList li:first-child{border:none;}
 .channel_list li:first-child{
     border:none;
 }
+.movepage{
+   	text-decoration:none;
+}
 
 
 /*************************
@@ -1044,6 +1046,15 @@ ul.contentsList li:first-child{border:none;}
     right: 25px;
     font-size: 36px !important;
     margin-left: 50px;
+}
+.select_edit{
+	position: absolute;
+    float: left;
+    top: 0;
+    margin: 0 auto;
+    padding: 5px;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 .openmenu:hover {
     color:rgb(0,154,200);
@@ -1140,3 +1151,5 @@ ul.contentsList li:first-child{border:none;}
     margin-top: 50px;
     margin-left: 170px;
 }
+
+

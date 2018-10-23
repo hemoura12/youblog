@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import org.kh.youblog.blog.model.vo.Blog;
 
 public interface BlogService {
-	
-	Blog selectBlog(Blog blog);
-	Blog infoBlog(String blogno);
-	
-	ArrayList<Blog> selectList();
+	ArrayList<Blog> selectBlogList(String writerid);
+	int updateBlog(Blog blog);
+	int deleteBlog(Blog blog);
 	
 }

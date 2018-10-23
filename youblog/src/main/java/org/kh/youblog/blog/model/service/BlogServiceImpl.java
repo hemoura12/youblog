@@ -17,19 +17,18 @@ public class BlogServiceImpl implements BlogService {
 	public BlogServiceImpl(){}
 
 	@Override
-	public Blog selectBlog(Blog blog) {
-		return blogDao.selectBlog(blog);
+	public ArrayList<Blog> selectBlogList(String writerid) {
+		return (ArrayList<Blog>) blogDao.selectBlogList(writerid);
 	}
 
 	@Override
-	public Blog infoBlog(String blogno) {
-		return blogDao.infoBlog(blogno);
+	public int updateBlog(Blog blog) {
+		return blogDao.updateBlog(blog);
 	}
 
 	@Override
-	public ArrayList<Blog> selectList() {
-		List<Blog> list = blogDao.selectList();
-		return (ArrayList<Blog>)list;
+	public int deleteBlog(Blog blog) {
+		return blogDao.deleteBlog(blog);
 	}
 
 }

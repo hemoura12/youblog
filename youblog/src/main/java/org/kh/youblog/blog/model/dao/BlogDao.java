@@ -14,19 +14,18 @@ public class BlogDao {
 	SqlSessionTemplate sqlSession;
 		
 
-	public Blog selectBlog(Blog blog) {
-		return null;
-	}
-
-	public Blog infoBlog(String blogno) {
+	public List<Blog> selectBlogList(String writerid) {
 		
-		System.out.println("dao blogno : " + blogno);
-		return (Blog)sqlSession.selectOne("blogMapper.selectBlog", blogno);
+		return sqlSession.selectList("blogMapper.selectBlog", writerid);
 	}
 
-	public List<Blog> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public int updateBlog(Blog blog) {
+		
+		return sqlSession.update("blogMapper.updateBlog", blog);
+	}
+
+	public int deleteBlog(Blog blog) {
+		return sqlSession.delete("blogMapper.updateBlog", blog);
 	}
 
 }

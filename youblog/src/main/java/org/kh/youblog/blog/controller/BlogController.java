@@ -1,6 +1,11 @@
 package org.kh.youblog.blog.controller;
 
+import java.util.ArrayList;
+
 import org.kh.youblog.blog.model.service.BlogService;
+import org.kh.youblog.blog.model.vo.Blog;
+import org.kh.youblog.member.model.service.MemberService;
+import org.kh.youblog.member.model.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,27 +15,65 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes("blog")
+@SessionAttributes({"blog", "member"})
 
 public class BlogController {
 
 	@Autowired
 	private BlogService blogSerivce;
 	
-	@RequestMapping(value="test1.do", method=RequestMethod.POST)
-	public ModelAndView infoBlog(ModelAndView mv, @RequestParam(value="blogno") String blogno){
+	@Autowired
+	private MemberService memberService;
+	
+	
+	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
+	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
-		System.out.println("Blog Information : " + blogSerivce.infoBlog(blogno));
+		writerid = "user01";
+		
+		ArrayList<Blog> blog = blogSerivce.selectBlogList(writerid);
+		Member member = memberService.selectBlogMember(writerid);
 		
 		
-		
-		mv.addObject("blog", blogSerivce.infoBlog(blogno));
-		mv.setViewName("home");
+		mv.addObject("blog", blog);//Blog객체 리턴받음
+		mv.addObject("member", member);
+
+		mv.setViewName("personblog/personmain");
 		
 		return mv;
-		
-		
 	}
+	
+	@RequestMapping(value="blogpudate.do", method=RequestMethod.GET)
+	public ModelAndView updateBlogList(ModelAndView mv, @RequestParam(value="memberid") String memberid,
+																				@RequestParam(value="blogid") String blogid){
+		
+		memberid = "user01";
+		blogid = "1";
+		
+		Blog blog = new Blog();
+		blog.setBlogno(blogid);
+		blog.setWriterid(memberid);
+		
+		mv.addObject("blog", blogSerivce.updateBlog(blog));
+		
+		return mv;
+	}
+	
+	public ModelAndView deleteBlogList(ModelAndView mv, @RequestParam(value="memberid") String memberid,
+																				@RequestParam(value="blogid") String blogid){
+		
+		memberid = "user01";
+		blogid = "1";
+
+		Blog blog = new Blog();
+		blog.setBlogno(blogid);
+		blog.setWriterid(memberid);
+
+		mv.addObject("blog", blogSerivce.deleteBlog(blog));
+
+		return mv;
+	}
+	
 	
 	
 	
