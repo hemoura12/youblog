@@ -214,3 +214,6 @@ public class Member implements java.io.Serializable{
 	
 
 }
+	
+
+}

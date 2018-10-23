@@ -54,5 +54,4 @@
 			from TB_MEMBER
 			where member_id = #{writerid}
 		</select>
-
 </mapper>

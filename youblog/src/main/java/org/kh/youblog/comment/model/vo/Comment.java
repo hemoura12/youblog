@@ -9,12 +9,11 @@ public class Comment implements java.io.Serializable {
 	private String cmtParentno;
 	private String cmtContents;
 	private String state;
-	private String hidden;
+	
 	
 	public Comment(){}
 
-	public Comment(String cmtNo, String blogNo, String memberId, String cmtParentno, String cmtContents, String state,
-			String hidden) {
+	public Comment(String cmtNo, String blogNo, String memberId, String cmtParentno, String cmtContents, String state) {
 		super();
 		this.cmtNo = cmtNo;
 		this.blogNo = blogNo;
@@ -22,7 +21,7 @@ public class Comment implements java.io.Serializable {
 		this.cmtParentno = cmtParentno;
 		this.cmtContents = cmtContents;
 		this.state = state;
-		this.hidden = hidden;
+		
 	}
 
 	public String getCmtNo() {
@@ -73,13 +72,6 @@ public class Comment implements java.io.Serializable {
 		this.state = state;
 	}
 
-	public String getHidden() {
-		return hidden;
-	}
-
-	public void setHidden(String hidden) {
-		this.hidden = hidden;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -88,7 +80,7 @@ public class Comment implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Comment [cmtNo=" + cmtNo + ", blogNo=" + blogNo + ", memberId=" + memberId + ", cmtParentno="
-				+ cmtParentno + ", cmtContents=" + cmtContents + ", state=" + state + ", hidden=" + hidden + "]";
+				+ cmtParentno + ", cmtContents=" + cmtContents + ", state=" + state + "]";
 	}
 	
 	

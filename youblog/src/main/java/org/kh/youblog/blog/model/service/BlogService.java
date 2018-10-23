@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package org.kh.youblog.blog.model.service;
 
 import java.util.ArrayList;
@@ -8,5 +9,23 @@ public interface BlogService {
 	ArrayList<Blog> selectBlogList(String writerid);
 	int updateBlog(Blog blog);
 	int deleteBlog(Blog blog);
+	
+	// 에디터 글쓰기
+		public void create(String editor, Blog vo);
+
+		// 대주제 출력
+		ArrayList<Category> selectList1();
+		
+		// 소주제 ajax 처리용
+		public List<Category> selectList2(String sub);
+		
+		//회원세션 출력
+		public List<Session> selectList3(String memberSession);
+
+		// 블로그 글 출력
+		ArrayList<Blog> selectList();
+
+		List<Blog> getBlogList();
+
 	
 }
