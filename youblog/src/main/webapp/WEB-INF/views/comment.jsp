@@ -29,7 +29,12 @@ $(document).ready(function(){
 		$(this).attr("id", "refact");
 		$(this).attr("value", "변경");
 		
+		
+		
+		
 		$("#refact").on('click', function(){
+			
+			
 			fnCommentUpdate();
 		});
 		//$("#"+id).contents().unwrap().wrap('<input type ="button" value="저장"');
