@@ -16,14 +16,22 @@ public class CommentServiceImpl implements CommentService{
    
    public CommentServiceImpl(){}
 
-   @Override
+  /* @Override
    public ArrayList<Comment> selectList() {
       List<Comment> list = CommentDao.selectList();
       return (ArrayList<Comment>) list;
+   }*/
+
+   @Override
+   public void remove(List<Long> ids) {
+      CommentDao.delete(ids);
    }
-   
-   
-   
-   
-   
+
+@Override
+public ArrayList<Comment> selectList(String blogno) {
+	List<Comment> list = CommentDao.selectList(blogno);
+    return (ArrayList<Comment>) list;
+}
+
+
 }

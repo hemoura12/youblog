@@ -25,8 +25,15 @@
    <select id="selectList" resultMap="resultList" >
       select * from 
       tb_comment
-      <!-- where member_id = 'user01' -->
+      where blog_no = #{blogno}
    </select>
+
+   <delete id="delete">
+      DELETE
+      FROM tb_comment
+      WHERE cmt_no = #{id}
+
+   </delete>
    
 
 

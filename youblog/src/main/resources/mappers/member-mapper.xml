@@ -53,10 +53,13 @@
 		
 		<update id="updateChanel" parameterType="Member" >
 			update tb_member set subscribe_share = #{subscribeshare}
-			where member_id = 'user03'
-			<!-- where member_id = #{memberid} -->
+			where member_id = #{memberid}
 		</update>
 		
+		<select id="selectList" resultMap="resultList">
+			select * from 
+			tb_member
+		</select>
 		
 		
 		<!-- flushCache="true" statementType="PREPARED" -->

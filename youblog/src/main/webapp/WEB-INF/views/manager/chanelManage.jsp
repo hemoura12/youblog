@@ -6,8 +6,34 @@
 <head>
 <script type="text/javascript" src="/youblog/resources/js/jquery-3.3.1.min.js"></script>   
 <script type="text/javascript">
-	 /* function chanalcheck(){
-		//var x = document.getElementById("chanel");
+	  function chanalcheck() {
+          $.ajax({
+              url: "update1.do",
+              method: 'PUT',
+              contentType : 'application/json; charset=utf-8',
+              dataType: 'json',
+              data: JSON.stringify(
+                  {
+                      "subscribeshare": $("#subscribeshare").val()
+                  }
+              ),
+              success: function (data) {
+                  if(data){
+                      alert("완료!");
+                  }else{
+                      alert("실패!");
+                  }
+                  //self.close();
+              },
+              error: function (request, status, errorData) {
+                  alert("error code : " + request.status + "\n"
+                      + "message : " + request.responseText + "\n"
+                      + "error : " + errorData);
+              }
+          })
+      }
+
+		/*//var x = document.getElementById("chanel");
 		//var y = chanelSelect.options[chanelSelect.selectedIndex].value;
 		
 		var x = document.getElementById("subscribeshare").selectedIndex;
@@ -16,9 +42,10 @@
 
         alert("Index: " + y[x].index + " is " + y[x].text+" is " + z);
         
-        $('#subscribeshare').attr("action", "update1.do").submit();
-	 } */
-	 
+        $('#subscribeshare').attr("action", "update1.do").submit();*/
+
+
+
 	 /* var subscribeshare = $("#subscribeshare").val(); */
         /* $("#update").on("click", function(){});
         $.ajax({
@@ -36,7 +63,7 @@
             }
         });
      }    */
-    $(function(){
+    /*$(function(){
     	$("#update").on("click", function(){
     		 $.ajax({
     			 url:"update1.do",
@@ -53,7 +80,7 @@
     							+ "error : " + errorData);
     	         }
     	});
-	});
+	})});*/
      
         
 	 /* $(function(){
@@ -106,9 +133,9 @@
         </div> <!-- channel_header-->
         <div class="sub_header">
             <div class="header_category">
-                 <a class="first_link" href="personmain.do" >홈</a>
-                 <a class="first_link" href="personchannel.do" >채널</a>
-                 <a class="first_link" href="personboard.do" >게시글</a>
+                    <a class="first_link" href="personmain.do" >글 관리</a>
+                    <a class="first_link" href="list.do" >댓글 관리</a>
+                    <a class="first_link" href="update1.do" >채널 관리</a>
                 <div class="header_searchbar">
                     <img id='image_search' src="https://3.bp.blogspot.com/-2CWX7kIpob4/WZgVXt3yTQI/AAAAAAAAACM/N1eGT1OD7rklb4GtsadoxYRyWZoR_aI0gCLcBGAs/s1600/seo-1970475_960_720.png"
                          onclick="var inputBox = document.getElementById('input_text_search');
@@ -118,17 +145,14 @@
                                         inputBox.focus();">
                     <input id='input_text_search' type="text" onblur="this.style.width='0px'; this.style.paddingLeft='0px';"
                            onkeydown="if(event.keyCode==13){alert(this.value);}">
+
+                    <select style="position: relative; left: 100%; width:80px; height:30px;" 
+                    		name="subscribeshare" id="subscribeshare" onchange="chanalcheck()">
+                        <option value="" selected disabled>선 택</option>
+                        <option value="Y" >공 개</option>
+                        <option value="N" >비공개</option>
+                    </select>
                 </div>
-                	<div id="update">
-							<input type="text" name="subscribeshare"> <br>
-							<select name="subscribeshare" id="subscribeshare" onchange="chanalcheck()">
-							<option value="" selected disabled>선 택</option>
-							<option value="Y" >공 개</option>
-							<option value="N" >비공개</option> 
-							</select> <br>
-							<input type="submit" value="저장" id="update1">
-						
-                	</div>
             </div>
         </div> <!--sub_header-->
 
@@ -137,88 +161,20 @@
         <div class="channel_contents">
             <div class="channel_box_1">
                 <div class="subscription_Box">
+                     <c:forEach items="${list }" var="m" varStatus="i">
+                     <%-- <c:when test="${loop.count%4==0}"></c:when> --%>
                     <div class="sub_channel_img"><img src="resources/images/rion2.png" /></div>
-                        <p class="channel_name">쌍둥이 라이언네</p>
+                        <p class="channel_name">${m.membername }</p>
                         <p>
                             <span class="">구독자</span>
-                            <span class="sub_title"> 000.000 명</span>
+                            <span class="sub_title">${m.readercount }</span>
                         </p>
                          <a href="#" class="subscript_tag_1">
-                             <span>구독 중</span>
+                             <span>${m.subscribeshare }</span>
                          </a>
+                     </c:forEach>
                 </div> <!-- subscription_Box -->
-
-                <div class="subscription_Box">
-                    <div class="sub_channel_img"><img src="resources/images/rion2.png"/></div>
-                    <p class="channel_name">쌍둥이 라이언네</p>
-                    <p>
-                        <span class="">구독자</span>
-                        <span class="sub_title"> 000.000 명</span>
-                    </p>
-                    <a href="#" class="subscript_tag_1">
-                        <span>구독 중</span>
-                    </a>
-                </div> <!-- subscription_Box -->
-
-                <div class="subscription_Box">
-                    <div class="sub_channel_img"><img src="resources/images/pitch.jpg"/></div>
-                    <p class="channel_name">쌍둥이 라이언네</p>
-                    <p>
-                        <span class="">구독자</span>
-                        <span class="sub_title"> 000.000 명</span>
-                    </p>
-                    <a href="#" class="subscript_tag_1">
-                        <span>구독 중</span>
-                    </a>
-                </div> <!-- subscription_Box -->
-
-                <div class="subscription_Box">
-                    <div class="sub_channel_img"><img src="resources/images/rion.PNG"/></div>
-                    <p class="channel_name">쌍둥이 라이언네</p>
-                    <p>
-                        <span class="">구독자</span>
-                        <span class="sub_title"> 000.000 명</span>
-                    </p>
-                    <a href="#" class="subscript_tag_1">
-                        <span>구독 중</span>
-                    </a>
-                </div> <!-- subscription_Box -->
-
-                <div class="subscription_Box">
-                    <div class="sub_channel_img"><img src="resources/images/rion.PNG"/></div>
-                    <p class="channel_name">쌍둥이 라이언네</p>
-                    <p>
-                        <span class="">구독자</span>
-                        <span class="sub_title"> 000.000 명</span>
-                    </p>
-                    <a href="#" class="subscript_tag_1">
-                        <span>구독 중</span>
-                    </a>
-                </div> <!-- subscription_Box -->
-
-                <div class="subscription_Box">
-                    <div class="sub_channel_img"><img src="resources/images/rion.PNG"/></div>
-                    <p class="channel_name">쌍둥이 라이언네</p>
-                    <p>
-                        <span class="">구독자</span>
-                        <span class="sub_title"> 000.000 명</span>
-                    </p>
-                    <a href="#" class="subscript_tag_1">
-                        <span>구독 중</span>
-                    </a>
-                </div> <!-- subscription_Box -->
-
-                <div class="subscription_Box">
-                    <div class="sub_channel_img"><img src="resources/images/rion.PNG"/></div>
-                    <p class="channel_name">쌍둥이 라이언네</p>
-                    <p>
-                        <span class="">구독자</span>
-                        <span class="sub_title"> 000.000 명</span>
-                    </p>
-                    <a href="#" class="subscript_tag_1">
-                        <span>구독 중</span>
-                    </a>
-                </div> <!-- subscription_Box -->
+						
             </div> <!--channel_box -->
         </div> <!--channel_contents-->
     </div> <!--channel_conbox-->

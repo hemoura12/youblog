@@ -1,12 +1,16 @@
 package org.kh.youblog.member.model.service;
 
+import java.util.ArrayList;
+
 import org.kh.youblog.member.model.vo.Member;
 
 public interface MemberService {
 
-	//Member mychanelupdate(Member member);
+	void mychanelupdate(Member member);
 
-	int mychanelupdate(String check);
+	ArrayList<Member> selectList();
+
+	//int mychanelupdate(String check);
 
 	
 
