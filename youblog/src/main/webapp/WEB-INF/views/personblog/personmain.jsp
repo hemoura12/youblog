@@ -89,6 +89,7 @@
 									<div class="content">${b.contents }</div>
 								</div>
 								<div class="rightImgBox">
+								<!-- 이미지 수정 -->
 									<img src="resources/images/4k.jpg" alt="이미지" class="mainImg">
 								</div>
 							</li>
