@@ -16,11 +16,12 @@ public class BlogDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	//블로그 개인채널 출력
 	public List<Blog> selectBlogList(String writerid) {
 		return sqlSession.selectList("blogMapper.selectBlog", writerid);
 	}
 
-
+	//블로그 
 	public int updateBlog(Blog blog) {
 		
 		return sqlSession.update("blogMapper.updateBlog", blog);

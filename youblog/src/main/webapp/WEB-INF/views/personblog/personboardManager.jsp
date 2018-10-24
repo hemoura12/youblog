@@ -26,10 +26,20 @@
             </div>
             <div class ="infoBox_right">
                 <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
-                <a href="#" class="subscript_tag"><span>구독 중</span></a>
-
-                <a class = "sub_alram" onclick="changeicon()"><i class="fas fa-bell-slash"></i></a>
-                <!--<i class="fas fa-bell"></i>-->
+					
+					<!-- if문걸어 관리탭나누기 -->
+					<%-- <c:choose>
+						<c:when test="">
+							<a href="#" class="subscript_tag"><span>구독 중</span></a>
+							<a class="sub_alram" onclick="changeicon()"><i
+								class="fas fa-bell-slash"></i></a>
+						</c:when>
+						<c:when test="">
+							<a href="#" class="subscript_tag"><span>관리</span></a>
+						</c:when>
+					</c:choose> --%>
+					
+					<!--<i class="fas fa-bell"></i>-->
             </div> <!--infoBox_right -->
         </div> <!-- channel_header-->
         <div class="sub_header">
@@ -71,33 +81,28 @@
 		                <thead class="head">
 		                    <tr>
 		                        <!-- <th><a class="checkbox" href="" ></a></th>  -->
+		                        <th>   </th>
 		                        <th>글번호</th>
 		                        <th>글제목</th> 	                      
 		                        <th></th>
-		                        <th></th>
-		                        <th></th>
 		                        <th>등록일</th> 
-		                        <th></th> 
+		                        
 		                    </tr>    
 		                </thead>
 		                <tbody class="body">
-		                <!-- for문 시작 -->
+		                <c:forEach begin="1" end="5" step="1">
 		                    <tr>
 		                        <!-- <td class=""><a class="checkbox_checked" href="javascript:;" >✓</a></td> -->
-		                        <td class=""><input type="checkbox"></td>
 		                        <td class="">123</td>
 		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
 		                        <td class=""></td>
 		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
 		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
+		                        
 		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
 		                    </tr>
-		                   <!-- for문 종료 -->
-		                 
+		                 </c:forEach>
 		                </tbody>
-		                
 		                <tfoot class="foot">
 		                    <tr>
 		                        <td colspan="9">

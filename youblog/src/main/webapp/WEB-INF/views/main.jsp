@@ -169,4 +169,11 @@
     </div> <!--conBox end-->
 </div>  <!-- conWrap end-->
 </body>
+
+<script type="text/javascript" src="/youblog/resources/js/jquery-3.3.1.min.js">
+
+<script type="text/javascript">
+	$().alert("${member.memberid}");
+</script>
+
 </html>
