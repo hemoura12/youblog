@@ -1,15 +1,16 @@
 package org.kh.youblog;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
+import org.kh.youblog.member.model.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * Handles requests for the application home page.
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
@@ -131,10 +134,10 @@ public class HomeController {
 	public String join(Locale locale, Model model) {		
 		return "member/join";
 	}
-	@RequestMapping(value = "sec_join.do", method = RequestMethod.GET)
-	public String sec_join(Locale locale, Model model) {		
+	/*@RequestMapping(value = "join2.do", method = RequestMethod.GET)
+	public String join2(Locale locale, Model model) {		
 		return "member/join2";
-	}
+	}*/
 	@RequestMapping(value = "info.do", method = RequestMethod.GET)
 	public String info(Locale locale, Model model) {		
 		return "member/memberinfo";
@@ -153,7 +156,6 @@ public class HomeController {
 	}
 	
 	
-
 	/*@RequestMapping(value="main.do")
 	public String mainView(){
 		return "home";

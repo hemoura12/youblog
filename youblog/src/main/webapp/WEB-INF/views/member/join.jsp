@@ -24,7 +24,7 @@
     <div class="card-title">
     </div>
     <div class="card-body-1">
-        <form class="form-signin" method="POST" >
+    	<form class="form-signin" action="join2.do" method="POST" >
             <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2>
             <h4 align="center">YouBlog 계정 만들기</h4>
             <div class="outlinegroup">
@@ -33,14 +33,14 @@
                 <!--<button style="background-color: #1a73e8;" class="btn btn-primary">연동됨</button>-->
                 <br>
                 <div class="group">
-                    <input type="text" required>
+                    <input type="text" id = "memberemail" name = "memberemail" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>이메일</label>
                 </div>
 
                 <div class="group">
-                    <input type="text" required>
+                    <input type="password" id = "memberpwd" name = "memberpwd" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>비밀번호</label>
@@ -48,11 +48,15 @@
                 <div class ="footer_line">
                 <center>
                     <p style="font-size: small" >문자,숫자,기호를 조합하여 8자 이상을 사용하세요</p><br>
-                    <a href = "sec_join.do"><button class="btn btn-primary" type="submit">다음</button></a>
+                    <%-- <c:url var = "join2" value = "join2.do">
+						<c:param name = "MEMBER_EMAIL" value = "${MEMBER_EMAIL}"/>
+						<c:param name = "MEMBER_PW" value = "${MEMBER_PW}"/>
+					</c:url>  --%>
+                    <button class="btn btn-primary" type="submit">다음</button>
                 </center>
                 </div>
             </div>
-        </form>
+      	</form>
     </div>
 </div>
 </body>

@@ -23,14 +23,14 @@
 <body>
 <div class="card align-middle">
     <div class="card-body">
-        <form class="form-signin" method="POST" >
+        <form class="form-signin" action="login.do" method="POST" >
             <h2 align="center">Welcome</h2>
             <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2><br>
             <div class="inputgroup">
-            <label for="inputEmail" class="sr-only">google ID</label>
+            <label for="inputEmail" class="sr-only" name ="memberid">google ID</label>
                 <input type="text" class="form-control" placeholder="google ID" required autofocus><br>
             <label for="inputPassword" class="sr-only">password</label>
-            <input type="password" class="form-control" placeholder="password" required>
+            <input type="password" class="form-control" name ="memberpwd" placeholder="password" required>
             </div><br>
             <!-- 시간 남으면 구현할 기능
             <div class="checkbox">
