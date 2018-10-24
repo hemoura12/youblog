@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
     <script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
     <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -16,11 +16,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="resources/styles/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	
-	<script type="text/javascript">
-	/*몇번째 클릭인지 확인하는 임시변수*/	
-	var a = 1; 
-	function clicktest() {
+   
+   <script type="text/javascript">
+   /*몇번째 클릭인지 확인하는 임시변수*/   
+   var a = 1; 
+   function clicktest() {
         if (a == 1) {
             $('.top_img_box').css('width', '87%');
             a = 2;
@@ -28,8 +28,8 @@
             $('.top_img_box').css('width', '100%');
             a = 1;
         }
-	};
-	</script>
+   };
+   </script>
 
 <title>header</title>
 </head>
@@ -59,12 +59,27 @@
                 </button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="personmain.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
-                <button class="btn btn-primary_1" type="button">
+               <%-- <c:set var="m" value="${member }"/>
+                <li>
+                   <c:url var="personmain" value="personmain.do">
+                  <c:param name="writerid" value="${m.memberid }" />
+               </c:url>
+               <a href = "${personmain }">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+               </a>
+               
+            </li> --%>
+                <li><a href="writepage.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                <li>
+                   <c:url var="personmain" value="personmain.do">
+                     <c:param name="writerid" value="${m.memberid }" />
+               </c:url>
+                      <a href = "${personmain }"><span class="glyphicon glyphicon-th" aria-hidden="true"/></a>
+                </li>
+                <li><a href="info.do"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+                <a href ="login.do"><button class="btn btn-primary_1" type="button">
                     로그인
-                </button>
+                </button></a>
                 <!-- 로그인시 나올 부분 -->
                 <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>

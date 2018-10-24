@@ -46,7 +46,6 @@ $(document).ready(function(){
 			obj["memberId"] = ${userId};
 			
 			
-			fnCommentUpdate();
 		});
 		//$("#"+id).contents().unwrap().wrap('<input type ="button" value="저장"');
 		//fnCommentUpdate();
