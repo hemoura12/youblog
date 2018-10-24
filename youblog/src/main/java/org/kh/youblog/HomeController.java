@@ -24,20 +24,10 @@ public class HomeController {
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
-		/*logger.info("Welcome home! The client locale is {}.", locale);	
->>>>>>> refs/remotes/origin/기경욱
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);	
-		String formattedDate = dateFormat.format(date);	
-		model.addAttribute("serverTime", formattedDate );
-		System.out.println("요청확인");*/
 		return "main";
 	}
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		
-		
 		return "main";
 	}
 	@RequestMapping(value = "categoryall.do", method = RequestMethod.GET)
@@ -151,11 +141,17 @@ public class HomeController {
 		return "page/writepage";
 	}
 	
+	@RequestMapping(value="changepass.do", method = RequestMethod.GET)
+	public String changepass(){
+		return "member/relogin";
+	}
 	
-	/*@RequestMapping(value="main.do")
-	public String mainView(){
-		return "home";
-	}*/
+	@RequestMapping(value="chpwview.do", method = RequestMethod.GET)
+	public String chpwview(){
+		return "member/passwordchange";
+	}
+	
+	
 
 }
 

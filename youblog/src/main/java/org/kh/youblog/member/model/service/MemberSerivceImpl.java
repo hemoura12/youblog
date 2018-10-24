@@ -17,10 +17,8 @@ public class MemberSerivceImpl implements MemberService{
 	private MemberDao memberDao;
 	
 	
-	
 	@Override
-	public Member selectBlogMember(String writerid) {
-		
+	public Member selectBlogMember(String writerid) {		
 		return memberDao.selectBlogMember(writerid);
 	}
 	

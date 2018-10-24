@@ -47,7 +47,7 @@
                 <input type="hidden" id="memberid" name="memberid" value ="${member.memberemail}">
                 <input type="hidden" id="memberemail" name="memberemail" value ="${member.memberemail}">
                 <input type="hidden" id="memberpwd" name="memberpwd" value ="${member.memberpwd}">
-                <input type="hidden" id="memberphone" name="memberphone" value ="01045671549">
+                <!-- <input type="hidden" id="memberphone" name="memberphone" value ="01045671549"> -->
                 
                     <p style="color: darkgray; font-size: small" > &nbsp;&nbsp;생일 </p>
 

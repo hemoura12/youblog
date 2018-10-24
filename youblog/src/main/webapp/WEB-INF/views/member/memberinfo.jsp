@@ -47,8 +47,8 @@
                     </tr>
                     <tr>
                         <th scope="row" style="width: 29%;">비밀번호</th>
-                        <td style="width: 61%">내용이 들어갑니다.</td>
-                        <td style="width: 10%"><a href ="passchange.do"><img class="moveimg" src="resources/images/scroll.png"></a></td>
+                        <td style="width: 61%"></td>
+                        <td style="width: 10%"><a href ="changepass.do"><img class="moveimg" src="resources/images/scroll.png"></a></td>
                     </tr>
                     <tr>
                         <th scope="row">이 름</th>
