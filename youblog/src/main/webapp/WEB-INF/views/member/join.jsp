@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- 부가적인 테마 -->
@@ -24,7 +24,7 @@
     <div class="card-title">
     </div>
     <div class="card-body-1">
-    	<form class="form-signin" action="join2.do" method="POST" >
+    	<form class="form-signin" action="mjoin2.do" method="POST" >
             <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2>
             <h4 align="center">YouBlog 계정 만들기</h4>
             <div class="outlinegroup">

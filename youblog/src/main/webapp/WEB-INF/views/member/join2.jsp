@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -59,8 +59,8 @@
                     <div class="selectbox">
                         <select id= "gender" name="gender">
                             <option value="" disabled selected hidden>성별</option>
-                            <option>남</option>
-                            <option>여</option>
+                            <option>M</option>
+                            <option>F </option>
                             <option>비공개</option>
                         </select>
                     </div>

@@ -24,7 +24,7 @@
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
-			<result property="alarm_check" column="alarm_check" />
+			<result property="alarmcheck" column="alarm_check" />
 			<result property="memberdeletedate" column="member_deletedate" />
 		</resultMap>
 		
@@ -47,19 +47,24 @@
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
-			<result property="alarm_check" column="alarm_check" />
+			<result property="alarmcheck" column="alarm_check" />
 			<result property="memberdeletedate" column="member_deletedate" />
 		</resultMap>
 		
-		<!-- <insert id="insertmember" parameterType="Member" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
-			insert into TB_MEMBER values (#{memberid}, #{memberpwd}, #{membername}, #{memberemail}, #{birthday}, #{gender})
-		</insert> -->
+		<insert id="insertmember" parameterType="Member" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
+			insert into TB_MEMBER(member_id, member_pw, member_name, member_email, birthday, gender) values (#{memberid}, #{memberpwd}, #{membername}, #{memberemail}, #{birthday}, #{gender})
+		</insert>
 		
-		<!-- <select id="loginCheck" parameterType="Member" 	resultType="Member" resultMap ="resultMember">
+		<select id="loginCheck" parameterType="Member" 	resultType="Member" resultMap ="resultMember">
 			select * from TB_MEMBER 
-			where memberid = #{memberid} 
-			and memberpwd = #{memberpwd}
-		</select> -->
+			where member_id = #{memberid} 
+			and member_pw = #{memberpwd}
+		</select>
+		
+		<select id="selectMember" parameterType="string" resultMap="resultMember">
+			select * from TB_MEMBER 
+			where member_id = #{memberid}
+		</select>
 		
 		<!-- <insert id="insertmember" parameterType="Member" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
 			insert into TB_MEMBER values (#{memberid,jdbcType=VARCHAR}, #{memberpwd,jdbcType=VARCHAR}, #{membername,jdbcType=VARCHAR},

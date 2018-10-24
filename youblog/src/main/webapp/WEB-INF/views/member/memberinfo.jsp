@@ -43,7 +43,7 @@
             <table  class="uinfo">
                     <tr>
                         <th scope="row">이메일</th>
-                        <td colspan="2">YouBlog@gmail.com</td>
+                        <td colspan="2">${member.memberemail}</td>
                     </tr>
                     <tr>
                         <th scope="row" style="width: 29%;">비밀번호</th>
@@ -52,12 +52,12 @@
                     </tr>
                     <tr>
                         <th scope="row">이 름</th>
-                        <td colspan="2">YouBlog</td>
+                        <td colspan="2">${member.membername}</td>
                     </tr>
 
                     <tr id="viewhidden" onclick="show_content()">
                         <th scope="row">생 일</th>
-                        <td>내용이 들어갑니다.</td>
+                        <td>${member.birthday}</td>
                         <td>
                             <img class="moveimg" src="resources/images/scroll.png">
                         </td>
@@ -71,7 +71,7 @@
 
                     <tr onclick="show_content2()">
                         <th scope="row">성 별</th>
-                        <td>내용이 들어갑니다.</td>
+                        <td>${member.gender}</td>
                         <td>
                             <img class="moveimg" src="resources/images/scroll.png">
                         </td>

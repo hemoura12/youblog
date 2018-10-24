@@ -7,13 +7,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
-("memberDao")
-
+@Repository("memberDao")
 public class MemberDao {
 	
 	@Autowired
-	SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;
+	
 	
 	public MemberDao(){}
 
@@ -27,8 +26,8 @@ public class MemberDao {
 			return sqlSession.selectOne("memberMapper.loginCheck", member);
 		}
 		
-		public Member joinmember(Member member){			
-			return sqlSession.selectOne("memberMapper.insertmember", member);
+		public int joinmember(Member member){			
+			return sqlSession.insert("memberMapper.insertmember", member);
 		}
 
 		
@@ -37,9 +36,9 @@ public class MemberDao {
 			return sqlSession.selectList("memberMapper.selectList");
 		}
 
-		public Member infoMember(String userid) {
+		public Member infoMember(String memberid) {
 			
-			return (Member)sqlSession.selectOne("memberMapper.selectMember", userid);
+			return (Member)sqlSession.selectOne("memberMapper.selectMember", memberid);
 		}
 
 		public Member updateMember(Member member) {

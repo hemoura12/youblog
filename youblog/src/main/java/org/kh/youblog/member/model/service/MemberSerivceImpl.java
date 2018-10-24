@@ -30,7 +30,7 @@ public class MemberSerivceImpl implements MemberService{
 	}
 	
 	@Override
-	public Member joinmember(Member member) {
+	public int joinmember(Member member) {
 		return memberDao.joinmember(member);
 	}
 	
@@ -41,8 +41,8 @@ public class MemberSerivceImpl implements MemberService{
 	}
 	
 	@Override
-	public Member infoMember(String userid){
-		return memberDao.infoMember(userid);
+	public Member infoMember(String memberid){
+		return memberDao.infoMember(memberid);
 	}
 	
 	@Override

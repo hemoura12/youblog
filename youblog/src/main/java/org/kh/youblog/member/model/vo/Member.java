@@ -26,7 +26,7 @@ public class Member implements java.io.Serializable{
 	private Date alarmcheck;
 	private Date memberdeletedate;
 	
-	
+	public Member(){}
 	
 	public Member(String memberid, String memberpwd, String membername, String memberphone, String memberemail,
 			Date birthday, String gender, String membergoogleno, String membergoogleid, String manager,

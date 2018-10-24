@@ -137,11 +137,7 @@ public class HomeController {
 	/*@RequestMapping(value = "join2.do", method = RequestMethod.GET)
 	public String join2(Locale locale, Model model) {		
 		return "member/join2";
-	}*/
-	@RequestMapping(value = "info.do", method = RequestMethod.GET)
-	public String info(Locale locale, Model model) {		
-		return "member/memberinfo";
-	}	
+	}*/	
 	@RequestMapping(value = "passchange.do", method = RequestMethod.GET)
 	public String passchange(Locale locale, Model model) {		
 		return "member/passwordchange";

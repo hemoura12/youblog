@@ -10,12 +10,14 @@ public interface MemberService {
 	
 	Member selectMember(Member member);
 	
-	Member joinmember(Member member);
+	int joinmember(Member member);
 
 	List<Member> selectList();
 
-	Member infoMember(String userid);
+	Member infoMember(String memberid);
 
 	Member updatemember(Member member);
+
+	
 
 }
