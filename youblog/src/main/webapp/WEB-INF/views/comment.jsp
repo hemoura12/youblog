@@ -17,6 +17,7 @@ $(document).ready(function(){
 		
 	});
 	
+	
 	//댓글 수정
 	$(document).on('click','input[name="updateBtn"]',function(){
 		var id = $(this).attr("id");
@@ -25,7 +26,13 @@ $(document).ready(function(){
 		$("#"+no+"_contents").focus();
 		
 		
+		var td = $(this).parents("tr");
+		var cmtNo = td.find("#CmtNo"+no).text();
+		var memberId = td.find("#MemberId"+no).text();
+		var contents = $("#"+no+"_contents").val();
 		
+		console.log(cmtNo);
+		console.log(memberId);
 		$(this).attr("id", "refact");
 		$(this).attr("value", "변경");
 		
@@ -33,6 +40,10 @@ $(document).ready(function(){
 		
 		
 		$("#refact").on('click', function(){
+			var obj = {};
+			obj["cmtContents"] = contents;
+			obj["cmtNo"] = cmtNo;
+			obj["memberId"] = ${userId};
 			
 			
 			fnCommentUpdate();
@@ -101,7 +112,7 @@ function commentReading(data){
 		console.log(list[i].MEMBER_ID);
 		
 		if(id == list[i].MEMBER_ID){
-		outComment = "<tr><td id = 'hideCmtNo' style = 'display : none;'>" + list[i].CMT_NO + "</td><td>" + list[i].MEMBER_ID +"</td><td><input type='text' value='" + list[i].CMT_CONTENTS + "' id='" + i + "_contents' readOnly></td><td><input type='button' id='"+ i +"_update' name='updateBtn' value='수정'></td><td><button id = 'deleteBtn'>삭제</button></td></tr>"
+		outComment = "<tr><td id = 'CmtNo" + i + "' style = 'display : none;'>" + list[i].CMT_NO + "</td><td id = 'MemberId" + i + "'>" + list[i].MEMBER_ID +"</td><td><input type='text' value='" + list[i].CMT_CONTENTS + "' id='" + i + "_contents' readOnly></td><td><input type='button' id='"+ i +"_update' name='updateBtn' value='수정'></td><td><button id = 'deleteBtn'>삭제</button></td></tr>"
 		}else{
 			outComment = "<tr><td id = 'hideCmtNo' style = 'display : none;'>" + list[i].CMT_NO + "</td><td>" + list[i].MEMBER_ID +"</td><td>" + list[i].CMT_CONTENTS + "</td></tr>"
 		}
