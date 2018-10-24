@@ -9,7 +9,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,6 +19,7 @@ import org.kh.youblog.HomeController;
 import org.kh.youblog.blog.model.service.BlogService;
 import org.kh.youblog.blog.model.vo.Blog;
 import org.kh.youblog.member.model.service.MemberService;
+import org.kh.youblog.member.model.vo.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class BlogController {
 	@Autowired
 	private BlogService blogService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
@@ -103,7 +109,9 @@ public class BlogController {
 	
 	@RequestMapping(value = "favoriteList.do")
 	public ModelAndView favoriteList(ModelAndView mv){
-
+		int a=19;
+		int b = a/10;
+		System.out.println(b);
 		mv.addObject("blog", blogService.favoriteList());
 		mv.setViewName("favorite/favorite");
 		
@@ -111,26 +119,34 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "subscriptionList.do")
-	public ModelAndView subscriptionList(@RequestParam(value="memberid") String memberid, 
-			ModelAndView mv){
-
-		ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
-		LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
-
-		for(Blog list : blogList){
-			writerSet.add(list.getWriterid());
-		}
-		ArrayList<String> writerList = new ArrayList<String>();
-		for(String w : writerSet){
-			writerList.add(w);
-		}
+	public ModelAndView subscriptionList(HttpServletRequest request, ModelAndView mv){
+		HttpSession session = request.getSession(true);
+		session.setAttribute("memberid", "user01");
+		//session.removeAttribute("memberid");
+		String memberid = (String)session.getAttribute("memberid");
 		
-		//저장된 아이디 리스트 넘김
-		//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
-		//System.out.println(writerArr);
-		
-		mv.addObject("blog", blogService.subsBlogList(memberid));
-		mv.setViewName("subsBlog/subsList");
+		//로그인 안되어 있을 시
+		if(memberid==null){
+			System.out.println("로그인 필요");
+			mv.setViewName("subscription/subscription");
+		} else {
+			ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
+			LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
+	
+			for(Blog list : blogList){
+				writerSet.add(list.getWriterid());
+			}
+			ArrayList<String> writerList = new ArrayList<String>();
+			for(String w : writerSet){
+				writerList.add(w);
+			}
+			//저장된 아이디 리스트 넘김
+			//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
+			//System.out.println(writerArr);
+			
+			mv.addObject("blog", blogService.subsBlogList(memberid));
+			mv.setViewName("subscription/subscription");
+		}
 		
 		return mv;
 	}
@@ -139,12 +155,13 @@ public class BlogController {
 	public ModelAndView subsBlogList(@RequestParam(value="memberid") String memberid, 
 			ModelAndView mv){
 		
-		ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
+		ArrayList<Member> subsWriterList = memberService.subsWriterList(memberid);
+		
 		LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
 
-		for(Blog list : blogList){
+/*		for(Blog list : subsWriterList){
 			writerSet.add(list.getWriterid());
-		}
+		}*/
 		ArrayList<String> writerList = new ArrayList<String>();
 		for(String w : writerSet){
 			writerList.add(w);
@@ -162,3 +179,4 @@ public class BlogController {
 	
 
 }
+

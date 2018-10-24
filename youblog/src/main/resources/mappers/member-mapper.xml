@@ -48,5 +48,10 @@
 			<result property="memberdeletedate" column="member_deletedate" />
 			<result property="formula" column="formula" />
 		</resultMap>
+		
+	<select id="subsBlogList" resultMap="resultList" resultType="Member">
+		SELECT * FROM V_SUBSCRIBE_WRITER
+		WHERE READER_ID = #{memberid}
+	</select>
 
 </mapper>

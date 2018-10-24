@@ -9,9 +9,6 @@
 <title>Insert title here</title>
 </head>
 <script>
-function cate2List(){
-
-}
 
 function fnCngList(sVal){
 /*     var f = document.form1;

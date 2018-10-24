@@ -97,7 +97,16 @@
 		SELECT * FROM V_FAVORITE_BLOG
 	</select>
 	
-	
+	<select id="subsBlogList" resultMap="resultList" resultType="Blog">
+		SELECT * FROM V_SUBSCRIBE_BLOG
+		WHERE reader_ID = #{memberid}
+		AND WRITER_ID IN (select WRITER_ID from
+  			(select * from 
+    			(select reader_ID, WRITER_ID, WRITE_DATE, RANK() OVER(PARTITION BY WRITER_ID ORDER BY WRITE_DATE desc) rank from V_SUBSCRIBE)
+ 			where reader_ID = #{memberid}
+  			and rank <![CDATA[ < ]]>= 1 order by WRITE_DATE desc) where rownum <![CDATA[ < ]]>= 3)
+  			<!-- SELECT * FROM V_SUBSCRIBE_BLOG where reader_ID = #{memberid} -->
+	</select>
 	
 	<select id="categoryList" resultType="java.util.HashMap">
 		select * from TB_CATEGORY
@@ -107,8 +116,7 @@
 		select distinct cate_name1 from TB_CATEGORY
 	</select>
 	
-
-		
+	
 	<select id="subsBlogList" resultMap="resultList" resultType="Blog">
 		SELECT * FROM V_SUBSCRIBE_BLOG
 		WHERE reader_ID = #{memberid}
@@ -138,5 +146,5 @@
 	WHERE NOTICENO = #{noticeNo}
  </update> -->
 
-	
+
 </mapper>

@@ -45,7 +45,6 @@ public class BlogDao {
 		return (ArrayList<Blog>)result;
 	}
 	
-	
 	public ArrayList<HashMap<String, String>> categoryList_Level1() {
 		List<HashMap<String, String>> result = sqlSession.selectList("blogMapper.categoryListLev1");
 		return (ArrayList<HashMap<String, String>>)result;
@@ -65,8 +64,6 @@ public class BlogDao {
 		List<Blog> result = sqlSession.selectList("blogMapper.subsBlogList", memberid);
 		return (ArrayList<Blog>)result;
 	}
-
-
 
 
 }
