@@ -57,15 +57,17 @@ public class BlogController {
 		mv.addObject("list", list);
 		mv.setViewName("view");
 		
+		
 		return mv;
 	}
 
-
 	// 에디터 글쓰기
 	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
-	public String insertBoard(String contents, Blog vo) {
+	public String insertBoard(HttpServletRequest request, String contents, Blog vo) {
 		blogService.create(contents, vo);
-		
+		String[] arr = request.getParameterValues("aaa");
+		System.out.println("arr!!!!!"+arr);
+		System.out.println("Contents : " + contents + vo);
 		return "redirect:/coding.do";
 
 	}

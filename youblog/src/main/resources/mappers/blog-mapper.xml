@@ -70,7 +70,8 @@
    contents,
     write_date,
    cate_name1,
-   cate_name2)
+   cate_name2,
+   state)
    values
    (blog_no_seq.nextval,
    #{title},
@@ -78,9 +79,10 @@
    #{contents},
     sysdate,
    #{catename1},
-   #{catename2}
+   #{catename2},
+   #{state}
    )   
-   where asc
+
    </insert>
    
    <select id="view" resultType="org.kh.youblog.blog.model.vo.Blog">

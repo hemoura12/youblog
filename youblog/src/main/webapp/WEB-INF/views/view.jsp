@@ -31,13 +31,23 @@
 	var subjectFilter; //대주제
 	var subjectFilter2; //소주제
 	var categoryFilter; //회원이 만든 세션 카테고리
+	
+	/* function checkBox(){
+		  var state = $('#open').prop('checked'); // 변수에 넣기
+		  var chk1 = $('#close').prop('checked'); // 변수에 넣기
+			var a = $("#open").val();
+		alert(state);
+	} */
 
 	/* //페이지 시작시
 	$(document).ready(function(){
 		
 	}); */
 	
-	//체크박스 하나만 선택되게 하는 함수
+
+	
+/* 	
+	 //체크박스 하나만 선택되게 하는 함수
 	function doOpenCheck(chk){
 	    var obj = document.getElementsByName("aaa");
 	    for(var i=0; i<obj.length; i++){
@@ -45,21 +55,32 @@
 	            obj[i].checked = false;
 	        }
 	    }
-	    var chk = $('#open').prop('checked'); // 변수에 넣기
-	  	alert(chk);
-	    if(chk == true){
-	    	$(".tag").show();
+	    	  
+	    var state = $('#open').is(':selected'); // 변수에 넣기
+	  	var chk1 = $('#close').is(':selected'); // 변수에 넣기
 
+	    if(state == true){
+	    	$(".tag").show();
 		}else 		
 			$(".tag").hide();
+	  	
+	  	$("#ope").change(
+	  	function(){
+	  		if($("#open").is (":checked")){
+	  			$("open").val('N');
+	  		}else{
+	  			$("close").val('Y');
+	  		}
+	  	});
+	  	alert(state);
    
-}   
+}     */
+	
+		$("#state").on("change", function(){
+			alert("바뀝니다");
+		});
+
 	 
-
-	
-
-	
-
 	//대주제 select 발생시
 	$(function() {
 		$("#catename1").on("change", function() {
@@ -132,11 +153,6 @@
 		}); //ajax
 		return false;
 	} */
-	
-	
-	
-
-
 	//--------------------------------------------------------------------------------
 
 	$(function() {
@@ -206,7 +222,7 @@
 </script>
 <body>
 
-	<form action="insertBoard.do" method="post" id="insertBoardFrm" name="insertBoardFrm"
+	<form action="insertBoard.do" method="post" id="insertBoardFrm" name="insertBoardFrm" 
 		enctype="multipart/form-data">
 		</select> <br>
 		<th>제목</th>
@@ -233,12 +249,18 @@
 		</select>
 		</div>
 		<div>
-			<input type="checkbox" id="open" name="aaa"  onclick="doOpenCheck(this)"  />공개 
-			<input type="checkbox" id="close" name="aaa"  onclick="doOpenCheck(this)"/>비공개
+		<select id="stae" name="state" >
+		<option value="N" id="open">공개
+		</option>
+		<option value="Y" id="close">비공개</option>
+		</select>
+		
+			<!-- <input type="checkbox" id="open" name="aaa" value="Y" onclick="doOpenCheck(this)"  />공개 
+			<input type="checkbox" id="close" name="aaa" value="N" onclick="doOpenCheck(this)"/>비공개 -->
 
 		</div>
 
-		<input type="button" id="insertBlog" value="등록" />
+		<input type="button" id="insertBlog" value="등록"  />
 	</form>
 
 </body>
