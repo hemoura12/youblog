@@ -80,6 +80,11 @@ public class BlogServiceImpl implements BlogService {
 			return (ArrayList<Blog>) list;
 		}
 
+		@Override
+		public ArrayList<Blog> selectBoardList(String writerid) {
+			return (ArrayList<Blog>)blogDao.selectBoardList(writerid);
+		}
+
 		
 
 }

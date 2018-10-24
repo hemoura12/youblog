@@ -49,6 +49,7 @@ public class BlogController {
 	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
+		
 		writerid = "user01";
 		
 		ArrayList<Blog> blog = blogSerivce.selectBlogList(writerid);
@@ -225,5 +226,18 @@ public class BlogController {
 		return sb.toString();
 	}
 	
+	@RequestMapping(value="personboard.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
+	public ModelAndView selectBoardList(ModelAndView mv){
+		
+		String writerid = "user01";
+		ArrayList<Blog> blog = blogSerivce.selectBoardList(writerid);
+		
+		
+		mv.addObject("blog", blog);//Blog객체 리턴받음
+
+		mv.setViewName("personblog/personboard");
+		
+		return mv;
+	}
 	
 }

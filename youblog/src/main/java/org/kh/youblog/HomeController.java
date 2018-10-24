@@ -126,11 +126,11 @@ public class HomeController {
       
       return "personblog/personchannel";
    }
-   @RequestMapping(value = "personboard.do", method = RequestMethod.GET)
+  /* @RequestMapping(value = "personboard.do", method = RequestMethod.GET)
    public String personboard(Locale locale, Model model) {
       
       return "personblog/personboard";
-   }
+   }*/
    //member
    @RequestMapping(value = "login.do", method = RequestMethod.GET)
    public String login(Locale locale, Model model) {      

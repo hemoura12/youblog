@@ -26,6 +26,9 @@ public interface BlogService {
 
 		// 블로그 글 출력
 		ArrayList<Blog> selectList();
+		
+		//블로그 게시판 출력
+		ArrayList<Blog> selectBoardList(String writerid);
 
 	
 }

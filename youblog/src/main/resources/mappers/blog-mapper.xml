@@ -98,6 +98,12 @@
    select * from tb_board
    where blog_no = #{blogno}
    </select>
-	
+   
+   <select id="selectBoardList" parameterType="String" resultMap="resultBlog">
+		select * 
+		from TB_BLOG
+		where writer_id = #{writerid}
+		ORDER BY WRITE_DATE desc
+	</select>
 </mapper>
 

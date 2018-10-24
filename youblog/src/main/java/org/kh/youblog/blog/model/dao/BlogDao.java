@@ -63,5 +63,9 @@ public class BlogDao {
 			return sqlSession.selectList("sessionMapper.selectList", memberSession);
 		}
 
+		public List<Blog> selectBoardList(String writerid) {
+			return sqlSession.selectList("blogMapper.selectBoardList", writerid);
+		}
+
 		
 }
