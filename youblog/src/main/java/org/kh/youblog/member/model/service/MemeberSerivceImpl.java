@@ -12,15 +12,27 @@ import org.springframework.stereotype.Service;
 public class MemeberSerivceImpl implements MemberService{
 	
 	@Autowired
-	private MemberDao MemberDao;
+	private MemberDao memberDao;
 	
 	public MemeberSerivceImpl(){}
 	
-	@Override
+	/*@Override
 	public ArrayList<Member> selectList(){
-		 List<Member> list = MemberDao.selectList();
+		 List<Member> list = memberDao.selectList();
 	      
 	      return (ArrayList<Member>)list;
+	}*/
+	
+	@Override
+	   public Member selectBlogMember(String writerid) {
+	      
+	      return memberDao.selectBlogMember(writerid);
+	   }
+
+	@Override
+	public ArrayList<Member> selectList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

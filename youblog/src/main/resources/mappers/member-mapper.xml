@@ -19,12 +19,12 @@
 			<result property="profilephoto" column="profile_photo" />
 			<result property="banner" column="banner" />
 			<result property="readercount" column="reader_count" />
-			<result property="channeropen" column="channer_open" />
+			<result property="reader_open" column="reader_open" />
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
 			<result property="memberdeletedate" column="member_deletedate" />
-			<result property="alarmcheck" column="alarm_check" />
+			<result property="formula" column="formula" />
 		</resultMap>
 		
 		<resultMap type="Member" id="resultList">
@@ -41,17 +41,17 @@
 			<result property="profilephoto" column="profile_photo" />
 			<result property="banner" column="banner" />
 			<result property="readercount" column="reader_count" />
-			<result property="channeropen" column="channer_open" />
+			<result property="reader_open" column="reader_open" />
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
 			<result property="memberdeletedate" column="member_deletedate" />
-			<result property="alarmcheck" column="alarm_check" />
+			<result property="formula" column="formula" />
 		</resultMap>
-
-	<select id="selectList" resultMap="resultList" resultType="Member">
-		select *
-		from TB_MEMBER
-	</select>
-
+		
+		<select id="selectBlogMember" parameterType="string" statementType="PREPARED" resultMap="resultMember">
+			Select *
+			from TB_MEMBER
+			where member_id = #{writerid}
+		</select>
 </mapper>

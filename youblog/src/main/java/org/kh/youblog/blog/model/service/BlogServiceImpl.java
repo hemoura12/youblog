@@ -17,8 +17,24 @@ public class BlogServiceImpl implements BlogService {
 	@Autowired
 	private BlogDao blogDao;
 
-	public BlogServiceImpl() {
-	}
+	public BlogServiceImpl(){}
+	
+	@Override
+	   public ArrayList<Blog> selectBlogList(String writerid) {
+	      return (ArrayList<Blog>)blogDao.selectBlogList(writerid);
+	   }
+
+	   @Override
+	   public int updateBlog(Blog blog) {
+	      return blogDao.updateBlog(blog);
+	   }
+
+	   @Override
+	   public int deleteBlog(Blog blog) {
+	      return blogDao.deleteBlog(blog);
+	   }
+	
+	
 
 	// 에디터 글쓰기
 	@Override
@@ -62,19 +78,9 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.selectList3(memberSession);
 	}
 
-	// 블로그 글 출력
-	@Override
-	public ArrayList<Blog> selectList() {
-		List<Blog> list = blogDao.selectList();
-		return (ArrayList<Blog>) list;
-	}
+	
 
-	// 블로그 글 출력
-	@Override
-	public List<Blog> getBlogList() {
-		return blogDao.getList();
-	}
-
+	
 	
 
 

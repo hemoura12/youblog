@@ -7,5 +7,7 @@ import org.kh.youblog.member.model.vo.Member;
 public interface MemberService {
 
 	ArrayList<Member> selectList();
+	
+	Member selectBlogMember(String writerid);
 
 }

@@ -18,6 +18,19 @@ public class BlogDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	public List<Blog> selectBlogList(String writerid) {
+	      return sqlSession.selectList("blogMapper.selectBlog", writerid);
+	   }
+
+
+	   public int updateBlog(Blog blog) {
+	      
+	      return sqlSession.update("blogMapper.updateBlog", blog);
+	   }
+
+	   public int deleteBlog(Blog blog) {
+	      return sqlSession.delete("blogMapper.updateBlog", blog);
+	   }
 
 	
 	//게시글 작성
@@ -25,15 +38,7 @@ public class BlogDao {
 		return sqlSession.insert("blogMapper.insert", vo);
 	}
 	
-	public List<Blog> selectList() {
-	      // TODO Auto-generated method stub
-	      return sqlSession.selectList("blogMapper.selectBlogList");
-	   }
-
-	   public List<Blog> getList() {
-	      return sqlSession.selectList("blogMapper.selectBlogList");
-	   }
-	   
+	
 	
 	
 	//대주제 출력

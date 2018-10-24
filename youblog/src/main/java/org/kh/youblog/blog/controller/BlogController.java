@@ -34,26 +34,76 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.google.inject.Inject;
-
 @Controller
+@SessionAttributes({"blog", "member"})
+
 public class BlogController {
 
 	@Autowired
-	private BlogService blogService;
+	private BlogService blogSerivce;
 	
-	@RequestMapping(value = "blogread.do")
-    public ModelAndView reading(ModelAndView mv){
-      mv.addObject("resultList", blogService.getBlogList());
-       mv.setViewName("blogread");
-      return mv;
-   }
+	@Autowired
+	private MemberService memberService;
+	
+	//블로그 리스트 출력
+	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
+	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
+		
+		writerid = "user01";
+		
+		ArrayList<Blog> blog = blogSerivce.selectBlogList(writerid);
+		Member member = memberService.selectBlogMember(writerid);
+		
+		
+		mv.addObject("blog", blog);//Blog객체 리턴받음
+		mv.addObject("member", member);
+
+		mv.setViewName("personblog/personmain");
+		
+		return mv;
+	}
+	
+	
+	//글관리 수정
+	@RequestMapping(value="blogpudate.do", method=RequestMethod.GET)
+	public ModelAndView updateBlogList(ModelAndView mv, @RequestParam(value="memberid") String memberid,
+																				@RequestParam(value="blogid") String blogid){
+		
+		memberid = "user01";
+		blogid = "1";
+		
+		Blog blog = new Blog();
+		blog.setBlogno(blogid);
+		blog.setWriterid(memberid);
+		
+		mv.addObject("blog", blogSerivce.updateBlog(blog));
+		
+		return mv;
+	}
+	
+	//글관리 삭제
+	public ModelAndView deleteBlogList(ModelAndView mv, @RequestParam(value="memberid") String memberid,
+																				@RequestParam(value="blogid") String blogid){
+		
+		memberid = "user01";
+		blogid = "1";
+
+		Blog blog = new Blog();
+		blog.setBlogno(blogid);
+		blog.setWriterid(memberid);
+
+		mv.addObject("blog", blogSerivce.deleteBlog(blog));
+
+		return mv;
+	}
+	
+
 
 	// view 페이지이동 대주제 출력
 	@RequestMapping(value = "/coding.do")
 	public ModelAndView list(ModelAndView mv) {
 
-		ArrayList<Category> list = blogService.selectList1();
+		ArrayList<Category> list = blogSerivce.selectList1();
 		mv.addObject("list", list);
 		mv.setViewName("view");
 		
@@ -63,20 +113,22 @@ public class BlogController {
 
 	// 에디터 글쓰기
 	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
+
 	public String insertBoard(HttpServletRequest request, String contents, Blog vo) {
-		blogService.create(contents, vo);
-		String[] arr = request.getParameterValues("aaa");
-		System.out.println("arr!!!!!"+arr);
-		System.out.println("Contents : " + contents + vo);
+	
+		
+		blogSerivce.create(contents, vo);
+
 		return "redirect:/coding.do";
 
 	}
+	
 	
 	//소주제 불러오기
 	@RequestMapping(value="subject.do", method = RequestMethod.POST)
 	public void read(HttpServletResponse response,@RequestParam(value="sub") String sub) throws IOException{
 		Category category = new Category();
-		List<Category> list = blogService.selectList2(sub);
+		List<Category> list = blogSerivce.selectList2(sub);
 		JSONObject json = new JSONObject();
 		
 		//System.out.println("List 오는지: " + list);
@@ -108,7 +160,7 @@ public class BlogController {
 	@RequestMapping(value="memberSession.do", method = RequestMethod.POST)
 	public void session(HttpServletResponse response,@RequestParam(value="memberSession") String memberSession) throws IOException{
 		Session sess = new Session();
-		List<Session> list = blogService.selectList3(memberSession);
+		List<Session> list = blogSerivce.selectList3(memberSession);
 		JSONObject json = new JSONObject();
 		
 		System.out.println("List 오는지: " + list);
@@ -173,35 +225,4 @@ public class BlogController {
 	}
 	
 	
-	
-    
-    
-    //테스트 코드들
-    /*//게시판테스트
-	@RequestMapping(value ="create.do" , method = RequestMethod.POST)
-	public String insert(@ModelAttribute Blog vo) {
-		blogService.write(vo);
-
-		return "home";
-	}
-	
-	@RequestMapping(value = "test.do")
-    public String test() {
-        return "board";
-    }*/
-	
-	//게시글출력
-		/*@RequestMapping(value = "/coding.do")
-		   public ModelAndView list(ModelAndView mv){
-		      
-		      ArrayList<Blog> list = blogService.selectList();
-		      mv.addObject("list", list);
-		      mv.setViewName("view");
-		      
-		      
-		      return mv;
-		      
-		   }*/
-    
-    
 }
