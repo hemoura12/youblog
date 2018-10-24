@@ -64,23 +64,25 @@
 		}else 		
 			$(".tag").hide();
 	  	
-	  	$("#ope").change(
-	  	function(){
-	  		if($("#open").is (":checked")){
-	  			$("open").val('N');
-	  		}else{
-	  			$("close").val('Y');
-	  		}
-	  	});
-	  	alert(state);
+	  
    
 }     */
-	
-		$("#state").on("change", function(){
-			alert("바뀝니다");
-		});
 
-	 
+
+
+	 $(function(){
+		$("#state").on("change", function(){
+			var target = document.getElementById("state");
+			//alert('선택된 옵션 text 값=' + target.options[target.selectedIndex].text); // 옵션 text 값
+			//alert('선택된 옵션 value 값=' + target.options[target.selectedIndex].value); // 옵션 value 값
+			if(target.options[target.selectedIndex].value == 'Y'){
+				$(".tag").hide();
+			}else
+				$(".tag").show();
+			
+		});
+	}); 
+
 	//대주제 select 발생시
 	$(function() {
 		$("#catename1").on("change", function() {
@@ -108,14 +110,15 @@
 			},
 			dataType : "json",
 			success : function(data) {
-				var jsonStr  = JSON.stringify(data);
-				var json  = JSON.parse(jsonStr);
+				var jsonStr = JSON.stringify(data);
+				var json = JSON.parse(jsonStr);
 
-				  $("#catename2").append("<option>소주제선택</option>"); 
-				
-				for(var i = 0; i < json.list.length; i++){
+				$("#catename2").append("<option>소주제선택</option>");
 
-						$("#catename2").append("<option>" + json.list[i].cate2 + "</option>");
+				for (var i = 0; i < json.list.length; i++) {
+
+					$("#catename2").append(
+							"<option>" + json.list[i].cate2 + "</option>");
 				} //for
 			}, //success
 			error : function(jqXHR, textstatus, errorThrown) {
@@ -126,7 +129,6 @@
 		return false;
 	}
 
-	
 	/* //회원세션 출력 함수
 	function categoryNamePrint(categoryFilter) {
 		$.ajax({
@@ -154,14 +156,13 @@
 		return false;
 	} */
 	//--------------------------------------------------------------------------------
-
 	$(function() {
 		//전역변수
 		var obj = [];
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : obj,
-			elPlaceHolder : "contents", 
+			elPlaceHolder : "contents",
 			sSkinURI : "/youblog/resources/editor/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부
@@ -172,7 +173,7 @@
 				bUseModeChanger : false,
 			}
 		});
-		
+
 		/* $("#insertBlog").click(function() {
 			var blogWrite = new Object();
 			alert("등록버튼 누르기");
@@ -185,22 +186,22 @@
 			var jsonStr = JSON.stringify(blogWrite);
 			
 			$.ajax({
-	            url : "/youblog/insertBoard.do",
-	            type : "post",
-	            data : {"jsonStr" : jsonStr},
-	           // dataType : "json",
-	            success : function(data){
-	               alert("글작성완료 ajax 성공!!" );
-	                  if(data >= 1)
-	                     alert("글 작성완료");
-	                  else
-	                     alert("글 작성실패");
-	               
-	            },   //success
-	            error : function(jqXHR, textstatus, errorThrown){
-	               console.log("error : " + jqXHR + ", " + textstatus + ", " + errorThrown);
-	            } //error
-	   });//ajax
+		        url : "/youblog/insertBoard.do",
+		        type : "post",
+		        data : {"jsonStr" : jsonStr},
+		       // dataType : "json",
+		        success : function(data){
+		           alert("글작성완료 ajax 성공!!" );
+		              if(data >= 1)
+		                 alert("글 작성완료");
+		              else
+		                 alert("글 작성실패");
+		           
+		        },   //success
+		        error : function(jqXHR, textstatus, errorThrown){
+		           console.log("error : " + jqXHR + ", " + textstatus + ", " + errorThrown);
+		        } //error
+		});//ajax
 			
 		});  */
 		//전송버튼
@@ -212,13 +213,9 @@
 			obj.getById["subject2"].exec("UPDATE_CONTENTS_FIELD", []);
 			obj.getById["subject"].exec("UPDATE_CONTENTS_FIELD", []);  */
 			//폼 submit
-			$("#insertBoardFrm").submit();		
-		});			
+			$("#insertBoardFrm").submit();
+		});
 	});
-	
-	
-	
-
 </script>
 <body>
 
@@ -244,16 +241,17 @@
 
 	 <select id="catename2" name="catename2" class="cate2">
 		</select>
-
+</div>
 		 <select id="catename3" class="cate3">
 		</select>
-		</div>
+		
 		<div>
-		<select id="stae" name="state" >
-		<option value="N" id="open">공개
-		</option>
+		<select id="state" name="state" >
+		<option value="N" id="open">공개</option>
 		<option value="Y" id="close">비공개</option>
 		</select>
+		
+		
 		
 			<!-- <input type="checkbox" id="open" name="aaa" value="Y" onclick="doOpenCheck(this)"  />공개 
 			<input type="checkbox" id="close" name="aaa" value="N" onclick="doOpenCheck(this)"/>비공개 -->

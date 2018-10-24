@@ -8,6 +8,7 @@ public interface MemberService {
 
 	ArrayList<Member> selectList();
 	
+	
 	Member selectBlogMember(String writerid);
 
 }

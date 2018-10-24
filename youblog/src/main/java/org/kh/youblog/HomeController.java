@@ -114,11 +114,11 @@ public class HomeController {
       
       return "library/likeview";
    }
-   @RequestMapping(value = "personmain.do", method = RequestMethod.GET)
+  /* @RequestMapping(value = "personmain.do", method = RequestMethod.GET)
    public String personmain(Locale locale, Model model) {
       
       return "personblog/personmain";
-   }
+   }*/
    @RequestMapping(value = "personchannel.do", method = RequestMethod.GET)
    public String personchannel(Locale locale, Model model) {
       
