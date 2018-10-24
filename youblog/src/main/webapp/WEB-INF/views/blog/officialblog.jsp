@@ -28,6 +28,8 @@
                      </span><br><br><br>
                     <a href="#" class="btn_src"><button class="official_btn" href="#">공식블로그 신청하기</button></a>
 
+
+
                 </div>
                 <div class="ul-table__tables">
                     <div class="table_1"><img  src="resources/images/라이언 썸네일.png"/>
