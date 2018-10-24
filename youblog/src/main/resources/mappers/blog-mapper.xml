@@ -52,16 +52,22 @@
 		where writer_id = #{writerid}
 	</select>
 	
-	<select id="selectBlog" parameterType="String" resultMap="resultBlog">
+	<!-- <select id="selectBlog" parameterType="String" resultMap="resultBlog">
       select * 
       from TB_BLOG
       where blog_no = #{blogno}
-   </select>
+   </select> -->
    
    <select id="selectBlogList" resultType="Blog" resultMap="resultList">
       select *
       from TB_BLOG
    </select>
+   
+   
+   <update id="updateBlogSettings">
+   		update TB_BLOG
+   		set 
+   </update>
    
    <select id="selectList"  resultMap="resultList" >
      select distinct cate_name1 from tb_category

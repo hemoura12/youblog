@@ -45,7 +45,7 @@ public class BlogController {
 	@Autowired
 	private MemberService memberService;
 	
-	
+	//블로그 리스트 출력
 	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
@@ -63,6 +63,8 @@ public class BlogController {
 		return mv;
 	}
 	
+	
+	//글관리 수정
 	@RequestMapping(value="blogpudate.do", method=RequestMethod.GET)
 	public ModelAndView updateBlogList(ModelAndView mv, @RequestParam(value="memberid") String memberid,
 																				@RequestParam(value="blogid") String blogid){
@@ -79,6 +81,7 @@ public class BlogController {
 		return mv;
 	}
 	
+	//글관리 삭제
 	public ModelAndView deleteBlogList(ModelAndView mv, @RequestParam(value="memberid") String memberid,
 																				@RequestParam(value="blogid") String blogid){
 		
@@ -94,12 +97,12 @@ public class BlogController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "blogread.do")
+	/*@RequestMapping(value = "blogread.do")
     public ModelAndView reading(ModelAndView mv){
       mv.addObject("resultList", blogSerivce.getBlogList());
        mv.setViewName("blogread");
       return mv;
-   }
+   }*/
 
 	// view 페이지이동 대주제 출력
 	@RequestMapping(value = "/coding.do")

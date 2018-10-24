@@ -20,7 +20,7 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public ArrayList<Blog> selectBlogList(String writerid) {
-		return (ArrayList<Blog>) blogDao.selectBlogList(writerid);
+		return (ArrayList<Blog>)blogDao.selectBlogList(writerid);
 	}
 
 	@Override
@@ -80,10 +80,6 @@ public class BlogServiceImpl implements BlogService {
 			return (ArrayList<Blog>) list;
 		}
 
-		// 블로그 글 출력
-		@Override
-		public List<Blog> getBlogList() {
-			return blogDao.getList();
-		}
+		
 
 }

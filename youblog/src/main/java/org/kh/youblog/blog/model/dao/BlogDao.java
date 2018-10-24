@@ -1,5 +1,6 @@
 package org.kh.youblog.blog.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.kh.youblog.blog.model.vo.Blog;
@@ -14,12 +15,11 @@ public class BlogDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
-		
-
+	
 	public List<Blog> selectBlogList(String writerid) {
-		
 		return sqlSession.selectList("blogMapper.selectBlog", writerid);
 	}
+
 
 	public int updateBlog(Blog blog) {
 		
@@ -40,9 +40,7 @@ public class BlogDao {
 		      return sqlSession.selectList("blogMapper.selectBlogList");
 		   }
 
-		   public List<Blog> getList() {
-		      return sqlSession.selectList("blogMapper.selectBlogList");
-		   }
+		
 		   
 		
 		
@@ -64,4 +62,5 @@ public class BlogDao {
 			return sqlSession.selectList("sessionMapper.selectList", memberSession);
 		}
 
+		
 }

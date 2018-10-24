@@ -27,7 +27,5 @@ public interface BlogService {
 		// 블로그 글 출력
 		ArrayList<Blog> selectList();
 
-		List<Blog> getBlogList();
-
 	
 }

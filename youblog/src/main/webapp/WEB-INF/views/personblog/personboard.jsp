@@ -26,10 +26,20 @@
             </div>
             <div class ="infoBox_right">
                 <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
-                <a href="#" class="subscript_tag"><span>구독 중</span></a>
-
-                <a class = "sub_alram" onclick="changeicon()"><i class="fas fa-bell-slash"></i></a>
-                <!--<i class="fas fa-bell"></i>-->
+					
+					<!-- if문걸어 관리탭나누기 -->
+					<%-- <c:choose>
+						<c:when test="">
+							<a href="#" class="subscript_tag"><span>구독 중</span></a>
+							<a class="sub_alram" onclick="changeicon()"><i
+								class="fas fa-bell-slash"></i></a>
+						</c:when>
+						<c:when test="">
+							<a href="#" class="subscript_tag"><span>관리</span></a>
+						</c:when>
+					</c:choose> --%>
+					
+					<!--<i class="fas fa-bell"></i>-->
             </div> <!--infoBox_right -->
         </div> <!-- channel_header-->
         <div class="sub_header">
