@@ -28,8 +28,8 @@ public class SessionServiceImpl implements SessionService{
 	}
 	
 	@Override
-	public int deleteSession(Session session) {
-		return sessionDao.deleteSession(session);
+	public int deleteSession(String sessionname, String memberid) {
+		return sessionDao.deleteSession(sessionname, memberid);
 		
 	}
 

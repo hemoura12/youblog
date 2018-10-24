@@ -18,7 +18,7 @@ public class Member implements java.io.Serializable{
 	private String profilephoto;
 	private String banner;
 	private int readercount;
-	private String readeropen;
+	private String channeropen;
 	private String formula;
 	private String partner;
 	private String state;
@@ -30,7 +30,7 @@ public class Member implements java.io.Serializable{
 
 	public Member(String memberid, String memberpwd, String membername, String memberphone, String memberemail,
 			Date birthday, String gender, String membergoogleno, String membergoogleid, String manager,
-			String profilephoto, String banner, int readercount, String readeropen, String formula, String partner,
+			String profilephoto, String banner, int readercount, String channeropen, String formula, String partner,
 			String state, Date memberdeletedate) {
 		super();
 		this.memberid = memberid;
@@ -46,7 +46,7 @@ public class Member implements java.io.Serializable{
 		this.profilephoto = profilephoto;
 		this.banner = banner;
 		this.readercount = readercount;
-		this.readeropen = readeropen;
+		this.channeropen = channeropen;
 		this.formula = formula;
 		this.partner = partner;
 		this.state = state;
@@ -109,8 +109,8 @@ public class Member implements java.io.Serializable{
 		return readercount;
 	}
 
-	public String getReaderopen() {
-		return readeropen;
+	public String getChanneropen() {
+		return channeropen;
 	}
 
 	public String getFormula() {
@@ -181,8 +181,8 @@ public class Member implements java.io.Serializable{
 		this.readercount = readercount;
 	}
 
-	public void setReaderopen(String readeropen) {
-		this.readeropen = readeropen;
+	public void setChanneropen(String channeropen) {
+		this.channeropen = channeropen;
 	}
 
 	public void setFormula(String formula) {
@@ -207,12 +207,10 @@ public class Member implements java.io.Serializable{
 				+ ", memberphone=" + memberphone + ", memberemail=" + memberemail + ", birthday=" + birthday
 				+ ", gender=" + gender + ", membergoogleno=" + membergoogleno + ", membergoogleid=" + membergoogleid
 				+ ", manager=" + manager + ", profilephoto=" + profilephoto + ", banner=" + banner + ", readercount="
-				+ readercount + ", readeropen=" + readeropen + ", formula=" + formula + ", partner=" + partner
-				+ ", state=" + state + ", memberdeletedate=" + memberdeletedate + "]\n\n";
+				+ readercount + ", channeropen=" + channeropen + ", formula=" + formula + ", partner=" + partner
+				+ ", state=" + state + ", memberdeletedate=" + memberdeletedate + "]";
 	}
 	
 	
 
 }
-	
-

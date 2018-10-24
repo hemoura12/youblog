@@ -18,6 +18,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
    
    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+   
+   /**
+    * Simply selects the home view to render by returning its name.
+    */
+   /*@RequestMapping(value = "main.do", method = RequestMethod.GET)
+   public String home1(Locale locale, Model model) {
+      logger.info("Welcome home! The client locale is {}.", locale);
+      return "main";
+   }*/
 
    @RequestMapping(value = "main.do", method = RequestMethod.GET)
    public String main(Locale locale, Model model) {
@@ -32,8 +41,6 @@ public class HomeController {
    }
    @RequestMapping(value = "home.do", method = RequestMethod.GET)
    public String home(Locale locale, Model model) {
-      
-      
       
       return "main";
    }
@@ -107,11 +114,11 @@ public class HomeController {
       
       return "library/likeview";
    }
-   /*@RequestMapping(value = "personmain.do", method = RequestMethod.GET)
+   @RequestMapping(value = "personmain.do", method = RequestMethod.GET)
    public String personmain(Locale locale, Model model) {
       
       return "personblog/personmain";
-   }*/
+   }
    @RequestMapping(value = "personchannel.do", method = RequestMethod.GET)
    public String personchannel(Locale locale, Model model) {
       
@@ -122,41 +129,15 @@ public class HomeController {
       
       return "personblog/personboard";
    }
-   //member
-   @RequestMapping(value = "login.do", method = RequestMethod.GET)
-   public String login(Locale locale, Model model) {      
-      return "member/loginView";
-   }
-   @RequestMapping(value = "join.do", method = RequestMethod.GET)
-   public String join(Locale locale, Model model) {      
-      return "member/join";
-   }
-   @RequestMapping(value = "sec_join.do", method = RequestMethod.GET)
-   public String sec_join(Locale locale, Model model) {      
-      return "member/join2";
-   }
-   @RequestMapping(value = "info.do", method = RequestMethod.GET)
-   public String info(Locale locale, Model model) {      
-      return "member/memberinfo";
-   }   
-   @RequestMapping(value = "passchange.do", method = RequestMethod.GET)
-   public String passchange(Locale locale, Model model) {      
-      return "member/passwordchange";
-   }
-   @RequestMapping(value = "detailpage.do", method = RequestMethod.GET)
-   public String detailpage(Locale locale, Model model) {      
-      return "page/detailpage";
-   }
-   @RequestMapping(value = "writepage.do", method = RequestMethod.GET)
-   public String wirtepage(Locale locale, Model model) {      
-      return "page/writepage";
-   }
    
-   
-
    /*@RequestMapping(value="main.do")
    public String mainView(){
       return "home";
    }*/
-
+   
+   @RequestMapping("test2.do")
+   public String test(){
+      
+      return "test";
+   }
 }

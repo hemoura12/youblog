@@ -22,6 +22,16 @@ public class MemberController {
         return "Memberlist";
     }*/
 	
+	@RequestMapping(value="member.do")
+	public ModelAndView list(ModelAndView mv){
+		
+		ArrayList<Member> list = memberservice.selectList();
+		mv.addObject("list", list);
+		mv.setViewName("member");
+		
+		return mv;
+		
+	}
 }
 
 

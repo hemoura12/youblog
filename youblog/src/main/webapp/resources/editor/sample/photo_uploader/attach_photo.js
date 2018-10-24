@@ -334,7 +334,6 @@
     	var tempFile,
     		sUploadURL;
     	
-
     	sUploadURL= '../../../../file_uploader_html5.do'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.

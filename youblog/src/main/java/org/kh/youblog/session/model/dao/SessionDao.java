@@ -43,9 +43,9 @@ public class SessionDao {
 		return result;
 	}
 
-	public int deleteSession(Session session) {
+	public int deleteSession(String sessionname, String memberid) {
 		// TODO Auto-generated method stub
-		return (int)sqlSession.delete("sessionMapper.deleteSession", session);
+		return (int)sqlSession.delete("sessionMapper.deleteSession", sessionname);
 	}
 	
 	
