@@ -284,7 +284,7 @@ public class Blog implements java.io.Serializable{
 				+ ", titleimage=" + titleimage + ", catename1=" + catename1 + ", catename2=" + catename2 + ", tag="
 				+ tag + ", hits=" + hits + ", hitstime=" + hitstime + ", likecount=" + likecount + ", state=" + state
 				+ ", notice=" + notice + ", subscribeshare=" + subscribeshare + ", bestno=" + bestno + ", catelevel="
-				+ catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + "]";
+				+ catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + "]\n\n";
 	}
 	  
 	

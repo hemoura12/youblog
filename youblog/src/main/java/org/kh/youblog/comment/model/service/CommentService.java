@@ -1,5 +1,6 @@
 package org.kh.youblog.comment.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.kh.youblog.comment.model.vo.Comment;
@@ -22,13 +23,16 @@ public interface CommentService {
 	 * 댓글수정
 	 * @param com
 	 */
-	public void updateComment(Comment com);
+	public int updateComment(Comment com);
 	
 	/**
 	 * 댓글삭제
 	 * @param com
 	 */
-	public void deleteComment(Comment com);
-	
-	
+	public int deleteComment(Comment com);
+
+
+
+	ArrayList<Comment> selectList2();
+
 }

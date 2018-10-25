@@ -1,5 +1,6 @@
 package org.kh.youblog.comment.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,12 +25,12 @@ public class commentController {
 	@Resource(name="commentService")
 	CommentService commentService;
 	
-	@RequestMapping(value="/comment.do")
+/*	@RequestMapping(value="/comment.do")
 	public ModelAndView commentView(ModelAndView mv){
-		mv.addObject("blogNo","22");
+		
 		mv.setViewName("comment");
 		return mv;
-	}
+	}*/
 	
 	@RequestMapping(value="/insertComment.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -67,6 +68,7 @@ public class commentController {
 		response.setContentType("application/json; charset=utf-8");
 		JSONObject job = new JSONObject();
 		try{
+			
 			commentService.deleteComment(com);
 			job.put("message","댓글이 삭제 되었습니다. ");
 		}catch(Exception e){
@@ -99,10 +101,11 @@ public class commentController {
 			jarr.add(job);
 		}
 		json.put("list", jarr);
+		
 		return json;
+		
+		
 	}
 	
-	
-	
+	   
 }
-	

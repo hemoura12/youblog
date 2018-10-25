@@ -32,7 +32,7 @@ public class CommentDao {
 	 * @return
 	 */
 	public int updateComment(Comment com){
-		return sqlSession.insert("commentMapper.updateComment", com);
+		return sqlSession.update("commentMapper.updateComment", com);
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class CommentDao {
 	 * @return
 	 */
 	public int deleteComment(Comment com){
-		return sqlSession.insert("commentMapper.deleteComment", com);
+		return sqlSession.update("commentMapper.deleteComment", com);
 	}
 
 	/**
@@ -51,6 +51,11 @@ public class CommentDao {
 	 */
 	public List<Comment> readComment(Comment com) {
 		return sqlSession.selectList("commentMapper.readComment", com);
+	}
+
+	public List<Comment> selectList2() {
+		
+		return sqlSession.selectList("commentMapper.selectList");
 	}
 
 }

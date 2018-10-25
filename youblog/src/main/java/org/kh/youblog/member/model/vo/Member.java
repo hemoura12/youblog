@@ -208,9 +208,11 @@ public class Member implements java.io.Serializable{
 				+ ", gender=" + gender + ", membergoogleno=" + membergoogleno + ", membergoogleid=" + membergoogleid
 				+ ", manager=" + manager + ", profilephoto=" + profilephoto + ", banner=" + banner + ", readercount="
 				+ readercount + ", readeropen=" + readeropen + ", formula=" + formula + ", partner=" + partner
-				+ ", state=" + state + ", memberdeletedate=" + memberdeletedate + "]";
+				+ ", state=" + state + ", memberdeletedate=" + memberdeletedate + "]\n\n";
 	}
 	
 	
 
 }
+	
+

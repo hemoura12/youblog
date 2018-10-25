@@ -1,5 +1,6 @@
 package org.kh.youblog.comment.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.kh.youblog.comment.model.dao.CommentDao;
@@ -16,7 +17,7 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public void insertComment(Comment com) {
-		com.setMemberId("user01");
+		
 		commentDao.insertComment(com);
 	}
 
@@ -28,16 +29,27 @@ public class CommentServiceImpl implements CommentService {
 
 
 	@Override
-	public void updateComment(Comment com) {
-		com.setMemberId("user01");
-		commentDao.updateComment(com);
+	public int updateComment(Comment com) {
+		
+		return commentDao.updateComment(com);
 	}
 
 
 	@Override
-	public void deleteComment(Comment com) {
-		com.setMemberId("user01");
-		commentDao.deleteComment(com);
+	public int deleteComment(Comment com) {
+		
+		return commentDao.deleteComment(com);
 	}
-}
+
+	@Override
+	public ArrayList<Comment> selectList2() {
+		List<Comment> list = commentDao.selectList2();
+		return (ArrayList<Comment>) list;
+	}
 	
+	
+	
+	
+	
+}
+

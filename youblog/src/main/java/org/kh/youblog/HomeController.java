@@ -1,20 +1,22 @@
 package org.kh.youblog;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
+import org.kh.youblog.member.model.vo.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes("member")
 public class HomeController {
    
    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -31,11 +33,16 @@ public class HomeController {
       return "main";
    }
    @RequestMapping(value = "home.do", method = RequestMethod.GET)
-   public String home(Locale locale, Model model) {
+   public ModelAndView home(Locale locale, Model model, ModelAndView mv) {
       
+      Member member = new Member();
       
+      member.setMemberid("user01");
       
-      return "main";
+      mv.addObject("member", member);
+      mv.setViewName("main");
+      
+      return mv;
    }
    @RequestMapping(value = "categoryall.do", method = RequestMethod.GET)
    public String categoryall(Locale locale, Model model) {
@@ -143,10 +150,7 @@ public class HomeController {
    public String passchange(Locale locale, Model model) {      
       return "member/passwordchange";
    }
-   @RequestMapping(value = "detailpage.do", method = RequestMethod.GET)
-   public String detailpage(Locale locale, Model model) {      
-      return "page/detailpage";
-   }
+  
    @RequestMapping(value = "writepage.do", method = RequestMethod.GET)
    public String wirtepage(Locale locale, Model model) {      
       return "page/writepage";
@@ -158,5 +162,6 @@ public class HomeController {
    public String mainView(){
       return "home";
    }*/
+
 
 }

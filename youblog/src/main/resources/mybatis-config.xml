@@ -7,17 +7,20 @@
 	<typeAliases>		
 		<typeAlias type="org.kh.youblog.member.model.vo.Member" alias="Member" />	
 		<typeAlias type="org.kh.youblog.blog.model.vo.Blog" alias="Blog" />	
+		<typeAlias type="org.kh.youblog.comment.model.vo.Comment" alias="Comment"/>
+		<typeAlias type="org.kh.youblog.category.model.vo.Category" alias="Category"/>
 		<typeAlias type="org.kh.youblog.session.model.vo.Session" alias="Session"/>
-		<!-- <typeAlias type="org.kh.youblog.movie.model.vo.Movie" alias="Movie"/>	 -->
-		<!-- <typeAlias type="org.kh.youblog.comment.model.vo.Comment" alias="Comment"/> -->
+		<!-- <typeAlias type="org.kh.youblog.movie.model.vo.Movie" alias="Movie"/>	-->
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/blog-mapper.xml"/>
+		<mapper resource="mappers/comment-mapper.xml"/>
+		<mapper resource="mappers/category-mapper.xml"/>
 		<mapper resource="mappers/session-mapper.xml"/>
-		<!-- <mapper resource= "mappers/movie-mapper.xml"/> -->
-		<!-- <mapper resource="mappers/comment-mapper.xml"/> -->
+		<!-- <mapper resource= "mappers/movie-mapper.xml"/>-->
 	</mappers>
 	
 </configuration>
+

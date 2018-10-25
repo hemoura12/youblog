@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="resources/styles/css/main.css">
  <script>
 				/* righNav 열기/닫기 */
 				function openNav() {
@@ -37,9 +38,11 @@
 <div class="category_frame">
             <span class="openmenu" onclick='openNav()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i></span>
         </div>
-        <div class="channel_category" style="background-color: red">
+        <div class="channel_category">
             <div id="mysidenav" class="sidenav">
+                
                 <div class="closebtn" onclick='closeNav()'>x</div>
+                <div class="select_edit">edit</div>
                 <a href="#">About<div class="num">100</div></a>
                 <a href="#">Services<div class="num">100</div></a>
                 <a href="#">Clients<div class="num">100</div></a>

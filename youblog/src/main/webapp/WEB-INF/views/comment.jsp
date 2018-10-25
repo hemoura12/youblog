@@ -106,7 +106,7 @@ function fnAjaxResult(data){
 function commentReading(data){
 	var list = data.list;
 	var outComment = "";
-	var id = "user02";
+	var id = ${member.memberid};
 	for(var i = 0; i < list.length; i++){
 		console.log(list[i].MEMBER_ID);
 		
@@ -164,4 +164,5 @@ function fnAjaxPostData(url, data, callBack) {
 	
 </table>
 </body>
+
 </html>

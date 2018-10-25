@@ -51,27 +51,33 @@ private String cmtNo;
 		,CMT_CONTENTS
 	     )values(
 	     (CMT_NO_SEQ.NEXTVAL),
-	     '22',
-	     'user01',
+	     #{blogNo},
+	     #{memberId},
 	     #{cmtContents}
 	     )
 	</insert>
 	
 	<!-- 댓글 수정 -->
-	<insert id="updateComment" parameterType="Comment" >
+	<update id="updateComment" parameterType="Comment" >
 		UPDATE TB_COMMENT
 		SET	 CMT_CONTENTS = #{cmtContents}
 		WHERE MEMBER_ID = #{memberId}
 		AND CMT_NO = #{cmtNo}
-	</insert>
+	</update>
 	
 	<!-- 댓글 삭제 -->
-	<insert id="deleteComment" parameterType="Comment" >
+	<update id="deleteComment" parameterType="Comment" >
 		UPDATE TB_COMMENT
 		SET	 STATE  = 'Y',
 			CMT_CONTENTS = '삭제된댓글입니다.'
 		WHERE MEMBER_ID = #{memberId}
 		AND CMT_NO = #{cmtNo}
-	</insert>
-	
+	</update>
+<!-- 
+   <select id="selectList" resultMap="resultList" resultType="Comment">
+      select * from 
+      tb_comment
+      where member_id = 'user01'
+   </select> -->
+
 </mapper>

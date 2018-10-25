@@ -41,9 +41,9 @@ public class SessionController {
 		return mv;
 	}
 	
-	public ModelAndView deleteSession(ModelAndView mv, @RequestParam(value="sessionname") String sessionname
-																			, @RequestParam(value="memberid") String memberid){
-		sessionService.deleteSession(sessionname, memberid);
+	public ModelAndView deleteSession(ModelAndView mv, @RequestParam(value="session") Session session){
+		
+		sessionService.deleteSession(session);
 		
 		mv.setViewName("home");
 		
