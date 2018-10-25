@@ -16,7 +16,9 @@ public interface MemberService {
 
 	Member infoMember(String memberid);
 
-	Member updatemember(Member member);
+	int updatemember(Member member);
+
+	int updateprofile(Member member);
 
 	
 

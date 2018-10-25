@@ -66,6 +66,18 @@
 			where member_id = #{memberid}
 		</select>
 		
+		<update id="updateMember" parameterType="Member" flushCache="true" statementType="PREPARED">
+				update TB_MEMBER 
+				set member_pw = #{memberpwd}
+				where member_id = #{memberid}
+		</update>
+		
+		<update id="updateprofile" parameterType="Member" flushCache="true" statementType="PREPARED">
+				update TB_MEMBER 
+				set birthday = #{birthday}, gender = #{gender}
+				where member_id = #{memberid}
+		</update>
+		
 		<!-- <insert id="insertmember" parameterType="Member" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
 			insert into TB_MEMBER values (#{memberid,jdbcType=VARCHAR}, #{memberpwd,jdbcType=VARCHAR}, #{membername,jdbcType=VARCHAR},
 			#{memberphone,jdbcType=VARCHAR}, #{memberemail,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=VARCHAR}, #{membergoogleno,jdbcType=VARCHAR},

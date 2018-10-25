@@ -71,8 +71,8 @@
 <div class="card align-middle">
     <div class="card-body">
         <form class="form-signin" action="relogin.do" method="POST" onsubmit="return false;">
-            <h2 align="center">Welcome</h2>
-            <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png">youblog</h2><br>
+            <h2 align="center" style = "font-size:2.5rem">Welcome Youblog</h2>
+            <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png" style ="margin-top:15px"></h2><br>
             <div class="inputgroup">
             <label for="inputEmail" class="sr-only" >google ID</label>
                 <input type="text" class="form-control" id= "memberid" name ="memberid" placeholder="google ID" required autofocus><br>
@@ -82,7 +82,8 @@
             <input type="hidden" id= "smemberpwdq" name = "smemberpwdq" value ="${member.memberpwd}">
             </div><br>
             <center>
-            <input type = "submit" class="btn btn-primary" onclick = "check()" value = "log-in">
+            <input type = "submit" class="btn btn-primary" onclick = "check()" value = "log-in" style ="position: relative; top: 40px;
+    		width: 267px">
             <br><br>
             <!-- <a href ="join.do"><h8>아직 가입하지 않으셨나요?</h8></a> -->
             </center>

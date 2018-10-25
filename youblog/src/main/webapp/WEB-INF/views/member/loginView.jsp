@@ -24,8 +24,8 @@
 <div class="card align-middle">
     <div class="card-body">
         <form class="form-signin" action="login.do" method="POST" >
-            <h2 align="center">Welcome</h2>
-            <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2><br>
+            <h2 align="center" style = "font-size:2.5rem">Welcome Youblog</h2>
+            <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png" style ="margin-top:15px"></h2><br>
             <div class="inputgroup">
             <label for="inputEmail" class="sr-only" >google ID</label>
                 <input type="text" class="form-control" name ="memberid" placeholder="google ID" required autofocus><br>
@@ -38,7 +38,7 @@
                     <input type="checkbox" value="remember-me"> 기억하기
                 </label>
             </div>-->
-            <center>
+            <center style = "position:relative; top: 20px">
             <button class="btn btn-primary">로 그 인</button>
 
             <br><br>

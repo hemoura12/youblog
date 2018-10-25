@@ -288,3 +288,13 @@ table.uinfo td {
 	float: right;
 	margin-right: 15px;
 }
+
+
+.errorMS{
+	margin-top:20px;
+	margin-left:20px;
+}
+
+.form-signin-heading{
+	    font-size: 3rem;
+}

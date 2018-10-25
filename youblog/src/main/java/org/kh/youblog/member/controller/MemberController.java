@@ -28,19 +28,26 @@ public class MemberController {
 	
 	//첫 로그인
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ModelAndView loginMethod(Member member, 
-			ModelAndView mv, HttpSession session){
-		member = memberService.selectMember(member);
-		/*session.setAttribute("member", member);*/
-		mv.addObject(member);
-		/*if(member.getUserid().equals("admin"))
-			mv.setViewName("main");
-		else
-			mv.setViewName("member/loginSuccess");
-			mv.setViewName("main");*/
-		mv.setViewName("main");
+	public ModelAndView loginMethod(Member member, ModelAndView mv, HttpSession session, SessionStatus status){
 		
-		return mv;
+		
+		try {
+				member = memberService.selectMember(member);
+				if(member != null){				
+				mv.addObject(member);
+				mv.setViewName("main");
+				return mv;
+				}else{
+					mv.setViewName("member/loginView");
+					status.setComplete();
+					return mv;
+				}
+		} catch (Exception e) {
+			mv.setViewName("member/loginView");
+			status.setComplete();
+			return mv;
+		}
+	
 	}
 	//로그인 재유도
 	@RequestMapping(value="relogin.do", method=RequestMethod.POST)
@@ -132,25 +139,55 @@ public class MemberController {
 		return mv;
 	}
 	
-	/*@RequestMapping(value="list.do")
-	public ModelAndView listMethod(ModelAndView tv){
-		System.out.println("요청확인");
-		member.setUsername("홍길동");
-		member.setAge(27);
-		member.setGender("M");
-		
-		List<Member> list = memberService.selectList();
+	//비밀번호 변경
+	@RequestMapping(value = "updatepw.do", method = RequestMethod.POST)
+	public void updatepw(Member member, HttpServletRequest request, 
+			HttpServletResponse response, SessionStatus status) throws IOException{
+		String inputnow = request.getParameter("inputnow");
+		String changepw = request.getParameter("changepw");
+		String loginid = request.getParameter("loginid");
+		PrintWriter out = response.getWriter();
+		String returnValue = "0";
+		try {
 
-		ModelAndView mv = new ModelAndView();
-		tv.addObject("memberlist", list);
-		tv.setViewName("member/memberlistview");
+			member.setMemberpwd(changepw);		
+			int result = memberService.updatemember(member);
+			System.out.println("결과출력 result = " + result);
+			
+			if(result == 1){
+				status.setComplete();
+				returnValue = "1";
+				out.append(returnValue);
+				out.flush();
+			}else if (result == 0){
+				out.append(returnValue);
+				out.flush();
+			}	
+			out.close();
+		} catch (Exception e) {
+			returnValue = "2";
+			out.append(returnValue);
+			out.flush();
+		}
 		
-		return tv;
-	}*/
+		out.close();
+		
+	}
+	
+	@RequestMapping(value="updateprofile.do", method=RequestMethod.POST)
+		public ModelAndView updateprofile(Member member, ModelAndView mv){
+
+		int result = memberService.updateprofile(member);
+	System.out.println(result);
+	mv.addObject("member", member);
+	mv.setViewName("member/memberinfo");
+	
+	return mv;
+	}	
+		
 	
 	@RequestMapping(value="logout.do")
 	public String homemethod(SessionStatus status) throws IOException{
-		System.out.println("로그아웃요청확인");
 		status.setComplete(); //세션 객체 없앰
 		return "main";
 		
@@ -168,7 +205,7 @@ public class MemberController {
 		
 	}*/
 	
-	@RequestMapping(value="changeinfo.do", method=RequestMethod.POST)
+	/*@RequestMapping(value="changeinfo.do", method=RequestMethod.POST)
 	public ModelAndView changeinfoMethod(Member member, 
 			ModelAndView mv){
 		
@@ -180,5 +217,5 @@ public class MemberController {
 			mv.setViewName("member/myinfoView");
 				return mv;
 	
-	}
+	}*/
 }

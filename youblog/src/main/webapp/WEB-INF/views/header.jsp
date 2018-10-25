@@ -85,19 +85,17 @@
                 </c:if>
                 <c:if test = "${!empty member }">
                 <button class="btn btn-primary_1" type="button">
-                    ${member.membername}님 환영합니다
+                    ${member.membername} 님
                 </button>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">더보기<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                     <c:url var = "info" value = "info.do">
-						<c:param name = "memberid" value = "${member.memberid }"/>
+						<c:param name = "memberid" value = "${member.memberid}"/>
 					</c:url>
                         <li><a href="${info}">계정설정</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="logout.do">logout</a></li>
+                        <li><a href="#">고객센터</a></li>
+                        <li><a href="logout.do">로그아웃</a></li>
                     </ul>
                 </li>
                 </c:if>

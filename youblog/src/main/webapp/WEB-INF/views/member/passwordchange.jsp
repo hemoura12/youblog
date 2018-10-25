@@ -27,65 +27,53 @@
     	
     	var inputnow = $('#nowpw').val();
 		var changepw = $('#changepw').val();
-		var login = $('#loginid').val();
-		 
+		var loginid = $('#loginid').val();
+		
        			
    		 if(inputnow == null || inputnow == ""){
-   			$("#nowpw")
-		  	    .attr('data-original-title', '현재 비밀번호를 입력해주세요')
-		    	.attr('data-placement', 'right').tooltip('show')
-  			 $("#nowpw").css("background-color", "#FFCECE");
+   				$("#errorMS").css("color", "red").css("display", "block").text('기존 비밀번호를 입력해주세요.');
+  			 /* $("#nowpw").css("background-color", "#FFCECE"); */
   			 $("#nowpw").focus();
   		 	 return false;
   		 
 		 } else if(changepw == null || changepw == ""){
-			 $("#changepw")
-			    .attr('data-original-title', '변경할 비밀번호를 입력해주세요')
-			    .attr('data-placement', 'right').tooltip('show')
-			 $("#changepw").css("background-color", "#FFCECE");
+			 $("#errorMS").css("color", "red").css("display", "block").text('변경 비밀번호를 입력해주세요.');
 			 $("#changepw").focus();
 			 return false;
 			 
-		 } else if(!getPassword.test($("#changepw").val())){
+		 } else if(!getPassword.test($("#nowpw").val())){
  			 $("#errorMS").css("color", "red").text('변경 비밀번호를 다시 입력해주세요.')
  			 $("#errorMS").css("display", "block"); 
 			 $("#changepw").val("");
-			 $("#changepw").css("background-color", "#FFFFFF");
 	         $("#changepw").focus();
 	         return false;	   
 	 		 
-		 } else if ( inputnow = changepw ) {
+		 } else if ( inputnow != changepw ) {
 			
-			 $("#changepw")
-			    .attr('data-original-title', '기존 비밀번호와 같은 비밀번호로 변경할 수 없습니다')
-			    .attr('data-placement', 'right').tooltip('show')
-			    alert("기존비밀번호와 같음");
-  			 $("#changepw").css("background-color", "#FFCECE");
+			 $("#errorMS").css("color", "red").css("display", "block").text('변경 비밀번호가 일치하지 않습니다.');
   			 $("#changepw").val('');
   		     $("#changepw").focus();
   			 return false;
   		 
 		 } else {
-			 var = ""
+		
 				     $.ajax({
 				    	url : "updatepw.do",
 				    	type : "post",
-				    	data : { smemberid : mid, smemberpwd : mpwd},
+				    	data : { inputnow : inputnow, changepw : changepw, loginid : loginid },
 				   		success : function(data){
-						 	if(data == '0'){
-						 		alert("결과값 0")
+						 	 if(data == '0'){
+						 		alert("비밀번호 변경 실패");
 						 		return false;		 		
-						 	}
-						 	else if(data == '1'){
-						 		alert("결과값 1");
-						 	location.href="main.do";
+						 	}else if(data == '1'){
+						 		location.href="login.do";
 						 	
 						 	} else {
 						 		alert("관리자에게 문의하세요");
 						 		return false;	
-						 	}      		 
+						 	}      		  
 				       }    			
-				    });  //ajax end 
+				    });  //ajax end  				    
 		 		}
   	} //checkpw() end
     
@@ -97,11 +85,11 @@
 <body>
 
 <div class="card align-middle">
-
+	<div class = "errorMS" id = "errorMS" style = "display:none; position:relative; top: 30px; left: 30px;" ></div>
     <div class="card-body">
-
+		<form action="updatepw.do" Method = "POST" onsubmit="return false;">
         <div class="group">
-            <input type="text" id ="nowpw" name = "memberpwd" required>
+            <input type="password" id ="nowpw" name = "memberpwd" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>새 비밀번호</label>
@@ -111,14 +99,14 @@
                 8자 이상 입력하세요. 다른 사이트에서 쓰는 비밀번호나 애완동물의 이름처럼 추측하기 쉬운 이름은 사용하지 마세요.</p><br>
 
         <div class="group">
-            <input type="text" id = "changepw" name = "changepwd" required>
+            <input type="password" id = "changepw" name = "changepwd" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>새 비밀번호 확인</label>
         </div>
-		<input type = "hidden" id = "memberid" name = "memberid" value="${member.memberid}">
-        <button type ="submit" class="btn btn-primary" onclick="checkpw()">비밀번호 변경 </button>
-
+		<input type = "hidden" id = "loginid" name = "memberid" value="${member.memberid}">
+        <input type ="button" class="btn btn-primary" onclick="checkpw()" value = "비밀번호 변경"> 
+	</form>
 
 
     </div>

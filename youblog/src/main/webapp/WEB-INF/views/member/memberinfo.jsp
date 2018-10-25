@@ -38,8 +38,8 @@
 <body>
 <div class="card align-middle">
     <div class="card-body">
-        <form class="form-signin" method="POST" >
-            <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2><br>
+        <form class="form-signin" action = "updateprofile.do" method="POST" > <!-- onsubmit ="return false;" -->
+            <h2 class="form-signin-heading" align="center" style = "font-size:3rem"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2><br>
             <table  class="uinfo">
                     <tr>
                         <th scope="row">이메일</th>
@@ -54,7 +54,7 @@
                         <th scope="row">이 름</th>
                         <td colspan="2">${member.membername}</td>
                     </tr>
-
+					
                     <tr id="viewhidden" onclick="show_content()">
                         <th scope="row">생 일</th>
                         <td>${member.birthday}</td>
@@ -65,7 +65,7 @@
 
                     <tr id="hidden" style="display:none;">
                         <td colspan="3" align="center">
-                            <input type="date">
+                            <input type="date" name = "birthday" style="border:0">
                         </td>
                     </tr>
 
@@ -79,12 +79,10 @@
                     <tr align="center" id="hidden2" style="display:none;">
                         <td colspan="3" align="center" style="height: 150px;">
                             <div class="selectbox" style="width: 50%;">
-                                <select>
+                                <select name = "gender">
                                     <option value="" disabled selected hidden>성별</option>
-                                    <option>남</option>
-                                    <option>여</option>
-                                    <option>비공개</option>
-
+                                    <option>M</option>
+                                    <option>F</option>
                                 </select>
                             </div>
                         </td>
