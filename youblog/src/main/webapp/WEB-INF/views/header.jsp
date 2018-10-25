@@ -72,14 +72,34 @@
                 <li><a href="writepage.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
                 <li>
 	                <c:url var="personmain" value="personmain.do">
-							<c:param name="writerid" value="${sessionScope.login.memberid }" />
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
 					</c:url>
                		 <a href = "${personmain }"><span class="glyphicon glyphicon-th" aria-hidden="true"/></a>
                 </li>
                 <li><a href="info.do"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+				 <c:if test = "${empty member }">
                 <a href ="login.do"><button class="btn btn-primary_1" type="button">
                     로그인
                 </button></a>
+                </c:if>
+                <c:if test = "${!empty member }">
+                <button class="btn btn-primary_1" type="button">
+                    ${member.membername}님 환영합니다
+                </button>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                    <c:url var = "info" value = "info.do">
+						<c:param name = "memberid" value = "${member.memberid }"/>
+					</c:url>
+                        <li><a href="${info}">계정설정</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="logout.do">logout</a></li>
+                    </ul>
+                </li>
+                </c:if>
                 <!-- 로그인시 나올 부분 -->
                 <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>

@@ -182,8 +182,6 @@ public class BlogController {
 	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
-		
-		
 		System.out.println(writerid);
 		
 		ArrayList<Blog> blog = blogService.selectBlogList(writerid);
@@ -191,7 +189,7 @@ public class BlogController {
 		
 		
 		mv.addObject("blog", blog);//Blog객체 리턴받음
-		mv.addObject("member", member);
+		mv.addObject("blogMember", member);
 
 		mv.setViewName("personblog/personmain");
 		
@@ -363,7 +361,6 @@ public class BlogController {
 	@RequestMapping(value="personboard.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView selectBoardList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
-		writerid = "user01";
 		ArrayList<Blog> blog = blogService.selectBoardList(writerid);
 		
 		

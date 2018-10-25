@@ -44,7 +44,7 @@
 				</div>
 				<div class="infoBox_right">
 				<c:choose>
-					<c:when test="${sessionScope.login.memberid eq blog[1].writerid}">
+					<c:when test="${sessionScope.member.memberid eq blog[1].writerid}">
 							<a href="#" class="subscript_tag"><span>관리</span></a>
 						</c:when>
 						
@@ -87,7 +87,7 @@
 
 			<%-- <%@ include file = "/WEB-INF/views/rightNav.jsp" %> --%>
 			<c:import url="/WEB-INF/views/rightNav.jsp" />
-			<div class="channel_contents">
+			<div class="channel_contents" style = "width : 65%; height: auto;     float: left;">
 				<div class="channel_box">
 					<!--<div class="libray_title_box">
                         <i class="fas fa-redo-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;<span class="libray_title">최근 본 게시글</span>

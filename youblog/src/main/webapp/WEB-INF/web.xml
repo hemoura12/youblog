@@ -7,15 +7,10 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-   		 classpath:root-context.xml
-   		 <!-- 스프링 시큐리티 설정 추가 -->
+   		 classpath:root-context.xml  		 <!-- 스프링 시큐리티 설정 추가 -->
    		 /WEB-INF/spring/appServlet/spring-security.xml
     </param-value>
 	</context-param>
