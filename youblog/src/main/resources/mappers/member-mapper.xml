@@ -60,9 +60,5 @@
 			select * from 
 			tb_member
 		</select>
-		
-		
-		<!-- flushCache="true" statementType="PREPARED" -->
-
 
 </mapper>

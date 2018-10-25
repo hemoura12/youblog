@@ -5,22 +5,17 @@ import java.util.List;
 
 import org.kh.youblog.comment.model.dao.CommentDao;
 import org.kh.youblog.comment.model.vo.Comment;
+import org.kh.youblog.comment.model.vo.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("commentService")
-public class CommentServiceImpl implements CommentService{
+public  class CommentServiceImpl implements CommentService{
 
    @Autowired
    private CommentDao CommentDao;
    
    public CommentServiceImpl(){}
-
-  /* @Override
-   public ArrayList<Comment> selectList() {
-      List<Comment> list = CommentDao.selectList();
-      return (ArrayList<Comment>) list;
-   }*/
 
    //댓길 삭제
    @Override
@@ -35,5 +30,8 @@ public class CommentServiceImpl implements CommentService{
 	   return (ArrayList<Comment>) list;
    }
 
-
 }
+
+   
+
+

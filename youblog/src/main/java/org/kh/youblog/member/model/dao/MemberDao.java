@@ -25,12 +25,4 @@ public class MemberDao {
 		return sqlSession.selectList("memberMapper.selectList");
 	}
 
-/*	public int mychanelupdate(String check) {
-		System.out.println("Dao 가동");
-		
-		return (int)sqlSession.update("memberMapper.updateChanel", check);
-		//return check;
-	}*/
-	
-
 }

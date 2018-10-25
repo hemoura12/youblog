@@ -10,11 +10,4 @@ public interface MemberService {
 
 	ArrayList<Member> selectList();
 
-	//int mychanelupdate(String check);
-
-	
-
-	
-
-	
 }

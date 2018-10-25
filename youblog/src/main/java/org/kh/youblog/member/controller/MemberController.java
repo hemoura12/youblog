@@ -17,17 +17,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-														/*@RequestParam(value="subscribeshare") String check*/
-	/*@RequestMapping(value="update1.do", method=RequestMethod.GET)
-	public ModelAndView updatechanelMethod(ModelAndView mv , ) {
-		//System.out.println("controller : " + check);
-		//memberService.mychanelupdate(check);
-		
-		//mv.addObject("member", memberService.mychanelupdate(check));
-		mv.setViewName("/manager/chanelManage");
-		
-		return mv;
-	}*/
 	
 	@RequestMapping(value = "update1.do")
 	   public ModelAndView list(ModelAndView mv){

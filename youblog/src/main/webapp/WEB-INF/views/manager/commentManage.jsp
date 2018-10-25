@@ -38,8 +38,34 @@
                 	+ "error : " + errorData);
         	}
     	})
-	}
-
+    	
+    	$.ajax({
+            url: "update1.do",
+            method: 'PUT',
+            contentType : 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(
+                {
+                    "subscribeshare": $("#subscribeshare").val()
+                }
+            ),
+            success: function (data) {
+                if(data){
+                    alert("완료!");
+                }else{
+                    alert("실패!");
+                }
+                //self.close();
+            },
+            error: function (request, status, errorData) {
+                alert("error code : " + request.status + "\n"
+                    + "message : " + request.responseText + "\n"
+                    + "error : " + errorData);
+            }
+        })
+    }
+	
+	//체크박스 전체선택
 	$(document).ready(function(){
     	//최상단 체크박스 클릭
     	$("#checkall").click(function(){
@@ -55,27 +81,6 @@
     	})
 	});
 
-	/* $(document).ready(function(){
-        $('#userTable').dataTable({
-            pageLength: 10,
-            bPaginate: true,
-            ajax : {
-                "url":"list.do",
-                "type":"POST",
-                "data": function (d) {
-                    alert("성공")
-                }
-            },
-            columns : [
-                {data: "blogno"},
-                {data: "memberid"},
-                {data: "cmtcontents"},
-                {data: "state"}
-            ]
-
-        });
-
-}); */
 
 	
 </script>

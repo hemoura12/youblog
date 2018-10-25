@@ -36,10 +36,25 @@
 
    </delete>
    
+   <select id="selectCmtList" resultMap="resultList" >
+		select *
+		from TB_COMMENT
+		where state = 'N'
+		and MEMBER_ID = #{memberid}
+   </select>
 
+	<select id="commentList" resultMap="resultList">
+    	select c.*
+		from TB_BLOG b
+		INNER join TB_COMMENT c on(B.BLOG_NO=C.BLOG_NO)
+		where B.WRITER_ID = 'user02'
+	</select>
 
-
-
+	<select id="noriterTC" resultType="java.lang.String">
+    	<![CDATA[
+    	select count(*) as totalCount from tb_comment
+    	]]>
+	</select>
 
 
 </mapper>

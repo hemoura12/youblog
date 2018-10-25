@@ -1,9 +1,13 @@
 package org.kh.youblog.comment.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import org.kh.youblog.comment.model.vo.Comment;
+import org.kh.youblog.comment.model.vo.Paging;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,11 +17,8 @@ public class CommentDao {
    
    @Autowired
    private SqlSessionTemplate sqlSession;
-
-   /*public List<Comment> selectList() {
-      
-      return sqlSession.selectList("commentMapper.selectList");
-   }*/
+   
+   public CommentDao() {}
 
    //댓글 삭제
    public void delete(List<Long> ids) {
@@ -34,4 +35,5 @@ public class CommentDao {
    public List<Comment> selectList(String blogno) {
 	   return sqlSession.selectList("commentMapper.selectList", blogno);
    }
+
 }

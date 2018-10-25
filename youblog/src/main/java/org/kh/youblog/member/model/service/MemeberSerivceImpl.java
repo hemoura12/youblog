@@ -29,15 +29,4 @@ public class MemeberSerivceImpl implements MemberService{
 	    return (ArrayList<Member>) list;
 	}
 	
-
-/*	@Override
-	public int mychanelupdate(String check) {
-		System.out.println("service 넘어와요");
-		return memberDao.mychanelupdate(check);
-	}*/
-
-	
-
-	
-
 }

@@ -34,76 +34,6 @@
           })
       }
 
-		/*//var x = document.getElementById("chanel");
-		//var y = chanelSelect.options[chanelSelect.selectedIndex].value;
-		
-		var x = document.getElementById("subscribeshare").selectedIndex;
-        var y = document.getElementById("subscribeshare").options;
-        var z = document.getElementById("subscribeshare").value;
-
-        alert("Index: " + y[x].index + " is " + y[x].text+" is " + z);
-        
-        $('#subscribeshare').attr("action", "update1.do").submit();*/
-
-
-
-	 /* var subscribeshare = $("#subscribeshare").val(); */
-        /* $("#update").on("click", function(){});
-        $.ajax({
-            url:"update1.do",
-            type:'GET',
-            data: {"subscribeshare" : $("#subscribeshare").val(),
-            success:function(data){
-                alert("완료!");
-                self.close();
-            },
-            error: function(request, status, errorData){
-				alert("error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-            }
-        });
-     }    */
-    /*$(function(){
-    	$("#update").on("click", function(){
-    		 $.ajax({
-    			 url:"update1.do",
-    	         type:'GET',
-    	         //data: {"subscribeshare" : $("#subscribeshare").val(),
-    	         contentType: "application/json; charset=utf-8",
-    	         success: function(result){
-    				alert("전송 성공 : " + result);
-    	         	$("#update").html();
-    	         },
-    	         error: function(request, status, errorData){
-    					alert("error code : " + request.status + "\n"
-    							+ "message : " + request.responseText + "\n"
-    							+ "error : " + errorData);
-    	         }
-    	});
-	})});*/
-     
-        
-	 /* $(function(){
-		 $("#update1").on("click", funtion(){
-			 var subscribeshare = $("#subscribeshare").val();
-			 
-			 $.ajax({
-				 url: "update1.do",
-				 type: "post",
-				 dataType: "json",
-				 //contentType: "application/json; charset=utf-8",
-				 success: function(result){
-					 $("#subscribeshare").html("공개여부 : " + result.subscribeshare);
-				 },
-				 error: function(request, status, errorData){
-						alert("error code : " + request.status + "\n"
-								+ "message : " + request.responseText + "\n"
-								+ "error : " + errorData);
-						}
-			 });
-		 });
-	 }); */
 </script>
     <title>chanelManage</title>
 </head>
@@ -177,7 +107,6 @@
                             <span class="sub_title">${m.readercount }</span>
                         </p>
                          <a href="#" class="subscript_tag_1">
-                             <span>구독중<%-- ${m.subscribeshare } --%></span>
                          </a>
                     </td>
 	    			<c:if test="${i%j == j-1 }">
@@ -186,18 +115,6 @@
 	    			<c:set var="i" value="${i+1 }" />
 	  				</c:forEach>
 					</table>
-                    <%-- <c:forEach items="${list }" var="m" >
-                    <div class="sub_channel_img"><img src="resources/images/rion2.png" /></div>
-                
-                        <p class="channel_name">${m.membername }</p>
-                        <p>
-                            <span class="">구독자</span>
-                            <span class="sub_title">${m.readercount }</span>
-                        </p>
-                         <a href="#" class="subscript_tag_1">
-                             <span>${m.subscribeshare }</span>
-                         </a>
-                     </c:forEach> --%>
                 </div> <!-- subscription_Box -->
             </div> <!--channel_box -->
         </div> <!--channel_contents-->
