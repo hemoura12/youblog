@@ -5,23 +5,17 @@
 <html>
 
 <head>
+<meta  charset="UTF-8">
 	<title>Home</title>
 </head>
 <body>
 <h1>
 	Hello world!  
-</h1>
-
+</h1>                
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<form action="test1.do" method="post">
-	<h1>Test</h1>
-	<input type="text" name="blogno"> <br>
-	<input type="submit" value="test">	
-</form>
 
-<a href = "test2.do">테스트</a>
 </body>
 
 

@@ -18,21 +18,23 @@ public class Member implements java.io.Serializable{
 	private String profilephoto;
 	private String banner;
 	private int readercount;
-	private String readeropen;
+	private String channelopen;
+	private String subscribeshare;
 	private String formula;
 	private String partner;
 	private String state;
-	private Date memberdeletedate;
 	private Date alarmcheck;
 	private String readerid;
 	private String writerid;
-
-	public Member() {}
+	private Date memberdeletedate;
+	
+	public Member(){}
 
 	public Member(String memberid, String memberpwd, String membername, String memberphone, String memberemail,
 			Date birthday, String gender, String membergoogleno, String membergoogleid, String manager,
-			String profilephoto, String banner, int readercount, String readeropen, String formula, String partner,
-			String state, Date memberdeletedate, Date alarmcheck, String readerid, String writerid) {
+			String profilephoto, String banner, int readercount, String channelopen, String subscribeshare,
+			String formula, String partner, String state, Date alarmcheck, String readerid, String writerid,
+			Date memberdeletedate) {
 		super();
 		this.memberid = memberid;
 		this.memberpwd = memberpwd;
@@ -47,14 +49,15 @@ public class Member implements java.io.Serializable{
 		this.profilephoto = profilephoto;
 		this.banner = banner;
 		this.readercount = readercount;
-		this.readeropen = readeropen;
+		this.channelopen = channelopen;
+		this.subscribeshare = subscribeshare;
 		this.formula = formula;
 		this.partner = partner;
 		this.state = state;
-		this.memberdeletedate = memberdeletedate;
 		this.alarmcheck = alarmcheck;
 		this.readerid = readerid;
 		this.writerid = writerid;
+		this.memberdeletedate = memberdeletedate;
 	}
 
 	public String getMemberid() {
@@ -161,12 +164,20 @@ public class Member implements java.io.Serializable{
 		this.readercount = readercount;
 	}
 
-	public String getReaderopen() {
-		return readeropen;
+	public String getChannelopen() {
+		return channelopen;
 	}
 
-	public void setReaderopen(String readeropen) {
-		this.readeropen = readeropen;
+	public void setChannelopen(String channelopen) {
+		this.channelopen = channelopen;
+	}
+
+	public String getSubscribeshare() {
+		return subscribeshare;
+	}
+
+	public void setSubscribeshare(String subscribeshare) {
+		this.subscribeshare = subscribeshare;
 	}
 
 	public String getFormula() {
@@ -193,14 +204,6 @@ public class Member implements java.io.Serializable{
 		this.state = state;
 	}
 
-	public Date getMemberdeletedate() {
-		return memberdeletedate;
-	}
-
-	public void setMemberdeletedate(Date memberdeletedate) {
-		this.memberdeletedate = memberdeletedate;
-	}
-
 	public Date getAlarmcheck() {
 		return alarmcheck;
 	}
@@ -225,17 +228,25 @@ public class Member implements java.io.Serializable{
 		this.writerid = writerid;
 	}
 
+	public Date getMemberdeletedate() {
+		return memberdeletedate;
+	}
+
+	public void setMemberdeletedate(Date memberdeletedate) {
+		this.memberdeletedate = memberdeletedate;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberid=" + memberid + ", memberpwd=" + memberpwd + ", membername=" + membername
 				+ ", memberphone=" + memberphone + ", memberemail=" + memberemail + ", birthday=" + birthday
 				+ ", gender=" + gender + ", membergoogleno=" + membergoogleno + ", membergoogleid=" + membergoogleid
 				+ ", manager=" + manager + ", profilephoto=" + profilephoto + ", banner=" + banner + ", readercount="
-				+ readercount + ", readeropen=" + readeropen + ", formula=" + formula + ", partner=" + partner
-				+ ", state=" + state + ", memberdeletedate=" + memberdeletedate + ", alarmcheck=" + alarmcheck
-				+ ", readerid=" + readerid + ", writerid=" + writerid + "]";
+				+ readercount + ", channelopen=" + channelopen + ", subscribeshare=" + subscribeshare + ", formula="
+				+ formula + ", partner=" + partner + ", state=" + state + ", alarmcheck=" + alarmcheck + ", readerid="
+				+ readerid + ", writerid=" + writerid + ", memberdeletedate=" + memberdeletedate + "]";
 	}
 	
-
-
+	
 }
+	

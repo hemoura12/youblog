@@ -9,10 +9,9 @@ public class Blog implements java.io.Serializable {
 	private String blogno;
 	private String title;
 	private String writerid;
-	private String membername;
 	private String contents;
 	private String contentstag;
-	private Date writerdate;
+	private Date writedate;
 	private String thumbnail;
 	private String titleimage;
 	private String catename1;
@@ -21,34 +20,32 @@ public class Blog implements java.io.Serializable {
 	private int hits;
 	private int hitstime;
 	private int likecount;
-	private int bedcount;
 	private String state;
 	private String notice;
 	private int bestno;
+	private int catelevel;
+	private int cateparent;
+	private int likegood;
+	private String membername;
+	private int bedcount;
 
 	private int readercount;
 	private String readerid;
 
-	private int catelevel;
-	private int cateparent;
-
-	private int likegood;
-	
 	public Blog(){}
 	
-	public Blog(String rowno, String blogno, String title, String writerid, String membername, String contents,
-			String contentstag, Date writerdate, String thumbnail, String titleimage, String catename1,
-			String catename2, String tag, int hits, int hitstime, int likecount, int bedcount, String state,
-			String notice, int bestno, int readercount, String readerid, int catelevel, int cateparent, int likegood) {
+	public Blog(String rowno, String blogno, String title, String writerid, String contents, String contentstag,
+			Date writedate, String thumbnail, String titleimage, String catename1, String catename2, String tag,
+			int hits, int hitstime, int likecount, String state, String notice, int bestno, int catelevel,
+			int cateparent, int likegood, String membername, int bedcount, int readercount, String readerid) {
 		super();
 		this.rowno = rowno;
 		this.blogno = blogno;
 		this.title = title;
 		this.writerid = writerid;
-		this.membername = membername;
 		this.contents = contents;
 		this.contentstag = contentstag;
-		this.writerdate = writerdate;
+		this.writedate = writedate;
 		this.thumbnail = thumbnail;
 		this.titleimage = titleimage;
 		this.catename1 = catename1;
@@ -57,15 +54,17 @@ public class Blog implements java.io.Serializable {
 		this.hits = hits;
 		this.hitstime = hitstime;
 		this.likecount = likecount;
-		this.bedcount = bedcount;
 		this.state = state;
 		this.notice = notice;
 		this.bestno = bestno;
-		this.readercount = readercount;
-		this.readerid = readerid;
 		this.catelevel = catelevel;
 		this.cateparent = cateparent;
 		this.likegood = likegood;
+		this.membername = membername;
+		this.bedcount = bedcount;
+		this.readercount = readercount;
+		this.readerid = readerid;
+
 	}
 
 	public String getRowno() {
@@ -74,30 +73,6 @@ public class Blog implements java.io.Serializable {
 
 	public void setRowno(String rowno) {
 		this.rowno = rowno;
-	}
-
-	public String getMembername() {
-		return membername;
-	}
-
-	public void setMembername(String membername) {
-		this.membername = membername;
-	}
-
-	public int getReadercount() {
-		return readercount;
-	}
-
-	public void setReadercount(int readercount) {
-		this.readercount = readercount;
-	}
-
-	public String getReaderid() {
-		return readerid;
-	}
-
-	public void setReaderid(String readerid) {
-		this.readerid = readerid;
 	}
 
 	public String getBlogno() {
@@ -140,12 +115,12 @@ public class Blog implements java.io.Serializable {
 		this.contentstag = contentstag;
 	}
 
-	public Date getWriterdate() {
-		return writerdate;
+	public Date getWritedate() {
+		return writedate;
 	}
 
-	public void setWriterdate(Date writerdate) {
-		this.writerdate = writerdate;
+	public void setWritedate(Date writedate) {
+		this.writedate = writedate;
 	}
 
 	public String getThumbnail() {
@@ -212,14 +187,6 @@ public class Blog implements java.io.Serializable {
 		this.likecount = likecount;
 	}
 
-	public int getBedcount() {
-		return bedcount;
-	}
-
-	public void setBedcount(int bedcount) {
-		this.bedcount = bedcount;
-	}
-
 	public String getState() {
 		return state;
 	}
@@ -268,14 +235,53 @@ public class Blog implements java.io.Serializable {
 		this.likegood = likegood;
 	}
 
-	@Override
-	public String toString() {
-		return "Blog [blogno=" + blogno + ", title=" + title + ", writerid=" + writerid + ", contents=" + contents
-				+ ", contentstag=" + contentstag + ", writerdate=" + writerdate + ", thumbnail=" + thumbnail
-				+ ", titleimage=" + titleimage + ", catename1=" + catename1 + ", catename2=" + catename2 + ", tag="
-				+ tag + ", hits=" + hits + ", hitstime=" + hitstime + ", likecount=" + likecount + ", bedcount="
-				+ bedcount + ", state=" + state + ", notice=" + notice + ", bestno=" + bestno + ", catelevel="
-				+ catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + "]";
+	public String getMembername() {
+		return membername;
 	}
 
+	public void setMembername(String membername) {
+		this.membername = membername;
+	}
+
+	public int getBedcount() {
+		return bedcount;
+	}
+
+	public void setBedcount(int bedcount) {
+		this.bedcount = bedcount;
+	}
+
+	public int getReadercount() {
+		return readercount;
+	}
+
+	public void setReadercount(int readercount) {
+		this.readercount = readercount;
+	}
+
+	public String getReaderid() {
+		return readerid;
+	}
+
+	public void setReaderid(String readerid) {
+		this.readerid = readerid;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Blog [rowno=" + rowno + ", blogno=" + blogno + ", title=" + title + ", writerid=" + writerid
+				+ ", contents=" + contents + ", contentstag=" + contentstag + ", writedate=" + writedate
+				+ ", thumbnail=" + thumbnail + ", titleimage=" + titleimage + ", catename1=" + catename1
+				+ ", catename2=" + catename2 + ", tag=" + tag + ", hits=" + hits + ", hitstime=" + hitstime
+				+ ", likecount=" + likecount + ", state=" + state + ", notice=" + notice + ", bestno=" + bestno
+				+ ", catelevel=" + catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + ", membername="
+				+ membername + ", bedcount=" + bedcount + ", readercount=" + readercount + ", readerid=" + readerid
+				+ "]";
+	}
+	
+	
 }

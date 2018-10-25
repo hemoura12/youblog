@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -81,116 +82,20 @@
 		                    </tr>    
 		                </thead>
 		                <tbody class="body">
+		                <%-- <c:forEach begin="0" end="${fn:length(blog) }" step="1"  varStatus="i" items="blog" var="b"> --%>
+		                <c:forEach items="${blog }" var="b" varStatus="i">
 		                    <tr>
 		                        <!-- <td class=""><a class="checkbox_checked" href="javascript:;" >✓</a></td> -->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
+		                        <td class="">${i.count }</td>
+		                        <td class="">${b.title }</td>
 		                        <td class=""></td>
 		                        <td class=""></td>
 		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
+		                        <td class="">${b.writedate }</td>                                                            
 		                        <td class=" txt_org"></td>
 		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
 		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                       <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
-		                    <tr>
-		                        <!--<td class=""><a class="checkbox" href="javascript:;" ></a></td>-->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class=" txt_org"></td>
-		                        <td class="">2016-0526</td>                                                            
-		                        <td class=" txt_org"></td>
-		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
-		                    </tr>
+		                 </c:forEach>
 		                </tbody>
 		                <tfoot class="foot">
 		                    <tr>

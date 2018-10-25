@@ -10,8 +10,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-   		 classpath:root-context.xml
-   		 <!-- 스프링 시큐리티 설정 추가 -->
+   		 classpath:root-context.xml  		 <!-- 스프링 시큐리티 설정 추가 -->
    		 /WEB-INF/spring/appServlet/spring-security.xml
     </param-value>
 	</context-param>
