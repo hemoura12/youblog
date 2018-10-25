@@ -33,8 +33,41 @@ public class Blog implements java.io.Serializable {
 	private int cateparent;
 
 	private int likegood;
-
 	
+	public Blog(){}
+	
+	public Blog(String rowno, String blogno, String title, String writerid, String membername, String contents,
+			String contentstag, Date writerdate, String thumbnail, String titleimage, String catename1,
+			String catename2, String tag, int hits, int hitstime, int likecount, int bedcount, String state,
+			String notice, int bestno, int readercount, String readerid, int catelevel, int cateparent, int likegood) {
+		super();
+		this.rowno = rowno;
+		this.blogno = blogno;
+		this.title = title;
+		this.writerid = writerid;
+		this.membername = membername;
+		this.contents = contents;
+		this.contentstag = contentstag;
+		this.writerdate = writerdate;
+		this.thumbnail = thumbnail;
+		this.titleimage = titleimage;
+		this.catename1 = catename1;
+		this.catename2 = catename2;
+		this.tag = tag;
+		this.hits = hits;
+		this.hitstime = hitstime;
+		this.likecount = likecount;
+		this.bedcount = bedcount;
+		this.state = state;
+		this.notice = notice;
+		this.bestno = bestno;
+		this.readercount = readercount;
+		this.readerid = readerid;
+		this.catelevel = catelevel;
+		this.cateparent = cateparent;
+		this.likegood = likegood;
+	}
+
 	public String getRowno() {
 		return rowno;
 	}

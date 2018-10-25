@@ -16,10 +16,10 @@ public class MemberDao {
 	
 	public MemberDao(){}
 	
-	public static ArrayList<Member> subsWriterList(String memberid) {
-		//List<Member> result = sqlSession.selectList("blogMapper.favoriteList");
-		//return (ArrayList<Member>)result;
-		return null;
+	public ArrayList<Member> subsWriterList(String memberid) {
+		List<Member> result = sqlSession.selectList("memberMapper.subsWriterList", memberid);
+		return (ArrayList<Member>)result;
 	}
+	
 
 }

@@ -100,13 +100,11 @@
     </script>
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
-
 <div class="conWrap">
            <!-- <div class ="select_box">
                 <button class="btn btn-default btn-lg" onclick="changebadukarray()"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></button>
                 <button class="btn btn-default btn-lg" onclick="changelistarray()"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></button>
             </div>-->
-
     <div class="wrap">
         <a href="#" class="badukarray" onclick="changebadukarray()"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a>
         <a href="#" class="listarray" onclick="changelistarray()"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
@@ -114,6 +112,10 @@
 
     <div class="s_conBox">
         <!--4x4 배열 시작-->
+ <c:forEach items="${subsWriterList}" var="writer">
+${writer.membername} : ${writer.writerid} : ${writer.readerid}
+<br>
+</c:forEach>
         <div class = "ul-table">
             <div class="ul-row">
                 <div class="session_name"></div>

@@ -47,9 +47,11 @@
 			<result property="state" column="state" />
 			<result property="memberdeletedate" column="member_deletedate" />
 			<result property="formula" column="formula" />
+			<result property="readerid" column="reader_id" />
+			<result property="writerid" column="writer_id" />
 		</resultMap>
 		
-	<select id="subsBlogList" resultMap="resultList" resultType="Member">
+	<select id="subsWriterList" resultMap="resultList" resultType="Member">
 		SELECT * FROM V_SUBSCRIBE_WRITER
 		WHERE READER_ID = #{memberid}
 	</select>

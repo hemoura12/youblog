@@ -57,7 +57,7 @@
 		
 	<select id="allCategory" resultMap="resultList" resultType="Blog">
 		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno,
 		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST)
 		WHERE rowno <![CDATA[ > ]]> #{row1}
@@ -66,20 +66,20 @@
 		
 	<select id="selectCategoryAll" resultMap="resultList" resultType="Blog">
 		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno,
 		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
-		ORDER BY rowno ASC;
+		ORDER BY rowno ASC
 	</select>	
 		
 	<select id="selectCTGLev2All" resultMap="resultList" resultType="Blog">
 		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno,
 		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
 		WHERE rowno <![CDATA[ > ]]> #{row1}
 		and rowno <![CDATA[ < ]]>= #{row2}
-		ORDER BY NO ASC;
+		ORDER BY rowno ASC
 	</select>	
 	
 	<select id="selectCTG" resultMap="resultList" resultType="Blog">
@@ -116,17 +116,6 @@
 		select distinct cate_name1 from TB_CATEGORY
 	</select>
 	
-	
-	<select id="subsBlogList" resultMap="resultList" resultType="Blog">
-		SELECT * FROM V_SUBSCRIBE_BLOG
-		WHERE reader_ID = #{memberid}
-		AND WRITER_ID IN (select WRITER_ID from
-  			(select * from 
-    			(select reader_ID, WRITER_ID, WRITE_DATE, RANK() OVER(PARTITION BY WRITER_ID ORDER BY WRITE_DATE desc) rank from V_SUBSCRIBE)
- 			where reader_ID = #{memberid}
-  			and rank <![CDATA[ < ]]>= 1 order by WRITE_DATE desc) where rownum <![CDATA[ < ]]>= 3)
-  			<!-- SELECT * FROM V_SUBSCRIBE_BLOG where reader_ID = #{memberid} -->
-	</select>
 <!-- 	<delete id="deleteNotice" parameterType ="_int" flushCache ="true" statementType ="PREPARED">
 			delete from notice where noticeno = #{noticeNo}
 	</delete>

@@ -124,34 +124,35 @@ public class BlogController {
 		session.setAttribute("memberid", "user01");
 		//session.removeAttribute("memberid");
 		String memberid = (String)session.getAttribute("memberid");
-		
+		System.out.println("memberid : " + memberid);
 		//로그인 안되어 있을 시
 		if(memberid==null){
 			System.out.println("로그인 필요");
 			mv.setViewName("subscription/subscription");
 		} else {
-			ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
-			LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
-	
-			for(Blog list : blogList){
+			//ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
+			//LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
+			ArrayList<Member> subsWriterList = memberService.subsWriterList(memberid);
+			/*for(Blog list : blogList){
 				writerSet.add(list.getWriterid());
-			}
-			ArrayList<String> writerList = new ArrayList<String>();
-			for(String w : writerSet){
+			}*/
+			//ArrayList<String> writerList = new ArrayList<String>();
+			/*for(String w : writerSet){
 				writerList.add(w);
-			}
+			}*/
 			//저장된 아이디 리스트 넘김
 			//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
 			//System.out.println(writerArr);
-			
-			mv.addObject("blog", blogService.subsBlogList(memberid));
+			System.out.println(subsWriterList.toString());
+			mv.addObject("subsWriterList", subsWriterList);
+			//mv.addObject("blog", blogService.subsBlogList(memberid));
 			mv.setViewName("subscription/subscription");
 		}
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "subsList.do")
+/*	@RequestMapping(value = "subsList.do")
 	public ModelAndView subsBlogList(@RequestParam(value="memberid") String memberid, 
 			ModelAndView mv){
 		
@@ -159,9 +160,9 @@ public class BlogController {
 		
 		LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
 
-/*		for(Blog list : subsWriterList){
+		for(Blog list : subsWriterList){
 			writerSet.add(list.getWriterid());
-		}*/
+		}
 		ArrayList<String> writerList = new ArrayList<String>();
 		for(String w : writerSet){
 			writerList.add(w);
@@ -175,7 +176,7 @@ public class BlogController {
 		mv.setViewName("subsBlog/subsList");
 		
 		return mv;
-	}
+	}*/
 	
 
 }
