@@ -18,7 +18,7 @@
 
 	<c:set var="m" value="${member }" />
 	<c:url var="personmain" value="personmain.do">
-		<c:param name="writerid" value="${sessionScope.login.memberid  }" />
+		<c:param name="writerid" value="${sessionScope.member.memberid  }" />
 	</c:url>
 
 
@@ -66,7 +66,7 @@
 					<a class="first_link" href="personchannel.do">채널</a> 
 					
 					<c:url var="personboard" value="personboard.do">
-							<c:param name="writerid" value="${sessionScope.login.memberid }" />
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
 					</c:url>
 					<a class="first_link" href="${personboard }">게시글</a>
 					<div class="header_searchbar">

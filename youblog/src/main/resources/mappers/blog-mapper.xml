@@ -66,9 +66,10 @@
    </select>
    
    
-   <update id="updateBlogSettings">
+   <update id="updateBlog" parameterType="Blog">
    		update TB_BLOG
-   		set 
+   		set state = #{state}
+   		where blog_no = #{blogno} 
    </update>
    
    <select id="selectList"  resultMap="resultList" >

@@ -10,6 +10,12 @@
 </head>
 <body>
 <c:import url = "/WEB-INF/views/header.jsp"/>
+
+
+<c:url var="personmain" value="personmain.do">
+		<c:param name="writerid" value="${sessionScope.member.memberid  }" />
+	</c:url>
+
 <div class="conWrap">
     <div class="top_bar">
         <div class="top_img_box"><img src="resources/images/headerimg.PNG"/></div>
@@ -36,8 +42,16 @@
         <div class="sub_header">
             <div class="header_category">
                  <a class="first_link" href="personmain.do" >홈</a>
-                 <a class="first_link" href="personchannel.do" >채널</a>
-                 <a class="first_link" href="personboard.do" >게시글</a>
+                 
+                 <c:url var="personchannel" value="personchannel.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${personchannel }" >채널</a>
+                 
+                 <c:url var="personboard" value="personboard.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${personboard }" >게시글</a>
                 <div class="header_searchbar">
                     <img id='image_search' src="https://3.bp.blogspot.com/-2CWX7kIpob4/WZgVXt3yTQI/AAAAAAAAACM/N1eGT1OD7rklb4GtsadoxYRyWZoR_aI0gCLcBGAs/s1600/seo-1970475_960_720.png"
                          onclick="var inputBox = document.getElementById('input_text_search');

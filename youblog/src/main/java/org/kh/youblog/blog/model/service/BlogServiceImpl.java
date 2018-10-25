@@ -121,6 +121,13 @@ public class BlogServiceImpl implements BlogService{
 			return (ArrayList<Blog>)blogDao.selectBoardList(writerid);
 		}
 
+		@Override
+		public int updateBoard(Blog blog) {
+			
+			return (int)blogDao.updateBoard(blog);
+		}
+
+		
 		
 
 }

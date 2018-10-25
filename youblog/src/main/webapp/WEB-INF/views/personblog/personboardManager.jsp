@@ -27,20 +27,10 @@
             </div>
             <div class ="infoBox_right">
                 <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
-					
-					<!-- if문걸어 관리탭나누기 -->
-					<%-- <c:choose>
-						<c:when test="">
-							<a href="#" class="subscript_tag"><span>구독 중</span></a>
-							<a class="sub_alram" onclick="changeicon()"><i
-								class="fas fa-bell-slash"></i></a>
-						</c:when>
-						<c:when test="">
-							<a href="#" class="subscript_tag"><span>관리</span></a>
-						</c:when>
-					</c:choose> --%>
-					
-					<!--<i class="fas fa-bell"></i>-->
+                <a href="#" class="subscript_tag"><span>구독 중</span></a>
+
+                <a class = "sub_alram" onclick="changeicon()"><i class="fas fa-bell-slash"></i></a>
+                <!--<i class="fas fa-bell"></i>-->
             </div> <!--infoBox_right -->
         </div> <!-- channel_header-->
         <div class="sub_header">
@@ -82,24 +72,36 @@
 		                <thead class="head">
 		                    <tr>
 		                        <!-- <th><a class="checkbox" href="" ></a></th>  -->
-		                        <th>   </th>
 		                        <th>글번호</th>
 		                        <th>글제목</th> 	                      
 		                        <th></th>
 		                        <th>등록일</th> 
-		                        
+		                        <th colspan="2">공개여부</th>
+		                        <th></th>
 		                    </tr>    
 		                </thead>
 		                <tbody class="body">
-		                <c:forEach begin="1" end="5" step="1">
+		                <%-- <c:forEach begin="0" end="${fn:length(blog) }" step="1"  varStatus="i" items="blog" var="b"> --%>
+		                <c:forEach items="${blog }" var="b" varStatus="i">
 		                    <tr>
 		                        <!-- <td class=""><a class="checkbox_checked" href="javascript:;" >✓</a></td> -->
-		                        <td class="">123</td>
-		                        <td class="">사랑이 넘치는 한의원 홈페이지 구독 웹진을 보내 드립니다.</td>
-		                        <td class=""></td>
-		                        <td class=""></td>
-		                        <td class="">2016-0526</td>                                                            
+		                        <td class="">${i.count }</td>
+		                        <td class="">${b.title }</td>
 		                        
+		                        <td class=" txt_org"></td>
+		                        <td class="">${b.writedate }</td>
+		                        <c:choose>
+			                        <c:when test="${blog[i].state eq 'Y' }">	                                                            
+				                        <td class=""><input type="radio" name="chk_open" value="Y">공개</td>
+				                    </c:when>
+				                    <c:when test="${blog[i].state eq 'N' }">	 
+				                        <td class=""><input type="radio" name="chk_open" value="N">비공개</td>
+				                    </c:when>
+		                        </c:choose>
+		                        <td class="">
+		                        	<input type="hidden" name = "blogno" id = "blogno" value="${b.blogno }">
+		                        </td>
+		                        <td class=""><input type="button" name="boardUpdate${i.count }" id="boardUpdate${i.count }"></td>
 		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
 		                    </tr>
 		                 </c:forEach>
@@ -134,4 +136,49 @@
     </div> <!--channel_conbox-->
 </div><!--conWrap-->
 </body>
+
+
+<script type="text/javascript" src = "/youblog/resources/js/jquery-3.3.1.min.js"/>
+<script type="text/javascript">
+$(function(){
+	var checkOpen = "";
+		
+	
+	 for(var i = 0 ; i < ${fn:length(blog)}; i++){
+		 $('boardUpdate'+i).each(function(){
+			 $(this).click(function(){
+				
+				checkOpen = $("input[type=radio][name=chk_open]:checked").val()
+				blogno = $('#blogno').val
+				
+	$.ajax({
+		type : "POST",
+		url : "/boardUpdate.do",
+        data : "checkopen=" + checkOpen, "&blogno=" + blogno,
+        dataType : "text",
+        success : 
+        	function(data) {	        	
+        	if(data == "success"){
+        		location.href="/personboardManager.do";
+        		alert("변경성공");
+        	} else if (data == "fail"){
+        		alert("변경 실패");
+				return;
+        	}
+        },
+	        error : function(request, status, error) {
+	            alert("code:" + request.status + "\n" + "error:" + error);
+	        }
+	    	});  //ajax
+	    })//end click
+	 });// end each
+	}// end for	
+	
+/* if(event.keyCode == 13){
+		doSearch();
+	} */
+	
+ });
+</script>
+
 </html>

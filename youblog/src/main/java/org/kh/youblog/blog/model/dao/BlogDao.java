@@ -118,5 +118,9 @@ public class BlogDao {
 			return (ArrayList<Blog>)result;
 		}
 
+		public int updateBoard(Blog blog) {
+			return sqlSession.update("blogMapper.updateBlog", blog);
+		}
+
 		
 }

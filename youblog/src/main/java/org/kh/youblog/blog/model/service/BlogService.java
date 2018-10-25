@@ -43,6 +43,9 @@ public interface BlogService {
 
 	// 블로그 게시판 출력
 	ArrayList<Blog> selectBoardList(String writerid);
+	
+	// 게시글 공개여부 수정
+	int updateBoard(Blog blog);
 
 	
 }

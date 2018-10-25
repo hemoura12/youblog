@@ -371,4 +371,30 @@ public class BlogController {
 		return mv;
 	}
 	
+	public void updateBoard(ModelAndView mv,
+			 						HttpServletResponse response,
+									@RequestParam(value="checkopen") String checkopen,
+									@RequestParam(value="blogno") String blogno) throws IOException{
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		Blog blog = new Blog();
+		
+		blog.setBlogno(blogno);
+		blog.setState(checkopen);
+		
+		
+		int checkreturn = (int)blogService.updateBoard(blog);
+		
+		if(checkreturn >0){
+			out.append("success");
+			out.flush();
+		}else{
+			out.append("success");
+			out.flush();
+		}
+		out.close();
+	}
+	
 }
