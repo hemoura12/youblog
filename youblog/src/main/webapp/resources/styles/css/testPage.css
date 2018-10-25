@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+div {
+	width: 80%;
+	height: 150px;
+	border: 1px solid blue;
+	border-radius: 10px;
+	background: rgba(0, 100, 200, 0.2);
+}

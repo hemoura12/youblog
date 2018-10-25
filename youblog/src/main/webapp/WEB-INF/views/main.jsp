@@ -175,5 +175,4 @@
 <script type="text/javascript">
 	$().alert("${member.memberid}");
 </script>
-
 </html>

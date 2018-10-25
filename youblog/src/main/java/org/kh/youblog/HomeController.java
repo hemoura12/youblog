@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Handles requests for the application home page.
  */
 @Controller
-@SessionAttributes("member")
+@SessionAttributes("login")
 public class HomeController {
    
    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -41,7 +41,7 @@ public class HomeController {
 	   
 	   member.setMemberid("user01");
 	   
-      mv.addObject("member", member);
+      mv.addObject("login", member);
       mv.setViewName("main");
       
       return mv;

@@ -72,7 +72,7 @@
                 <li><a href="writepage.do"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
                 <li>
 	                <c:url var="personmain" value="personmain.do">
-							<c:param name="writerid" value="${m.memberid }" />
+							<c:param name="writerid" value="${sessionScope.login.memberid }" />
 					</c:url>
                		 <a href = "${personmain }"><span class="glyphicon glyphicon-th" aria-hidden="true"/></a>
                 </li>
@@ -97,40 +97,70 @@
     </div><!-- /.container-fluid -->
 </nav><!--/.navbar navbar-default-->
 
-        <!-- side bar -->
-        <div class="nav-side-menu" id ="menu-side">
-            <div class="brand">Brand Logo</div>
-            <!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>-->
+<!-- 파라메터셋팅 -->
+<c:url var="categoryAll" value="categorySelect.do">
+	<c:param name="views" value="categoryAll" />
+	<c:param name="cate2" value="all" />
+</c:url>
+<c:url var="lifeAll" value="categorySelect.do">
+	<c:param name="views" value="lifeCTG" />
+    <c:param name="cate2" value="all" />
+</c:url>
+<c:url var="travelAll" value="categorySelect.do">
+	<c:param name="views" value="travelCTG" />
+    <c:param name="cate2" value="all" />
+</c:url>
+<c:url var="culturelifeAll" value="categorySelect.do">
+	<c:param name="views" value="cultureCTG" />
+    <c:param name="cate2" value="all" />
+</c:url>
+<c:url var="itAll" value="categorySelect.do">
+	<c:param name="views" value="itCTG" />
+    <c:param name="cate2" value="all" />
+</c:url>
+<c:url var="sportAll" value="categorySelect.do">
+	<c:param name="views" value="sportCTG" />
+    <c:param name="cate2" value="all" />
+</c:url>
+<c:url var="currentAll" value="categorySelect.do">
+	<c:param name="views" value="currentCTG" />
+    <c:param name="cate2" value="all" />
+</c:url>
 
-            <div class="menu-list">
+<div class = "conWrap">
 
-                <ul id="menu-content" class="menu-content"><!-- collapse out-->
-                    <li>
-                        <a href="home.do">
-                            <i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i>&nbsp;홈
-                        </a>
-                    </li>
+<!-- side bar -->
+<div class="nav-side-menu" id ="menu-side">
+    <div class="brand">Brand Logo</div>
+    <!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>-->
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content"><!-- collapse out-->
+            <li class="active">
+                <a href="main.do">
+                    <i class="fa fa-dashboard fa-lg"></i>홈
+                </a>
+            </li>
 
-                    <li  data-toggle="collapse" data-target="#products" class="collapsed">
-                        <a href="#"><i class="fas fa-pen fa-lg fa-fw"></i> 주제별</a>
-                    </li>
-                    <ul class="sub-menu collapse" id="products">
-                        <li class="#"><a href="categoryall.do"><i class="fas fa-angle-right"></i>전체</a></li>
-                        <li><a href="categoryLife.do"><i class="fas fa-angle-right"></i>라이프</a></li>
-                        <li><a href="categoryTravel.do"><i class="fas fa-angle-right"></i>여행·맛집</a></li>
-                        <li><a href="categoryCulture.do"><i class="fas fa-angle-right"></i>문화·연예</a></li>
-                        <li><a href="categoryIT.do"><i class="fas fa-angle-right"></i>IT</a></li>
-                        <li><a href="categorySport.do"><i class="fas fa-angle-right"></i>스포츠</a></li>
-                        <li><a href="categoryCurrent.do"><i class="fas fa-angle-right"></i>시사</a></li>
-                    </ul>
+            <li data-toggle="collapse" data-target="#products" class="collapsed">
+                <a href="#"><i class="fa fa-gift fa-lg"></i> 주제별</a>
+            </li>
+            <ul class="sub-menu collapse" id="products">
+                <li class="#"><a href="${categoryAll }">전체</a></li>
+                <li><a href="${lifeAll }">라이프</a></li>
+                <li><a href="${travelAll }">여행·맛집</a></li>
+                <li><a href="${culturelifeAll }">문화·연예</a></li>
+                <li><a href="${itAll }">IT</a></li>
+                <li><a href="${sportAll }">스포츠</a></li>
+                <li><a href="${currentAll }">시사</a></li>
+            </ul>
                     <li class="#">
-                        <a href="favorite.do">
+                        <a href="favoriteList.do">
                             <i class="fa fa-fire fa-lg"></i> 인기
                         </a>
                     </li>
 
                     <li class="sub_li">
-                        <a href="subscription.do">
+                        <a href="subscriptionList.do">
                             <i class="fa fa-bell fa-lg"></i> 구독
                         </a>
                     </li>

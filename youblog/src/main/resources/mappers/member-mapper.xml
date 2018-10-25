@@ -49,9 +49,15 @@
 			<result property="formula" column="formula" />
 		</resultMap>
 		
+
 		<select id="selectBlogMember" parameterType="string" statementType="PREPARED" resultMap="resultMember">
 			Select *
 			from TB_MEMBER
 			where member_id = #{writerid}
 		</select>
+
+	<select id="subsBlogList" resultMap="resultList" resultType="Member">
+		SELECT * FROM V_SUBSCRIBE_WRITER
+		WHERE READER_ID = #{memberid}
+	</select>
 </mapper>

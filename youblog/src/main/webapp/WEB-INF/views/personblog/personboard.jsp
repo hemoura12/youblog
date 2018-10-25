@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,20 +27,10 @@
             </div>
             <div class ="infoBox_right">
                 <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
-					
-					<!-- if문걸어 관리탭나누기 -->
-					<%-- <c:choose>
-						<c:when test="">
-							<a href="#" class="subscript_tag"><span>구독 중</span></a>
-							<a class="sub_alram" onclick="changeicon()"><i
-								class="fas fa-bell-slash"></i></a>
-						</c:when>
-						<c:when test="">
-							<a href="#" class="subscript_tag"><span>관리</span></a>
-						</c:when>
-					</c:choose> --%>
-					
-					<!--<i class="fas fa-bell"></i>-->
+                <a href="#" class="subscript_tag"><span>구독 중</span></a>
+
+                <a class = "sub_alram" onclick="changeicon()"><i class="fas fa-bell-slash"></i></a>
+                <!--<i class="fas fa-bell"></i>-->
             </div> <!--infoBox_right -->
         </div> <!-- channel_header-->
         <div class="sub_header">
@@ -93,10 +82,11 @@
 		                    </tr>    
 		                </thead>
 		                <tbody class="body">
+		                <%-- <c:forEach begin="0" end="${fn:length(blog) }" step="1"  varStatus="i" items="blog" var="b"> --%>
+		                <c:forEach items="${blog }" var="b" varStatus="i">
 		                    <tr>
 		                        <!-- <td class=""><a class="checkbox_checked" href="javascript:;" >✓</a></td> -->
-		                        <c:forEach items="${blog }" var="b" begin="0" end="${fn:length(blog) }" step="1" varStatus="i">
-		                        <td class="">${i.count}</td>
+		                        <td class="">${i.count }</td>
 		                        <td class="">${b.title }</td>
 		                        <td class=""></td>
 		                        <td class=""></td>
@@ -105,7 +95,7 @@
 		                        <td class=" txt_org"></td>
 		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
 		                    </tr>
-		                    </c:forEach>
+		                 </c:forEach>
 		                </tbody>
 		                <tfoot class="foot">
 		                    <tr>
