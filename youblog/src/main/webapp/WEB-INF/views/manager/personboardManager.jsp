@@ -18,26 +18,28 @@
         <div class="channel_header">
             <div class="channel_img"><img src="resources/images/rion2.png"/></div>
             <div class="channel_infoBox">
-                <p class="channel_name">라이언네 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
+                <p class="channel_name">${sessionScope.member.membername } <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
 
-                <p>
-                    <span class="uploadTime">1시간전</span>
-                    <span class="viewCount">View 591만회</span>
-                </p>
+                
             </div>
-            <div class ="infoBox_right">
-                <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
+           <!--  <div class ="infoBox_right">
+                <a href="#" class="subscript_tag"><span>구독</span></a>
                 <a href="#" class="subscript_tag"><span>구독 중</span></a>
 
                 <a class = "sub_alram" onclick="changeicon()"><i class="fas fa-bell-slash"></i></a>
-                <!--<i class="fas fa-bell"></i>-->
-            </div> <!--infoBox_right -->
+                <i class="fas fa-bell"></i>
+            </div> infoBox_right -->
         </div> <!-- channel_header-->
         <div class="sub_header">
             <div class="header_category">
-                 <a class="first_link" href="personmain.do" >홈</a>
-                 <a class="first_link" href="personchannel.do" >채널</a>
-                 <a class="first_link" href="personboard.do" >게시글</a>
+            
+            <c:url var="managego" value="managego.do">
+							<c:param name="check" value="${sessionScope.member.memberid}" />
+					</c:url>
+            
+                 <a class="first_link" href="${managego }" >글관리</a>
+                 <a class="first_link" href="list.do" >채널 관리</a>
+                 <a class="first_link" href="update1.do" >게시글</a>
                 <div class="header_searchbar">
                     <img id='image_search' src="https://3.bp.blogspot.com/-2CWX7kIpob4/WZgVXt3yTQI/AAAAAAAAACM/N1eGT1OD7rklb4GtsadoxYRyWZoR_aI0gCLcBGAs/s1600/seo-1970475_960_720.png"
                          onclick="var inputBox = document.getElementById('input_text_search');
@@ -70,38 +72,60 @@
 		            <table class="bbsList">
 		                <%-- <caption>이메일 수신자 그룹관리 (이메일 뉴스레터를 발송할 대상 수신자 목록을 선택하세요.)</caption>      --%>      
 		                <thead class="head">
+		                <tr>
+		                	<td></td><td></td><td></td><td></td><td></td>
+		                	<td align = "center">
+		                		<input type="button" value="삭제" id="removeBt" onclick="chkProduct();" class="subscript_tag">
+		                	</td>
+		                </tr>
 		                    <tr>
 		                        <!-- <th><a class="checkbox" href="" ></a></th>  -->
+		                         <th></th>
 		                        <th>글번호</th>
 		                        <th>글제목</th> 	                      
 		                        <th></th>
 		                        <th>등록일</th> 
-		                        <th colspan="2">공개여부</th>
-		                        <th></th>
+		                        <th>공개여부</th>
 		                    </tr>    
 		                </thead>
 		                <tbody class="body">
-		                <%-- <c:forEach begin="0" end="${fn:length(blog) }" step="1"  varStatus="i" items="blog" var="b"> --%>
-		                <c:forEach items="${blog }" var="b" varStatus="i">
+		               <c:forEach begin="0" end="${fn:length(blog) }" step="1"  varStatus="i" items="${blog}" var="b"> 
+		               <%--  <c:forEach items="${blog }" var="b" varStatus="i"> --%>
 		                    <tr>
 		                        <!-- <td class=""><a class="checkbox_checked" href="javascript:;" >✓</a></td> -->
+		                        <td class=""><input type="checkbox" name="chk" value="${m.blogno }"></td>
 		                        <td class="">${i.count }</td>
 		                        <td class="">${b.title }</td>
 		                        
 		                        <td class=" txt_org"></td>
 		                        <td class="">${b.writedate }</td>
 		                        <c:choose>
-			                        <c:when test="${blog[i].state eq 'Y' }">	                                                            
-				                        <td class=""><input type="radio" name="chk_open" value="Y">공개</td>
-				                    </c:when>
-				                    <c:when test="${blog[i].state eq 'N' }">	 
-				                        <td class=""><input type="radio" name="chk_open" value="N">비공개</td>
+			                        <c:when test="${b.state eq 'Y' }">	                                                            
+				                        <td class="">
+					                        <!-- <input type="radio" name="chk_open" value="Y" checked="checked">공개
+					                        <input type="radio" name="chk_open" value="N">비공개 -->
+					                     <select name="state" id = "state" onchange="statechange()">
+				                        	<option name="chk_open" value="Y" selected="selected">공개</option>
+				                        	<option name="chk_open" value="N" >비공개</option>
+				                        </select>
+				                        </td>
+				                   </c:when>
+				                    <c:when test="${b.state eq 'N' }">	 
+				                          <td class="">
+					                        <!-- <input type="radio" name="chk_open" value="Y" >공개
+					                        <input type="radio" name="chk_open" value="N" checked="checked">비공개 -->
+					                       <select name="state" id = "state" onchange="statechange()">
+					                        	<option name="chk_open" value="Y" >공개</option>
+					                        	<option name="chk_open" value="N" selected="selected">비공개</option>
+					                        </select>
+				                        </td>
 				                    </c:when>
 		                        </c:choose>
+		                       <%--  <td class=""><input type="button" name="boardUpdate${i.count }" id="boardUpdate${i.count }" value="변경"></td> --%>
 		                        <td class="">
 		                        	<input type="hidden" name = "blogno" id = "blogno" value="${b.blogno }">
 		                        </td>
-		                        <td class=""><input type="button" name="boardUpdate${i.count }" id="boardUpdate${i.count }"></td>
+		                        
 		                        <!-- <td class=""><a class="viewbtn" href="#" target="_blank"><span class="txt_org">보기</span></a></td> -->
 		                    </tr>
 		                 </c:forEach>
@@ -109,7 +133,7 @@
 		                <tfoot class="foot">
 		                    <tr>
 		                        <td colspan="9">
-		                            <span class="arrow radius-right">≪</span>
+		                            <!-- <span class="arrow radius-right">≪</span>
 		                            <span class="arrow radius-left">＜</span>
 		                            
 		                            <a href="javascript:;" class="num_box txt_point">1</a>
@@ -124,9 +148,9 @@
 		                            <a href="javascript:;" class="num_box ">10</a>
 		
 		                            <span class="arrow radius-right">＞</span>
-		                            <span class="arrow radius-left">≫</span>
-		                        </td>
-		                    </tr>    
+		                            <span class="arrow radius-left">≫</span>-->
+		                        </td>  
+		                    </tr>   
 		                </tfoot>
 		            </table>
 		            <!--< div class="btn_wrap">
@@ -140,21 +164,21 @@
 
 <script type="text/javascript" src = "/youblog/resources/js/jquery-3.3.1.min.js"/>
 <script type="text/javascript">
-$(function(){
+function statechange(){
 	var checkOpen = "";
-		
+	<%-- var blog = <% session.getAttribute("blog"); %> --%>
 	
 	 for(var i = 0 ; i < ${fn:length(blog)}; i++){
 		 $('boardUpdate'+i).each(function(){
 			 $(this).click(function(){
 				
-				checkOpen = $("input[type=radio][name=chk_open]:checked").val()
+				checkOpen = $("[select][name=chk_open]:checked").val()
 				blogno = $('#blogno').val
 				
 	$.ajax({
 		type : "POST",
 		url : "/boardUpdate.do",
-        data : "checkopen=" + checkOpen, "&blogno=" + blogno,
+        data : "checkopen=" + checkOpen + "&blogno=" + blogno,
         dataType : "text",
         success : 
         	function(data) {	        	
@@ -178,7 +202,90 @@ $(function(){
 		doSearch();
 	} */
 	
- });
+ }
+ 
+ 
+//체크선택삭제
+function chkProduct(){
+	var $inputs = $("input[name='chk']:checked");
+
+	if($inputs.length == 0){
+    	/* alert("선택하신 댓글은 "+$inputs.length + " 개 입니다."); */
+    	return;
+	}
+	var ids = $inputs.map(function() {
+    	return $( this ).val();
+	}).get().join( ",");
+	
+	$.ajax({
+    	url: "boardDelete.do?ids="+ids,
+    	method: 'DELETE',
+    	contentType : 'application/json; charset=utf-8',
+    	dataType: 'json',
+    	success: function (data) {
+        	if(data){
+            	window.location.reload(true);
+        	}else{
+            	alert("실패!");
+        	}
+    	},
+    	error: function (request, status, errorData) {
+        	alert("error code : " + request.status + "\n"
+            	+ "message : " + request.responseText + "\n"
+            	+ "error : " + errorData);
+    	}
+	})
+
+//체크박스 전체선택
+$(document).ready(function(){
+	//최상단 체크박스 클릭
+	$("#checkall").click(function(){
+    //클릭되었으면
+    	if($("#checkall").prop("checked")){
+        	//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+        	$("input[name=chk]").prop("checked",true);
+        	//클릭이 안되있으면
+    	}else{
+        	//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+        	$("input[name=chk]").prop("checked",false);
+    	}
+	})
+});
+ /* 
+function chanalcheck() {
+	var state = ${'#state'} 
+	
+    $.ajax({
+        url: "changeopen.do",
+        method: 'PUT',
+        contentType : 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: ,
+        success: function (data) {
+            if(data){
+                alert("완료!");
+            }else{
+                alert("실패!");
+            }
+            //self.close();
+        },
+        error: function (request, status, errorData) {
+            alert("error code : " + request.status + "\n"
+                + "message : " + request.responseText + "\n"
+                + "error : " + errorData);
+        }
+    })
+} */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 </script>
 
 </html>

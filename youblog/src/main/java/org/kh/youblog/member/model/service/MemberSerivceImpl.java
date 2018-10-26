@@ -53,6 +53,12 @@ public class MemberSerivceImpl implements MemberService{
 	public Member updatemember(Member member){
 		return memberDao.updateMember(member);
 	}
+	
+	@Override
+	public void mychanelupdate(Member member) {
+		System.out.println("service 넘어오나요");
+		memberDao.mychanelupdate(member);
+	}
 
 
 }

@@ -27,6 +27,9 @@ import org.kh.youblog.session.model.vo.Session;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -182,7 +185,7 @@ public class BlogController {
 	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
-		System.out.println(writerid);
+		
 		
 		ArrayList<Blog> blog = blogService.selectBlogList(writerid);
 		Member member = memberService.selectBlogMember(writerid);
@@ -395,6 +398,67 @@ public class BlogController {
 			out.flush();
 		}
 		out.close();
+	}
+	
+	@RequestMapping(value="myBlogList.do")
+	public ModelAndView myBlogList(ModelAndView mv) {
+		
+		ArrayList<Blog> list = blogService.myBlogList();
+		mv.addObject("list", list);
+		mv.setViewName("myBlogUpdate");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="test1.do", method=RequestMethod.POST)
+	public ModelAndView infoBlog(ModelAndView mv, @RequestParam(value="blogno") String blogno){
+		
+		System.out.println("Blog Information : " + blogService.infoBlog(blogno));
+		
+		mv.addObject("blog", blogService.infoBlog(blogno));
+		mv.setViewName("home");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="managego.do", method = RequestMethod.GET)
+	public ModelAndView managergo(ModelAndView mv, @RequestParam(value="check") String check){
+		
+		ArrayList<Blog> blog = blogService.selectBlogList(check);
+		
+		mv.addObject("blog", blog);
+
+		mv.setViewName("manager/personboardManager");
+		
+		return mv;
+	}
+	
+	@DeleteMapping(value = "boardDelete.do")
+	   @ResponseBody
+	   public Object delete(@RequestParam List<Long> ids){
+	      blogService.remove(ids);
+	      return "true";
+	   }   
+	
+	@RequestMapping(value="boardUpdate.do", method=RequestMethod.GET)
+	public String changestate(ModelAndView mv, @RequestParam(value="checkopen") String checkopen,
+																 @RequestParam(value="blogno") String blogno){
+		
+		Blog blog = new Blog();
+		
+		blog.setBlogno(blogno);
+		blog.setState(checkopen);
+		
+		int result = blogService.changestate(blog);
+		String rt;
+		
+		if(result > 0)
+			rt = "succes";
+		else
+			rt = "fail";
+			
+		
+		return rt;
 	}
 	
 }

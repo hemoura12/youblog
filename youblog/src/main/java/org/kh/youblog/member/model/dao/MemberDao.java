@@ -54,4 +54,11 @@ public class MemberDao {
 	public Member updateMember(Member member) {
 		return sqlSession.selectOne("memberMapper.updateMember", member);
 	}
+	
+	public int mychanelupdate(Member member) {
+		System.out.println("Dao 가동");
+		return sqlSession.update("memberMapper.updateChanel", member);
+		//return member;
+	}
+	
 }

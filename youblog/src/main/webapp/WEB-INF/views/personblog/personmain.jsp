@@ -43,9 +43,12 @@
 					</p> -->
 				</div>
 				<div class="infoBox_right">
+				<c:url var="managego" value="managego.do">
+							<c:param name="check" value="${sessionScope.member.memberid}" />
+					</c:url>
 				<c:choose>
 					<c:when test="${sessionScope.member.memberid eq blog[1].writerid}">
-							<a href="#" class="subscript_tag"><span>관리</span></a>
+							<a href=${managego } class="subscript_tag"><span>관리</span></a>
 						</c:when>
 						
 						<c:otherwise>
@@ -128,4 +131,20 @@
 	</div>
 	<!--conWrap-->
 </body>
+
+<!-- <script type="text/javascript" src = "/youblog/resources/js/jquery-3.3.1.min.js"/>
+<script type="text/javascript">
+	function encode(){
+		alert(${managego});
+		
+		var origin = ${managego}
+		var tran = encodeURI(origin);
+		
+		alert(tran);
+		
+		location.href= tran;
+		
+	}
+</script> -->
+
 </html>

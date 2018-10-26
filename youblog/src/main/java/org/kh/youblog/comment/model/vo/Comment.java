@@ -2,66 +2,64 @@ package org.kh.youblog.comment.model.vo;
 
 public class Comment implements java.io.Serializable {
 	private final static long serialVersionUID = 12L;
-	
-	private String cmtNo;
-	private String blogNo;
-	private String memberId;
-	private String cmtParentno;
-	private String cmtContents;
+
+	private String cmtno;
+	private String blogno;
+	private String memberid;
+	private String cmtparentno;
+	private String cmtcontents;
 	private String state;
-	
-	
-	public Comment(){}
 
-	public Comment(String cmtNo, String blogNo, String memberId, String cmtParentno, String cmtContents, String state) {
+	public Comment() {}
+
+	public Comment(String cmtno, String blogno, String memberid, String cmtparentno, String cmtcontents, String state) {
 		super();
-		this.cmtNo = cmtNo;
-		this.blogNo = blogNo;
-		this.memberId = memberId;
-		this.cmtParentno = cmtParentno;
-		this.cmtContents = cmtContents;
+		this.cmtno = cmtno;
+		this.blogno = blogno;
+		this.memberid = memberid;
+		this.cmtparentno = cmtparentno;
+		this.cmtcontents = cmtcontents;
 		this.state = state;
-		
 	}
 
-	public String getCmtNo() {
-		return cmtNo;
+	public String getCmtno() {
+		return cmtno;
 	}
 
-	public void setCmtNo(String cmtNo) {
-		this.cmtNo = cmtNo;
+	public void setCmtno(String cmtno) {
+		this.cmtno = cmtno;
 	}
 
-	public String getBlogNo() {
-		return blogNo;
+	public String getBlogno() {
+		return blogno;
 	}
 
-	public void setBlogNo(String blogNo) {
-		this.blogNo = blogNo;
+	public void setBlogno(String blogno) {
+		this.blogno = blogno;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getMemberid() {
+		return memberid;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
 	}
 
-	public String getCmtParentno() {
-		return cmtParentno;
+	public String getCmtparentno() {
+		return cmtparentno;
 	}
 
-	public void setCmtParentno(String cmtParentno) {
-		this.cmtParentno = cmtParentno;
+	public void setCmtparentno(String cmtparentno) {
+		this.cmtparentno = cmtparentno;
 	}
 
-	public String getCmtContents() {
-		return cmtContents;
+	public String getCmtcontents() {
+		return cmtcontents;
 	}
 
-	public void setCmtContents(String cmtContents) {
-		this.cmtContents = cmtContents;
+	public void setCmtcontents(String cmtcontents) {
+		this.cmtcontents = cmtcontents;
 	}
 
 	public String getState() {
@@ -72,19 +70,16 @@ public class Comment implements java.io.Serializable {
 		this.state = state;
 	}
 
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [cmtNo=" + cmtNo + ", blogNo=" + blogNo + ", memberId=" + memberId + ", cmtParentno="
-				+ cmtParentno + ", cmtContents=" + cmtContents + ", state=" + state + "]";
+		return "Comment [cmtno=" + cmtno + ", blogno=" + blogno + ", memberid=" + memberid + ", cmtparentno="
+				+ cmtparentno + ", cmtcontents=" + cmtcontents + ", state=" + state + "]";
 	}
-	
-	
-	
+
 	
 
 }

@@ -5,33 +5,55 @@
 <mapper namespace="commentMapper">
    
    <resultMap type="Comment" id="resultComment">
-      <id property="cmtNo" column="cmt_no" />
-      <result property="blogNo" column="blog_no" />
-      <result property="memberId" column="member_id" />
-      <result property="cmtParentno" column="cmt_parentno" />
-      <result property="cmtContents" column="cmt_contents" />
+      <id property="cmtno" column="cmt_no" />
+      <result property="blogno" column="blog_no" />
+      <result property="memberid" column="member_id" />
+      <result property="cmtparentno" column="cmt_parentno" />
+      <result property="cmtcontents" column="cmt_contents" />
       <result property="state" column="state" />
-      
    </resultMap>
    
    <resultMap type="Comment" id="resultList">
-      <result property="cmtNo" column="cmt_no" />
-      <result property="blogNo" column="blog_no" />
-      <result property="memberId" column="member_id" />
-      <result property="cmtParentno" column="cmt_parentno" />
-      <result property="cmtContents" column="cmt_contents" />
+      <result property="cmtno" column="cmt_no" />
+      <result property="blogno" column="blog_no" />
+      <result property="memberid" column="member_id" />
+      <result property="cmtparentno" column="cmt_parentno" />
+      <result property="cmtcontents" column="cmt_contents" />
       <result property="state" column="state" />
    </resultMap>
-   <select id="selectList" resultMap="resultList" resultType="Comment">
+   <!-- 전체 불러오기 -->
+   <select id="selectList" resultMap="resultList" >
       select * from 
       tb_comment
-      <!-- where member_id = 'user01' -->
+      where blog_no = #{blogno}
    </select>
+	<!-- 댓글 삭제 -->
+   <delete id="delete">
+      DELETE
+      FROM tb_comment
+      WHERE cmt_no = #{id}
+
+   </delete>
    
+   <select id="selectCmtList" resultMap="resultList" >
+		select *
+		from TB_COMMENT
+		where state = 'N'
+		and MEMBER_ID = #{memberid}
+   </select>
 
+	<select id="commentList" resultMap="resultList">
+    	select c.*
+		from TB_BLOG b
+		INNER join TB_COMMENT c on(B.BLOG_NO=C.BLOG_NO)
+		where B.WRITER_ID = 'user02'
+	</select>
 
-
-
+	<select id="noriterTC" resultType="java.lang.String">
+    	<![CDATA[
+    	select count(*) as totalCount from tb_comment
+    	]]>
+	</select>
 
 
 </mapper>

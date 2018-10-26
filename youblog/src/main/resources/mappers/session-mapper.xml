@@ -3,7 +3,6 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sessionMapper">
-
 	<resultMap type="Session" id="resultSession">
 		<id property="sessionname" column="SESSION_NAME"/>
 		<result property ="memberid" column="MEMBER_ID"/>
@@ -47,10 +46,7 @@
 	<select id="selectList" parameterType="String" resultMap="resultList" >
      select  SESSION_NAME from TB_SESSION
      where MEMBER_ID = #{memberid};
-     
    </select>
-	
-	 
 	
 	
 </mapper>

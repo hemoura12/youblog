@@ -22,5 +22,7 @@ public interface MemberService {
 	Member infoMember(String memberid);
 
 	Member updatemember(Member member);
+	
+	void mychanelupdate(Member member);
 
 }

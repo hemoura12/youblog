@@ -48,6 +48,4 @@ public class SessionDao {
 		return (int)sqlSession.delete("sessionMapper.deleteSession", session);
 	}
 	
-	
-
 }

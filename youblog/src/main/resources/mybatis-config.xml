@@ -6,7 +6,7 @@
 <configuration>
 	<typeAliases>		
 		<typeAlias type="org.kh.youblog.member.model.vo.Member" alias="Member" />	
-		<typeAlias type="org.kh.youblog.blog.model.vo.Blog" alias="Blog" />	
+		<typeAlias type="org.kh.youblog.blog.model.vo.Blog" alias="Blog" />
 		<typeAlias type="org.kh.youblog.comment.model.vo.Comment" alias="Comment"/>
 		<typeAlias type="org.kh.youblog.category.model.vo.Category" alias="Category"/>
 		<typeAlias type="org.kh.youblog.session.model.vo.Session" alias="Session"/>

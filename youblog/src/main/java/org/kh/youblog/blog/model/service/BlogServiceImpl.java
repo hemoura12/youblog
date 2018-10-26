@@ -128,6 +128,34 @@ public class BlogServiceImpl implements BlogService{
 		}
 
 		
-		
 
+	//블로그 불러오기
+	@Override
+	public ArrayList<Blog> myBlogList(){
+		List<Blog> list = blogDao.myBlogList();
+		return (ArrayList<Blog>) list;
+	}
+
+	@Override
+	public Blog selectBlog(Blog blog) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Blog infoBlog(String blogno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int changestate(Blog blog) {
+		
+		return blogDao.changestate(blog);
+	}
+
+	@Override
+	public void remove(List<Long> ids) {
+		blogDao.remove(ids);
+	}
 }

@@ -172,26 +172,15 @@
 	</select>
 	
 	
+	<select id="myBlogList" resultMap="resultList">
+		select * from
+		tb_blog
+	</select>
 	
-<!-- 	<delete id="deleteNotice" parameterType ="_int" flushCache ="true" statementType ="PREPARED">
-			delete from notice where noticeno = #{noticeNo}
-	</delete>
-
-	<update id="updateNotice" parameterType ="Notice" flushCache="true" statementType="PREPARED">	
-	UPDATE NOTICE 
-	SET NOTICE_TITLE = #{noticeTitle}, 
-	NOTICE_CONTENT = #{noticeContent},
-	FILE_PATH = #{filePath} 
-	WHERE NOTICE_NO = #{noticeNo}
-	UPDATE NOTICE 
-	<trim prefix="SET" suffixOverrides=",">
-		<if test="noticeTitle != null">NOTICETITLE = #{noticeTitle},</if>
-		<if test="noticeContent != null">NOTICECONTENT = #{noticeContent},</if>
-		<if test="originalFilepath != null">ORIGINAL_FILEPATH = #{originalFilepath} </if>
-	</trim>
-	WHERE NOTICENO = #{noticeNo}
- </update> -->
-
-
+	<delete id="delete">
+      DELETE
+      FROM tb_blog
+      WHERE blog_no = #{id}
+   </delete>
 </mapper>
 

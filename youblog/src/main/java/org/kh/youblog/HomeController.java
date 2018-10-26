@@ -1,8 +1,6 @@
 package org.kh.youblog;
 
 import java.util.Locale;
-
-
 import org.kh.youblog.member.model.vo.Member;
 import org.kh.youblog.member.model.service.MemberService;
 import org.slf4j.Logger;
@@ -23,19 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-
-   /*@RequestMapping(value = "home.do", method = RequestMethod.GET)
-   public ModelAndView home(Locale locale, Model model, ModelAndView mv) {
-      
-	   Member member = new Member();
-	   
-	   member.setMemberid("user01");
-	   
-      mv.addObject("login", member);
-      mv.setViewName("main");
-      
-      return mv;
-   }*/
 	
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -117,11 +102,6 @@ public class HomeController {
 		
 		return "library/likeview";
 	}
-	/*@RequestMapping(value = "personmain.do", method = RequestMethod.GET)
-	public String personmain(Locale locale, Model model) {
-		
-		return "personblog/personmain";
-	}*/
 	@RequestMapping(value = "personchannel.do", method = RequestMethod.GET)
 	public String personchannel(Locale locale, Model model) {
 		
@@ -137,10 +117,15 @@ public class HomeController {
 	public String join(Locale locale, Model model) {		
 		return "member/join";
 	}
-	
 	@RequestMapping(value = "passchange.do", method = RequestMethod.GET)
 	public String passchange(Locale locale, Model model) {		
 		return "member/passwordchange";
+	}
+	
+	@RequestMapping("test2.do")
+	public String test(){
+		
+		return "test";
 	}
 	@RequestMapping(value = "detailpage.do", method = RequestMethod.GET)
 	public String detailpage(Locale locale, Model model) {		
@@ -160,7 +145,5 @@ public class HomeController {
 	public String chpwview(){
 		return "member/passwordchange";
 	}
-	
-	
 
 }

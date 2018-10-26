@@ -46,6 +46,15 @@ public interface BlogService {
 	
 	// 게시글 공개여부 수정
 	int updateBoard(Blog blog);
+	
+	Blog selectBlog(Blog blog);
+	Blog infoBlog(String blogno);
+	
+	
+	//블로그 불러오기
+	ArrayList<Blog> myBlogList();
+	int changestate(Blog blog);
+	void remove(List<Long> ids);
 
 	
 }

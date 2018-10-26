@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.kh.youblog.blog.model.vo.Blog;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -122,5 +123,41 @@ public class BlogDao {
 			return sqlSession.update("blogMapper.updateBlog", blog);
 		}
 
+		public Blog infoBlog(String blogno) {
+			
+			System.out.println("dao blogno : " + blogno);
+			return (Blog)sqlSession.selectOne("blogMapper.selectBlog", blogno);
+		}
+		
+		//블로그 불러오기
+		public List<Blog> myBlogList() {
+			return sqlSession.selectList("blogMapper.myBlogList");
+		}
+		
+		//게시글 삭제
+		public void delete(List<Long> ids) {
+		      ids.forEach(new Consumer<Long>() {
+		         @Override
+		         public void accept(Long id) {
+		            sqlSession.delete("blogMapper.delete", id);
+		         }
+		      });
+
+		   }
+
+		public int changestate(Blog blog) {
+			
+			return sqlSession.update("blogMapper.updateBlog", blog);
+		}
+
+		public void remove(List<Long> ids) {
+			
+			ids.forEach(new Consumer<Long>() {
+		         @Override
+		         public void accept(Long id) {
+		        	sqlSession.delete("blogMapper.delete", id);
+		         }
+		      });
+		}
 		
 }

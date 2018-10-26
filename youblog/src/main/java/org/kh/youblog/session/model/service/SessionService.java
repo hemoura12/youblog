@@ -12,6 +12,4 @@ public interface SessionService {
 
 	public int deleteSession(Session session);
 
-		
-	
 }

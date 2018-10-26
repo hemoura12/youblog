@@ -82,4 +82,15 @@
 		SELECT * FROM V_SUBSCRIBE_WRITER
 		WHERE READER_ID = #{memberid}
 	</select>
+
+		
+		<update id="updateChanel" parameterType="Member" >
+			update tb_member set subscribe_share = #{subscribeshare}
+			where member_id = #{memberid}
+		</update>
+		
+		<select id="selectList" resultMap="resultList">
+			select * from 
+			tb_member
+		</select>
 </mapper>

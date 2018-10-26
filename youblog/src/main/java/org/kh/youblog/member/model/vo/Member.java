@@ -191,4 +191,3 @@ public class Member implements java.io.Serializable{
 				+ ", memberdeletedate=" + memberdeletedate + "]";
 	}
 }
-	
