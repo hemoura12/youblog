@@ -127,10 +127,6 @@ public class HomeController {
 		
 		return "test";
 	}
-	@RequestMapping(value = "detailpage.do", method = RequestMethod.GET)
-	public String detailpage(Locale locale, Model model) {		
-		return "page/detailpage";
-	}
 	@RequestMapping(value = "writepage.do", method = RequestMethod.GET)
 	public String wirtepage(Locale locale, Model model) {		
 		return "page/writepage";

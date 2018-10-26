@@ -50,11 +50,11 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" action="searchlist.do" method="get">
                 <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="검색"/>
+                    <input type="text" class="form-control" name="keyword"  placeholder="검색"/>
                 </div>
-                <button class="btn btn-default_2" type="button">
+                <button class="btn btn-default_2" type="submit">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
             </form>

@@ -24,12 +24,9 @@
         <div class="channel_header">
             <div class="channel_img"><img src="resources/images/rion2.png"/></div>
             <div class="channel_infoBox">
-                <p class="channel_name">라이언네 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
+                <p class="channel_name">${member.memberid }<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
 
-                <p>
-                    <span class="uploadTime">1시간전</span>
-                    <span class="viewCount">View 591만회</span>
-                </p>
+                
             </div>
             <div class ="infoBox_right">
                 <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
@@ -41,8 +38,11 @@
         </div> <!-- channel_header-->
         <div class="sub_header">
             <div class="header_category">
-                 <a class="first_link" href="personmain.do" >홈</a>
-                 
+            
+            	<c:url var="personmain" value="personmain.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${ personmain }" >홈</a>
                  <c:url var="personchannel" value="personchannel.do">
 							<c:param name="writerid" value="${sessionScope.member.memberid }" />
 					</c:url>

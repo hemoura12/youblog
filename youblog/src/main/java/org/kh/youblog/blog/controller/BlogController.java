@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes({"blog", "member"})
+@SessionAttributes({"blog", "blogMember"})
 public class BlogController {
 	@Autowired
 	private BlogService blogService;

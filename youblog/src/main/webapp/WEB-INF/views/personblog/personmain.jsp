@@ -17,9 +17,7 @@
 	<c:import url="/WEB-INF/views/header.jsp" />
 
 	<c:set var="m" value="${member }" />
-	<c:url var="personmain" value="personmain.do">
-		<c:param name="writerid" value="${sessionScope.member.memberid  }" />
-	</c:url>
+	
 
 
 	<div class="conWrap">
@@ -65,8 +63,20 @@
 			<!-- channel_header-->
 			<div class="sub_header">
 				<div class="header_category">
-					<a class="first_link" href="${personmain }">홈</a> 
-					<a class="first_link" href="personchannel.do">채널</a> 
+
+					<c:url var="personmain" value="personmain.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${ personmain }" >홈</a>
+                 <c:url var="personchannel" value="personchannel.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${personchannel }" >채널</a>
+                 
+                 <c:url var="personboard" value="personboard.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${personboard }" >게시글</a>
 					
 					<c:url var="personboard" value="personboard.do">
 							<c:param name="writerid" value="${sessionScope.member.memberid }" />

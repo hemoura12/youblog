@@ -25,7 +25,7 @@
    <select id="selectList" resultMap="resultList" >
       select * from 
       tb_comment
-      where blog_no = #{blogno}
+      where member_id = #{writerid}
    </select>
 	<!-- 댓글 삭제 -->
    <delete id="delete">

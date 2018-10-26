@@ -182,5 +182,14 @@
       FROM tb_blog
       WHERE blog_no = #{id}
    </delete>
+   
+   <select id="searchList" parameterType="string" resultMap="resultList">
+      SELECT * FROM TB_BLOG
+      WHERE WRITER_ID LIKE '%'||#{keyword}||'%'
+      OR TITLE LIKE '%'||#{keyword}||'%'
+      OR CONTENTS LIKE '%'||#{keyword}||'%'
+      <!-- ORDER BY WRITE_DATE DESC -->
+   </select>
+   
 </mapper>
 

@@ -32,9 +32,10 @@ public class commentController {
  //댓글 전체 불러오기
    @RequestMapping(value = "list.do")
    public ModelAndView list(ModelAndView mv){
-
-	  String blogno = "1";
-      ArrayList<Comment> list = commentService.selectList(blogno);
+	   	
+	   String writerid = "user01";
+	  
+      ArrayList<Comment> list = commentService.selectList(writerid);
       mv.addObject("list", list);
       mv.setViewName("manager/commentManage");
       

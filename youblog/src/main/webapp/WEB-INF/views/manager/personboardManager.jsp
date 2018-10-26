@@ -33,13 +33,18 @@
         <div class="sub_header">
             <div class="header_category">
             
-            <c:url var="managego" value="managego.do">
-							<c:param name="check" value="${sessionScope.member.memberid}" />
-					</c:url>
-            
-                 <a class="first_link" href="${managego }" >글관리</a>
-                 <a class="first_link" href="list.do" >채널 관리</a>
-                 <a class="first_link" href="update1.do" >게시글</a>
+            	<c:url var="managego" value="managego.do">
+						<c:param name="check" value="${sessionScope.member.memberid}" />
+					</c:url> 
+                 <a class="first_link" href="${ managego }" >글관리</a>
+                 
+                 <%-- <c:url var="list"  value="list.do">
+                 	<c:param name="writerid" value = "${blog[1].writerid}"/>
+                 </c:url> --%>
+                 <a class="first_link" href="list.do" >댓글 관리</a>
+                 
+                 <a class="first_link" href="update1.do" >채널 관리</a>
+                 
                 <div class="header_searchbar">
                     <img id='image_search' src="https://3.bp.blogspot.com/-2CWX7kIpob4/WZgVXt3yTQI/AAAAAAAAACM/N1eGT1OD7rklb4GtsadoxYRyWZoR_aI0gCLcBGAs/s1600/seo-1970475_960_720.png"
                          onclick="var inputBox = document.getElementById('input_text_search');

@@ -19,12 +19,9 @@
         <div class="channel_header">
             <div class="channel_img"><img src="resources/images/rion2.png"/></div>
             <div class="channel_infoBox">
-                <p class="channel_name">라이언네 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
+                <p class="channel_name">${ sessionScope.member.memberid } <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
 
-                <p>
-                    <span class="uploadTime">1시간전</span>
-                    <span class="viewCount">View 591만회</span>
-                </p>
+              
             </div>
             <div class ="infoBox_right">
                 <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
@@ -36,9 +33,22 @@
         </div> <!-- channel_header-->
         <div class="sub_header">
             <div class="header_category">
-                 <a class="first_link" href="personmain.do" >홈</a>
-                 <a class="first_link" href="personchannel.do" >채널</a>
-                 <a class="first_link" href="personboard.do" >게시글</a>
+                 
+                 
+                <c:url var="personmain" value="personmain.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${ personmain }" >홈</a>
+                 <c:url var="personchannel" value="personchannel.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+					
+                 <a class="first_link" href="${personchannel }" >채널</a>
+                 
+                 <c:url var="personboard" value="personboard.do">
+							<c:param name="writerid" value="${sessionScope.member.memberid }" />
+					</c:url>
+                 <a class="first_link" href="${personboard }" >게시글</a>
                 <div class="header_searchbar">
                     <img id='image_search' src="https://3.bp.blogspot.com/-2CWX7kIpob4/WZgVXt3yTQI/AAAAAAAAACM/N1eGT1OD7rklb4GtsadoxYRyWZoR_aI0gCLcBGAs/s1600/seo-1970475_960_720.png"
                          onclick="var inputBox = document.getElementById('input_text_search');

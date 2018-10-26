@@ -207,7 +207,7 @@ public class MemberController {
 	@ResponseBody
 	public String updatechanelMethod(ModelAndView mv, @RequestBody Member member) {
 		System.out.println("controller : " + member);
-		member.setMemberid("user03");
+		member.setMemberid("user01");
 		memberService.mychanelupdate(member);
 		return "true";
 	}

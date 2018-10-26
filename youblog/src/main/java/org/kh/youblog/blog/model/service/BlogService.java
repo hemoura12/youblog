@@ -54,6 +54,8 @@ public interface BlogService {
 	//블로그 불러오기
 	ArrayList<Blog> myBlogList();
 	int changestate(Blog blog);
+	
+	
 	void remove(List<Long> ids);
 
 	

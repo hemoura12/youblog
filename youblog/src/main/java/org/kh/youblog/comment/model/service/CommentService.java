@@ -9,6 +9,6 @@ public interface CommentService {
 	//댓글 삭제
     void remove(List<Long> ids);
 	//댓글 불러오기
-    ArrayList<Comment> selectList(String blogno);
+    ArrayList<Comment> selectList(String writerid);
     
 }

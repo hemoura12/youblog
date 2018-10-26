@@ -23,8 +23,8 @@ public  class CommentServiceImpl implements CommentService{
 
    //댓글 불러오기
    @Override
-   public ArrayList<Comment> selectList(String blogno) {
-	   List<Comment> list = CommentDao.selectList(blogno);
+   public ArrayList<Comment> selectList(String writerid) {
+	   List<Comment> list = CommentDao.selectList(writerid);
 	   return (ArrayList<Comment>) list;
    }
 
