@@ -7,11 +7,15 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,9 +25,10 @@ import org.kh.youblog.category.model.vo.Category;
 import org.kh.youblog.member.model.service.MemberService;
 import org.kh.youblog.member.model.vo.Member;
 import org.kh.youblog.session.model.vo.Session;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,28 +37,161 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes({"blog", "member"})
-
+@SessionAttributes({"blog", "blogMember"})
 public class BlogController {
-
 	@Autowired
-	private BlogService blogSerivce;
-	
+	private BlogService blogService;
 	@Autowired
 	private MemberService memberService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
+	
+	@RequestMapping(value = "categorySelect.do")
+	public ModelAndView categorySelect(
+			@RequestParam(value="views") String views, 
+			@RequestParam(value="cate2") String cate2, 
+			ModelAndView mv){
+
+		mv.addObject("cate2", cate2);
+		mv.setViewName("category/"+views);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="pagingCTG.do", method=RequestMethod.POST)
+	public void pagingCTG(HttpServletResponse response, 
+			@RequestParam(value="cate1") String cate1,
+			@RequestParam(value="cate2") String cate2,
+			@RequestParam(value="rowno1") int rowno1,
+			@RequestParam(value="rowno2") int rowno2) throws IOException{
+		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
+
+		ArrayList<Blog> list;
+		if(cate1.equals("all") && cate2.equals("all")){
+			list =	blogService.categoryAllBlog(rowno1, rowno2);
+		} else if(cate2.equals("all")){
+			System.out.println("레벨2올");
+			list =	blogService.categoryLev2All(cate1, rowno1, rowno2);
+		} else
+			list =	blogService.categoryBlog(cate1, cate2, rowno1, rowno2);
+		//json 배열 객체 생성
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr 로 옮기기
+		for(Blog blog : list){
+			//추출한 user 를 json 객체에 저장하기
+			JSONObject juser = new JSONObject();
+			
+			juser.put("blogno", blog.getBlogno());
+			juser.put("rowno", blog.getRowno());
+			juser.put("title", blog.getTitle());
+			juser.put("writerid", blog.getWriterid());
+			juser.put("memberName", blog.getMembername());
+			juser.put("contents", blog.getContents());
+			juser.put("writerdate", blog.getWritedate().toString());
+			juser.put("hits", blog.getHits());
+			
+			//json 배열에 json 객체 저장
+			jarr.add(juser);
+		}
+		
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		//jarr 을 전송 객체에 저장
+		sendJson.put("list", jarr);
+		
+		//직접 요청자에게 내보내기
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	
+	@RequestMapping(value = "favoriteList.do")
+	public ModelAndView favoriteList(ModelAndView mv){
+		int a=19;
+		int b = a/10;
+		System.out.println(b);
+		mv.addObject("blog", blogService.favoriteList());
+		mv.setViewName("favorite/favorite");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "subscriptionList.do")
+	public ModelAndView subscriptionList(HttpServletRequest request, ModelAndView mv){
+		HttpSession session = request.getSession(true);
+		session.setAttribute("memberid", "user01");
+		//session.removeAttribute("memberid");
+		String memberid = (String)session.getAttribute("memberid");
+		
+		//로그인 안되어 있을 시
+		if(memberid==null){
+			System.out.println("로그인 필요");
+			mv.setViewName("subscription/subscription");
+		} else {
+			ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
+			LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
+	
+			for(Blog list : blogList){
+				writerSet.add(list.getWriterid());
+			}
+			ArrayList<String> writerList = new ArrayList<String>();
+			for(String w : writerSet){
+				writerList.add(w);
+			}
+			//저장된 아이디 리스트 넘김
+			//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
+			//System.out.println(writerArr);
+			
+			mv.addObject("blog", blogService.subsBlogList(memberid));
+			mv.setViewName("subscription/subscription");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "subsList.do")
+	public ModelAndView subsBlogList(@RequestParam(value="memberid") String memberid, 
+			ModelAndView mv){
+		
+		ArrayList<Member> subsWriterList = memberService.subsWriterList(memberid);
+		
+		LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
+
+/*		for(Blog list : subsWriterList){
+			writerSet.add(list.getWriterid());
+		}*/
+		ArrayList<String> writerList = new ArrayList<String>();
+		for(String w : writerSet){
+			writerList.add(w);
+		}
+		
+		//저장된 아이디 리스트 넘김
+		//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
+		//System.out.println(writerArr);
+		
+		mv.addObject("blog", blogService.subsBlogList(memberid));
+		mv.setViewName("subsBlog/subsList");
+		
+		return mv;
+	}
+
 	
 	//블로그 리스트 출력
 	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
 	public ModelAndView selectBlogList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
 		
-		writerid = "user01";
+		System.out.println(writerid);
 		
-		ArrayList<Blog> blog = blogSerivce.selectBlogList(writerid);
+		ArrayList<Blog> blog = blogService.selectBlogList(writerid);
 		Member member = memberService.selectBlogMember(writerid);
 		
 		
 		mv.addObject("blog", blog);//Blog객체 리턴받음
-		mv.addObject("member", member);
+		mv.addObject("blogMember", member);
 
 		mv.setViewName("personblog/personmain");
 		
@@ -73,7 +211,7 @@ public class BlogController {
 		blog.setBlogno(blogid);
 		blog.setWriterid(memberid);
 		
-		mv.addObject("blog", blogSerivce.updateBlog(blog));
+		mv.addObject("blog", blogService.updateBlog(blog));
 		
 		return mv;
 	}
@@ -89,76 +227,102 @@ public class BlogController {
 		blog.setBlogno(blogid);
 		blog.setWriterid(memberid);
 
-		mv.addObject("blog", blogSerivce.deleteBlog(blog));
+		mv.addObject("blog", blogService.deleteBlog(blog));
 
 		return mv;
 	}
 	
 	/*@RequestMapping(value = "blogread.do")
     public ModelAndView reading(ModelAndView mv){
-      mv.addObject("resultList", blogSerivce.getBlogList());
+      mv.addObject("resultList", blogService.getBlogList());
        mv.setViewName("blogread");
       return mv;
    }*/
 
-	// view 페이지이동 대주제 출력
-	@RequestMapping(value = "/coding.do")
-	public ModelAndView list(ModelAndView mv) {
+	// 대주제 불러오기
+	   @RequestMapping(value = "subjecting.do", method = RequestMethod.POST)
+	   public void reading(HttpServletResponse response) throws IOException {
+	      Category category = new Category();
+	      List<Category> list = blogService.selectList1();
+	      JSONObject json = new JSONObject();
 
-		ArrayList<Category> list = blogSerivce.selectList1();
-		mv.addObject("list", list);
-		mv.setViewName("view");
-		
-		return mv;
-	}
+	      // System.out.println("List 오는지: " + list);
+
+	      JSONArray jarr = new JSONArray();
+
+	      for (Category c : list) {
+	         JSONObject job = new JSONObject();
+	         job.put("cate1", c.getCate_name1());
+
+	         jarr.add(job);
+	      }
+
+	      JSONObject sendJson = new JSONObject();
+	      sendJson.put("list", jarr);
+
+	      response.setContentType("application/json; charset=utf-8");
+	      PrintWriter out = response.getWriter();
+	      out.println(sendJson.toJSONString());
+	      out.flush();
+	      out.close();
+
+	   }
 
 
 	// 에디터 글쓰기
-	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
-	public String insertBoard(String contents, Blog vo) {
-		blogSerivce.create(contents, vo);
-		
-		return "redirect:/coding.do";
+	   @RequestMapping(value = "insertblog.do", method = RequestMethod.POST)
+	   public String insertBoard(String contents, Blog vo){
 
-	}
-	
-	//소주제 불러오기
-	@RequestMapping(value="subject.do", method = RequestMethod.POST)
-	public void read(HttpServletResponse response,@RequestParam(value="sub") String sub) throws IOException{
-		Category category = new Category();
-		List<Category> list = blogSerivce.selectList2(sub);
-		JSONObject json = new JSONObject();
-		
-		//System.out.println("List 오는지: " + list);
-		//System.out.println("sub 나오는지" + sub);
-		
-		JSONArray jarr = new JSONArray();
-	
-		
-		for(Category c : list){
-			JSONObject job = new JSONObject();
-			job.put("cate2", c.getCate_name2());
-			
-			jarr.add(job);
-		}
-		
-		
-		JSONObject sendJson = new JSONObject();
-		sendJson.put("list", jarr);
-		
-		response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println(sendJson.toJSONString());
-		out.flush();
-		out.close();
+	      blogService.create(contents, vo);
+	      System.out.println(contents);
+	      
+	      return "redirect:/main.do";
 
-	}
+	   }
+	   
+	   
+	// 게시글 수정
+	   @RequestMapping(value = "update.do", method = RequestMethod.POST)
+	   public String update(Blog vo) {
+	      blogService.update(vo);
+	      return "main.do";
+	   }
+	
+	   // 소주제 불러오기
+	   @RequestMapping(value = "subject.do", method = RequestMethod.POST)
+	   public void read(HttpServletResponse response, @RequestParam(value = "sub") String sub) throws IOException {
+	      Category category = new Category();
+	      List<Category> list = blogService.selectList2(sub);
+	      JSONObject json = new JSONObject();
+
+	      // System.out.println("List 오는지: " + list);
+	      // System.out.println("sub 나오는지" + sub);
+
+	      JSONArray jarr = new JSONArray();
+
+	      for (Category c : list) {
+	         JSONObject job = new JSONObject();
+	         job.put("cate2", c.getCate_name2());
+
+	         jarr.add(job);
+	      }
+
+	      JSONObject sendJson = new JSONObject();
+	      sendJson.put("list", jarr);
+
+	      response.setContentType("application/json; charset=utf-8");
+	      PrintWriter out = response.getWriter();
+	      out.println(sendJson.toJSONString());
+	      out.flush();
+	      out.close();
+
+	   }
 	
 	//회원세션불러오기
 	@RequestMapping(value="memberSession.do", method = RequestMethod.POST)
 	public void session(HttpServletResponse response,@RequestParam(value="memberSession") String memberSession) throws IOException{
 		Session sess = new Session();
-		List<Session> list = blogSerivce.selectList3(memberSession);
+		List<Session> list = blogService.selectList3(memberSession);
 		JSONObject json = new JSONObject();
 		
 		System.out.println("List 오는지: " + list);
@@ -222,21 +386,33 @@ public class BlogController {
 		return sb.toString();
 	}
 	
-	
+	@RequestMapping(value="personboard.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
+	public ModelAndView selectBoardList(ModelAndView mv, @RequestParam(value="writerid") String writerid){
+		
+		ArrayList<Blog> blog = blogService.selectBoardList(writerid);
+		
+		
+		mv.addObject("blog", blog);//Blog객체 리턴받음
+
+		mv.setViewName("personblog/personboard");
+		
+		return mv;
+	}
 	
 	@RequestMapping(value= "/detailpage.do")
 	@ResponseBody
-	public ModelAndView selectBlog(ModelAndView mv){
+	public ModelAndView selectBlog(ModelAndView mv, @RequestParam(value="blogno")String blogno){
 		
 		
 		Blog blog = new Blog();
-		String blogno = "1";
 		blog.setBlogno(blogno);
 		
 		
-		mv.addObject("blog", blogSerivce.selectDetailBlog(blog));
+		mv.addObject("blog", blogService.selectDetailBlog(blog));
 		
 		mv.setViewName("page/detailpage");
 		return mv;
 	}
+
+	
 }

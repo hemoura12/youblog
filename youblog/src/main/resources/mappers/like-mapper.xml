@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="likeMapper">
+	
+		<resultMap type="Like" id="resultLike">
+			<id property="memberId" column="member_id" />
+			<result property="blogNo" column="blog_no" />
+			<result property="likeGood" column="like_good" />
+		</resultMap>
+		
+		<resultMap type="Like" id="resultList">
+			<result property="memberId" column="member_id" />
+			<result property="blogNo" column="blog_no" />
+			<result property="likeGood" column="like_good" />
+		</resultMap>
+	<!-- 좋아요 버튼 누를시 좋아요테이블에 추가 -->
+	<insert id = "insertLike" parameterType="Like">
+	insert into tb_like
+		(MEMBER_ID
+		,BLOG_NO
+		,LIKE_GOOD
+		)values(
+	     #{memberId},
+	     #{blogNo},
+	     (select MAX(LIKE_GOOD)
+			from tb_like
+			where MEMBER_ID = #{memberId})+1
+	     )
+	</insert>
+	<!-- 좋아요 테이블에 로그인유저 아이디로 해당디테일뷰 좋아요 누른적이 있는지 검사(있으면 Like 객체 리턴) -->
+	<select id = "checkLike" parameterType="Like" resultMap = "resultLike">
+	select *
+	from tb_like
+	where member_id = ${memberId} and blog_no = ${blogNo}
+	</select>
+	
+	<!-- 로그인유저 아이디로 해당디테일뷰 좋아요취소 누를 시 좋아요테이블에 값 삭제 -->
+	<delete id = "deleteLike" parameterType="Like">
+	delete from tb_like where member_id = ${memberId} and blog_no = ${blogNo}
+	</delete>
+	
+	<select id = "likeCount" parameterType="Like" resultType = "Integer">
+	select count(blog_no)
+	from tb_like
+	where blog_no = ${blogNo}
+	</select>
+
+</mapper>

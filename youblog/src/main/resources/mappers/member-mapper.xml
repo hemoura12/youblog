@@ -19,12 +19,13 @@
 			<result property="profilephoto" column="profile_photo" />
 			<result property="banner" column="banner" />
 			<result property="readercount" column="reader_count" />
-			<result property="reader_open" column="reader_open" />
+			<result property="channelopen" column="channel_open" />
+			<result property="subscribeshare" column="subscribe_share" />
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
+			<result property="alarmcheck" column="alarm_check" />
 			<result property="memberdeletedate" column="member_deletedate" />
-			<result property="formula" column="formula" />
 		</resultMap>
 		
 		<resultMap type="Member" id="resultList">
@@ -41,17 +42,50 @@
 			<result property="profilephoto" column="profile_photo" />
 			<result property="banner" column="banner" />
 			<result property="readercount" column="reader_count" />
-			<result property="reader_open" column="reader_open" />
+			<result property="channelopen" column="channel_open" />
+			<result property="subscribeshare" column="subscribe_share" />
 			<result property="formula" column="formula" />
 			<result property="partner" column="partner" />
 			<result property="state" column="state" />
+			<result property="alarmcheck" column="alarm_check" />
 			<result property="memberdeletedate" column="member_deletedate" />
-			<result property="formula" column="formula" />
 		</resultMap>
 		
+		<insert id="insertmember" parameterType="Member" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
+			insert into TB_MEMBER(member_id, member_pw, member_name, member_email, birthday, gender) values (#{memberid}, #{memberpwd}, #{membername}, #{memberemail}, #{birthday}, #{gender})
+		</insert>
+		
+		<select id="loginCheck" parameterType="Member" 	resultType="Member" resultMap ="resultMember">
+			select * from TB_MEMBER 
+			where member_id = #{memberid} 
+			and member_pw = #{memberpwd}
+		</select>
+		
+		<select id="selectMember" parameterType="string" resultMap="resultMember">
+			select * from TB_MEMBER 
+			where member_id = #{memberid}
+		</select>
+		
+		<!-- <insert id="insertmember" parameterType="Member" flushCache="true" statementType="PREPARED" useGeneratedKeys="true">
+			insert into TB_MEMBER values (#{memberid,jdbcType=VARCHAR}, #{memberpwd,jdbcType=VARCHAR}, #{membername,jdbcType=VARCHAR},
+			#{memberphone,jdbcType=VARCHAR}, #{memberemail,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=VARCHAR}, #{membergoogleno,jdbcType=VARCHAR},
+			#{membergoogleid,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{profilephoto,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, #{readercount,jdbcType=NUMBER},
+			#{channelopen,jdbcType=VARCHAR}, #{subscribeshare,jdbcType=VARCHAR}, #{formula,jdbcType=VARCHAR}, #{partner,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{alarmcheck,jdbcType=DATE}, #{memberdeletedate,jdbcType=DATE})
+		</insert> -->
 		<select id="selectBlogMember" parameterType="string" statementType="PREPARED" resultMap="resultMember">
 			Select *
 			from TB_MEMBER
 			where member_id = #{writerid}
 		</select>
+
+	<select id="subsBlogList" resultMap="resultList" resultType="Member">
+		SELECT * FROM V_SUBSCRIBE_WRITER
+		WHERE READER_ID = #{memberid}
+	</select>
+	
+	<select id="readSelectBlogMember" parameterType = "Member" resultMap = "resultMember">
+		select *
+		from tb_member
+		where member_id = #{memberid}
+	</select>
 </mapper>

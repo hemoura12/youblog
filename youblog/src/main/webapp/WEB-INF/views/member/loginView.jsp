@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -23,14 +23,14 @@
 <body>
 <div class="card align-middle">
     <div class="card-body">
-        <form class="form-signin" method="POST" >
+        <form class="form-signin" action="login.do" method="POST" >
             <h2 align="center">Welcome</h2>
             <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2><br>
             <div class="inputgroup">
-            <label for="inputEmail" class="sr-only">google ID</label>
-                <input type="text" class="form-control" placeholder="google ID" required autofocus><br>
+            <label for="inputEmail" class="sr-only" >google ID</label>
+                <input type="text" class="form-control" name ="memberid" placeholder="google ID" required autofocus><br>
             <label for="inputPassword" class="sr-only">password</label>
-            <input type="password" class="form-control" placeholder="password" required>
+            <input type="password" class="form-control" name ="memberpwd" placeholder="password" required>
             </div><br>
             <!-- 시간 남으면 구현할 기능
             <div class="checkbox">

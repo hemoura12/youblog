@@ -6,6 +6,7 @@
 
 	<resultMap type="Blog" id="resultBlog">
 		<id property="blogno" column="blog_no" />
+		<result property="rowno" column="rowno" />
 		<result property="title" column="title" />
 		<result property="writerid" column="writer_id"/>
 		<result property="contents" column="contents"/>
@@ -21,12 +22,12 @@
 		<result property="hitstime" column="htis_time"/>
 		<result property="state" column="state"/>
 		<result property="notice" column="notice"/>
-		<result property="subscribeshare" column="subscribe_share"/>
 		<result property="bestno" column="bestno"/>
 	</resultMap>
 	
 	<resultMap type="Blog" id="resultList">
 		<result property="blogno" column="blog_no" />
+		<result property="rowno" column="rowno" />
 		<result property="title" column="title" />
 		<result property="writerid" column="writer_id"/>
 		<result property="contents" column="contents"/>
@@ -42,7 +43,6 @@
 		<result property="hitstime" column="htis_time"/>
 		<result property="state" column="state"/>
 		<result property="notice" column="notice"/>
-		<result property="subscribeshare" column="subscribe_share"/>
 		<result property="bestno" column="bestno"/>
 	</resultMap>
 	
@@ -61,6 +61,8 @@
    <select id="selectBlogList" resultType="Blog" resultMap="resultList">
       select *
       from TB_BLOG
+      where writer_id = #{writerid}
+      ORDER BY WRITE_DATE desc
    </select>
    
    
@@ -81,7 +83,9 @@
    contents,
     write_date,
    cate_name1,
-   cate_name2)
+   cate_name2,
+   state,
+   thumbnail)
    values
    (blog_no_seq.nextval,
    #{title},
@@ -89,9 +93,11 @@
    #{contents},
     sysdate,
    #{catename1},
-   #{catename2}
+   #{catename2},
+   #{state},
+   #{thumbnail}
    )   
-   where asc
+
    </insert>
    
    <select id="view" resultType="org.kh.youblog.blog.model.vo.Blog">
@@ -99,11 +105,112 @@
    where blog_no = #{blogno}
    </select>
    
+
    <select id="selectDetailBlog" parameterType="Blog" resultMap="resultBlog">
    select * from tb_blog
    where blog_no = #{blogno}
    </select>
-   
+
+   <select id="selectBoardList" parameterType="String" resultMap="resultBlog">
+		select * 
+		from TB_BLOG
+		where writer_id = #{writerid}
+		ORDER BY WRITE_DATE desc
+	</select>
+
+		
+	<select id="allCategory" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST)
+		WHERE rowno <![CDATA[ > ]]> #{row1}
+		and rowno <![CDATA[ < ]]>= #{row2}
+	</select>		
+		
+	<select id="selectCategoryAll" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
+		ORDER BY rowno ASC;
+	</select>	
+		
+	<select id="selectCTGLev2All" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
+		WHERE rowno <![CDATA[ > ]]> #{row1}
+		and rowno <![CDATA[ < ]]>= #{row2}
+		ORDER BY NO ASC;
+	</select>	
 	
+	<select id="selectCTG" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST 
+		WHERE CATE_NAME1 = #{cate1}
+		and CATE_NAME2 = #{cate2})
+		WHERE rowno <![CDATA[ > ]]> #{row1}
+		and rowno <![CDATA[ < ]]>= #{row2}
+	</select>
+	
+	<select id="favoriteList" resultMap="resultList" resultType="Blog">
+		SELECT * FROM V_FAVORITE_BLOG
+	</select>
+	
+	<select id="subsBlogList" resultMap="resultList" resultType="Blog">
+		SELECT * FROM V_SUBSCRIBE_BLOG
+		WHERE reader_ID = #{memberid}
+		AND WRITER_ID IN (select WRITER_ID from
+  			(select * from 
+    			(select reader_ID, WRITER_ID, WRITE_DATE, RANK() OVER(PARTITION BY WRITER_ID ORDER BY WRITE_DATE desc) rank from V_SUBSCRIBE)
+ 			where reader_ID = #{memberid}
+  			and rank <![CDATA[ < ]]>= 1 order by WRITE_DATE desc) where rownum <![CDATA[ < ]]>= 3)
+  			<!-- SELECT * FROM V_SUBSCRIBE_BLOG where reader_ID = #{memberid} -->
+	</select>
+	
+	<select id="categoryList" resultType="java.util.HashMap">
+		select * from TB_CATEGORY
+	</select>
+	
+	<select id="categoryListLev1" resultType="java.util.HashMap">
+		select distinct cate_name1 from TB_CATEGORY
+	</select>
+	
+	
+	
+<!-- 	<delete id="deleteNotice" parameterType ="_int" flushCache ="true" statementType ="PREPARED">
+			delete from notice where noticeno = #{noticeNo}
+	</delete>
+
+	<update id="updateNotice" parameterType ="Notice" flushCache="true" statementType="PREPARED">	
+	UPDATE NOTICE 
+	SET NOTICE_TITLE = #{noticeTitle}, 
+	NOTICE_CONTENT = #{noticeContent},
+	FILE_PATH = #{filePath} 
+	WHERE NOTICE_NO = #{noticeNo}
+	UPDATE NOTICE 
+	<trim prefix="SET" suffixOverrides=",">
+		<if test="noticeTitle != null">NOTICETITLE = #{noticeTitle},</if>
+		<if test="noticeContent != null">NOTICECONTENT = #{noticeContent},</if>
+		<if test="originalFilepath != null">ORIGINAL_FILEPATH = #{originalFilepath} </if>
+	</trim>
+	WHERE NOTICENO = #{noticeNo}
+ </update> -->
+<update id="updating">
+   update TB_BLOG set
+   title = #{title},
+   contents = #{contents},
+   cate_name1 = #{catename1},
+   cate_name2 = #{catename2},
+   state = #{state},
+   thumbnail = #{thumbnail}
+   where blog_no = #{blogno}
+   
+   </update>
+
 </mapper>
 

@@ -13,34 +13,36 @@
             $("#hidden").toggle();
 
         }
-        /* $('.holder').on('click', function() {
-            $this = $(this);
-            if($this.hasClass('active')) {
-                $this.fadeOut(500);
-                setTimeout(function() {
-                    $this.removeClass('active')
-                }, 500);
-                setTimeout(function() {
-                    $this.fadeIn(500);
-                }, 1000);
-            } else {
-                $(this).addClass('active');
-            }
-        });
-
-        $(document).on('click', function(e) {
-            container = $('.holder');
-            if ($('.holder').hasClass('active') && !container.is(e.target)  && container.has(e.target).length === 0) {
-                $this.fadeOut(500);
-                setTimeout(function() {
-                    $this.removeClass('active')
-                }, 500);
-                setTimeout(function() {
-                    $this.fadeIn(500);
-                }, 1000);
-            }
-        }); */
+       
         $(document).ready(function(){
+        	
+        	
+        	//좋아요 추가
+            $("#likeBtn").on("click", function(){
+           	 console.log("좋아요 클릭됨.");
+           	 var obj={};
+           	 obj["memberId"] = '${sessionScope.member.memberid }'; // 로그인 아이디 받아오기 (세션에 저장된 로그인한 유저 정보)
+           	 obj["blogNo"] = ${blog.blogno};
+           	 
+           	 fnAjaxPostData("/youblog/insertLike.do", obj, function(data){
+           		alert(data.message);
+           		
+           	});
+            });
+        	
+        	//좋아요 삭제(싫어요)
+        	$("#badBtn").on("click", function(){
+           	 
+           	 var obj={};
+           	 obj["memberId"] = '${sessionScope.member.memberid }'; // 로그인 아이디 받아오기 (세션에 저장된 로그인한 유저 정보)
+           	 obj["blogNo"] = ${blog.blogno};
+           	 
+           	 fnAjaxPostData("/youblog/deleteLike.do", obj, function(data){
+           		alert(data.message);
+           		
+           	});
+            });
+        	
         	//댓글 추가
         	$('#insertbtn').click(function(){
         		fnCommentSave();
@@ -48,6 +50,9 @@
         	});
         	
         	readingComment();
+        	readSelectBlogMember();
+        	likeCount();
+        	/* checkLike(); */
         	
         	//댓글 수정
         	 $(document).on('click','input[name="updateBtn"]',function(){
@@ -64,8 +69,7 @@
         		$("#content_"+no).text("");
         		$(".content_"+no).append("<input type = 'text' id = 'recomment"+ no +"' value = " + contents + ">");
         		$(".content_"+no).focus();
-        		console.log(cmtNo);
-        		console.log(memberId); 
+        		
         		$(this).attr("id", "refact");
         		$(this).attr("value", "변경");
         		
@@ -76,11 +80,12 @@
         			
         			obj["cmtContents"] = $("#recomment"+no).val();
         			obj["cmtNo"] = cmtNo;
-        			obj["memberId"] = "user01";
+        			obj["memberId"] = memberId;
        			
         			fnAjaxPostData("/youblog/updateComment.do", obj, function fnAjaxResult(data){
         	        	alert(data.message);
-        	        	
+        	        	$(".comment_line > tr").empty();
+                		fnAjaxPostData("/youblog/readComment.do", {"blogNo":'${blog.blogno}'}, commentReading);
         	        });
         		});  
         		//$("#"+id).contents().unwrap().wrap('<input type ="button" value="저장"');
@@ -97,63 +102,95 @@
          		var memberId = td.find("#MemberId"+no).text();
          		var obj = {};
          			obj["cmtNo"] = cmtNo;
-         			obj["memberId"] = "user01";
+         			obj["memberId"] = memberId;
         			
          			fnAjaxPostData("/youblog/deleteComment.do", obj, function fnAjaxResult(data){
          	        	alert(data.message);
-         	        	
+         	        	$(".comment_line > tr").empty();
+                		fnAjaxPostData("/youblog/readComment.do", {"blogNo":'${blog.blogno}'}, commentReading);
          	        });
          		 
         	}); 
+        	
+        	// 좋아요 카운트
+        	function likeCount(){
+        		var obj = {};
+        		obj["blogNo"] = '${blog.blogno}';
+        		fnAjaxPostData("/youblog/likeCount.do", obj, function(data){
+        			
+        			$("#poi").text(data.count);
+        		})
+        	}
+        	
+        	//좋아요 확인
+           /*   function checkLike(){
+      		   
+          	   var obj = {};
+          	   obj["memberId"] = '${sessionScope.member.memberid }'; //로그인한 세션 아이디불러오기
+          	   obj["blogNo"] = ${blog.blogno}; 
+          	   
+          	   
+          	   fnAjaxPostData("/youblog/checkLike.do", obj, changedLikeButton);
+             } */
+        	
         	//댓글 불러오기 
         	function readingComment(){
         		
         	var blogNo = ${blog.blogno};
         	var obj = {};
-        	console.log(blogNo);
+        	
         	
         	obj["blogNo"] = ${blog.blogno};
         	
         	fnAjaxPostData("/youblog/readComment.do", obj, commentReading);
         	};
         	});
-
+	
+        
         // 댓글 저장
          function fnCommentSave(){
-        	var url = "/youblog/insertComment.do"
+        	var url = "/youblog/insertComment.do";
         	var obj = {};
         	
         	obj["blogNo"] = ${blog.blogno};
-        	obj["memberId"] = "user01";
+        	obj["memberId"] = '${sessionScope.member.memberid }'; // 로그인 아이디 받아오기 (세션에 저장된 로그인한 유저 정보) 
         	obj["cmtContents"] = $(".commentarea").val();
         	
         	
         	
         	fnAjaxPostData(url, obj, function(data){
         		alert(data.message);
-        		/* $(".comment_count").detach(); */
-        		readingComment();
+        		$(".comment_line > tr").empty();
+        		fnAjaxPostData("/youblog/readComment.do", {"blogNo":'${blog.blogno}'}, commentReading);
         	});
         } 
-
-        //댓글 수정
-         /* function fnCommentUpdate(){
-        	var url = "/youblog/updateComment.do"
+        
+       
+        
+       
+        
+        //해당 블로거 정보 가져오기
+        
+         function readSelectBlogMember(){
+        	
+        	var mi = '${blog.writerid}'; //블로그 writerid 받아오기 blog.
         	var obj = {};
-        	obj["cmtNo"] = 'CMTNO넣어야함';
+        	obj["memberid"] = mi;
         		
-        	fnAjaxPostData(url, obj, fnAjaxResult);
-        }  */
-
-        //댓글 삭제
-       /*  function fnCommentDelete(){
-        	var url = "/youblog/insertComment.do"
-        	var obj = {};
-        	obj["cmtNo"] = 'CMTNO넣어야함';
-        		
-        	fnAjaxPostData(url, obj, fnAjaxResult);
-        } */
-
+        		fnAjaxPostData("/youblog/readSelectBlogMember.do", obj, function fnAjaxResultBlog(data){
+                	 
+                	console.log(data.memberid); 
+                	console.log(data.membername);
+                	console.log(data.profilephoto);
+                	var name = data.membername;
+                	 	$("#userName_1").text(name);
+                	var photo = data.profilephoto;
+                		$("#profimg").append(photo);
+                }  );
+        } 
+        
+     	
+        
         //결과
         function fnAjaxResult(data){
         	alert(data.message);
@@ -162,10 +199,13 @@
         //댓글 파싱
         function commentReading(data){
         	var list = data.list;
-        	var id = "user01";
+        	var id = '${sessionScope.member.memberid }'; //로그인 아이디 받아오기 (세션에 저장된 로그인한 유저 정보)
+        	
+        	
         	
         	for(var i = 0; i < list.length; i++){
-        		console.log(list[i].MEMBER_ID);
+        		
+        		
         		
         		/* if(id == list[i].MEMBER_ID){
         		outComment = "<tr><td id = 'CmtNo" + i + "' style = 'display : none;'>" + list[i].CMT_NO + "</td><td id = 'MemberId" + i + "'>" + list[i].MEMBER_ID +"</td><td><input type='text' value='" + list[i].CMT_CONTENTS + "' id='" + i + "_contents' readOnly></td><td><input type='button' id='"+ i +"_update' name='updateBtn' value='수정'></td><td><button id = 'deleteBtn'>삭제</button></td></tr>"
@@ -190,7 +230,35 @@
         	}
         	$(".commenttext").text("댓글 : "+list.length+"개");
         };
-
+		
+        
+        // 좋아요 조회 후, 싫어요버튼 활성화
+        /* function changedLikeButton(data){
+         	if(data.message == "좋아요했었습니다."){
+        					// 위 user01은 로그인 아이디 받아오기 (세션에 저장된 로그인한 유저 정보)
+        	
+        		$("#likeBtn").attr("id", "likeCancleBtn");
+        		$("#likeBtn").text("좋아요취소");
+        		
+        		$("#likeCancleBtn").on('click', function(){
+        			
+        			
+        			var obj = {};
+        			obj["MemberId"] = '${sessionScope.member.memberid }';
+        			obj["BlogNo"] = '${blog.blogno}';
+       			
+        			fnAjaxPostData("/youblog/deleteLike.do", obj, function fnAjaxResult(data){
+        	        	alert(data.message);
+        	        	
+        	        });
+        		});  
+        	  
+        	}else if(data.message == "좋아요누를수있습니다."){
+        		
+        	}
+        } */
+        
+        
         // 비동기통신
         function fnAjaxPostData(url, data, callBack) {
         	   // 값이 없을 경우 빈 값 생성
@@ -229,8 +297,8 @@
 
 <div class="conWrap">
     <div class="channel_conbox_1">
-        <div class="channel_header">
-            <p class="title-text">${blog.title }</p><hr>
+        <div class="channel_header" style = "margin-top: 70px;">
+            <p class="title-text">${blog.title}</p><hr>
             <div align="center" class="infoBox">
                 <!-- <p>
                     <img src="resources/images/arial.jpg" alt="프로필이미지" class="detail_img">
@@ -262,29 +330,25 @@
                 <div class="icon_box">
                     <table class="profiletable" align="right">
                         <tr>
-                            <td><i class="fas fa-thumbs-up"></i> 3.3만 &nbsp;&nbsp;&nbsp;</td>
-                            <td><i class="fas fa-thumbs-down"></i>3.5천 &nbsp;&nbsp;&nbsp;</td>
-                            <td><i class="fas fa-share-alt"></i> 1.1천 &nbsp;&nbsp;&nbsp;</td>
+                            <td><button id = "likeBtn"><i class="fas fa-thumbs-up" id = "poi"></i></button>&nbsp;&nbsp;&nbsp;</td>
+                            <td><button id = "badBtn"><i class="fas fa-thumbs-down"></i></button>&nbsp;&nbsp;&nbsp;</td>
                             <td><i class="fas fa-list"></i> &nbsp;&nbsp;&nbsp;</td>
                             <td><i class="fas fa-ellipsis-h"></i></td>
                         </tr>
                     </table>
                 </div>
-                <div class="profimg">
+                <div class="profimg" id = "profimg">
                     <%-- 작성자 프로필이미지 --%>
                 </div >
                 <div class="profiletextarea">
                     <div class="profile">
-                        <p class="userName_1"><!-- 작성자이름 --></p>
-                        <p class="uploadTime">1시간전</p>
-                        <p class="viewCount">View 591만회</p>
+                        <p class="userName_1" id ="userName_1"><!-- 작성자이름 --></p>
+                        <p class="viewCount">조회수 : ${blog.hits}</p>
                     </div>
                     <div class="followbox">
                         <div class ="infoBox_right_1">
                             <!--<a href="#" class="subscript_tag"><span>구독</span></a>-->
-                            <a href="#" class="subscript_tag"><span>구독 중</span></a>
 
-                            <a class = "sub_alram" onclick="changeicon()"><i class="fas fa-bell-slash"></i></a>
                             <!--<i class="fas fa-bell"></i>-->
                         </div> <!--infoBox_right -->
                     </div>
@@ -292,6 +356,18 @@
 
 
             </div>
+            <div class="btndiv">
+  
+            <button class="btn btn-primary" type="button" 
+            onclick="location.href='updatepage.do?blogno=${blog.blogno}' ">
+            수정            
+            </button>
+               
+                  
+                  <input type="button" class="btn btn-primary" id="delete"
+                  value="삭제">
+         
+         </div>
             <hr class="hrline">
         </div>
 
@@ -323,6 +399,9 @@
         </div>
 
 </div> <!--conWrap-->
+<table>
+<tr style="display:none;"><td>${blog.blogno }</td></tr>
+</table>
 
 </body>
 </html>
