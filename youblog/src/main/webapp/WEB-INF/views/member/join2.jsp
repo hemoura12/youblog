@@ -38,18 +38,18 @@
                     <span class="bar"></span>
                     <label>이름</label>
                 </div>
-                <div class="group-2">
-                    <input type="text" id ="" name="" style="width: 100%;" required >
+               <!--  <div class="group-2">
+                    <input type="hidden" id ="" name="" style="width: 100%;" required >
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label>히든공간</label>
-                </div>
+                    <label></label>
+                </div> -->
                 <input type="hidden" id="memberid" name="memberid" value ="${member.memberemail}">
                 <input type="hidden" id="memberemail" name="memberemail" value ="${member.memberemail}">
                 <input type="hidden" id="memberpwd" name="memberpwd" value ="${member.memberpwd}">
                 <!-- <input type="hidden" id="memberphone" name="memberphone" value ="01045671549"> -->
                 
-                    <p style="color: darkgray; font-size: small" > &nbsp;&nbsp;생일 </p>
+                    <p style="color: darkgray; font-size: small" > &nbsp;&nbsp; </p>
 
                 <div class="group-3">
                     <input type="date" id ="birthday" name="birthday" required>
@@ -61,7 +61,6 @@
                             <option value="" disabled selected hidden>성별</option>
                             <option>M</option>
                             <option>F </option>
-                            <option>비공개</option>
                         </select>
                     </div>
                 </div>

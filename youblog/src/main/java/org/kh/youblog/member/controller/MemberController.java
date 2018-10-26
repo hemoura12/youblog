@@ -119,11 +119,24 @@ public class MemberController {
 			ModelAndView mv, SessionStatus status){
 	
 		System.out.println(member.toString());
-		int result = memberService.joinmember(member);
-		System.out.println(result);
-		mv.addObject("member", member);
-		status.setComplete();
-		mv.setViewName("main");
+
+		
+		try {
+			int result = memberService.joinmember(member);
+			System.out.println(result);
+			
+			if(result == 1){				
+				mv.addObject("member", member);
+				status.setComplete();
+				mv.setViewName("main");			
+			}else{
+				status.setComplete();
+				mv.setViewName("member/join");	
+			}
+		} catch (Exception e) {
+				status.setComplete();
+				mv.setViewName("member/join");	
+		}	
 		
 		return mv;
 	}

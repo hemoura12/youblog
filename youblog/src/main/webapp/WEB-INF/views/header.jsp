@@ -76,7 +76,7 @@
 					</c:url>
                		 <a href = "${personmain }"><span class="glyphicon glyphicon-th" aria-hidden="true"/></a>
                 </li>
-                <li><a href="info.do"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
                 
                 <c:if test = "${empty member }">
                 <a href ="login.do"><button class="btn btn-primary_1" type="button">

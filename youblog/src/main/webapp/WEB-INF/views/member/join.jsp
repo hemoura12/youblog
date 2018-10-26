@@ -28,10 +28,11 @@
             <h2 class="form-signin-heading" align="center"><img class="logoimg" src="resources/images/youblog.png"> youblog</h2>
             <h4 align="center">YouBlog 계정 만들기</h4>
             <div class="outlinegroup">
-                <p style="color: lightgray; font-size: small" > 구글 ID 연동* </p>
-                <button class="btn btn-primary" type="">구글 로그인</button><br>
+         
+				<!--<button class="btn btn-primary" type="">구글 로그인</button><br> -->
                 <!--<button style="background-color: #1a73e8;" class="btn btn-primary">연동됨</button>-->
                 <br>
+                <p style="color: lightgray; font-size: small" >구글 ID 연동*</p>
                 <div class="group">
                     <input type="text" id = "memberemail" name = "memberemail" required>
                     <span class="highlight"></span>
