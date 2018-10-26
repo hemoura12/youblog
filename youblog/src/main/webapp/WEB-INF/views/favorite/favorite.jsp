@@ -7,24 +7,33 @@
     <meta charset="UTF-8">
     <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
     <script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
-    
+<script type="text/javascript">
+	
+	function selectBlog(blogno) {
+		var url = "selectBlog/"+blogno+".do";
+		window.location.href=url;
+	}
+</script>
     <title>favorite</title>
 </head>
 <body>
 
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
-<div class="conWrap">
+<div class = "conWrap" style = "width:100%; overflow:auto; margin-top:50px;">
     <div class="another_conBox">
         <div class="contentsBox">
+        	<div class="libray_title_box">
+                <i class="fa fa-fire fa-lg"></i>&nbsp;&nbsp;&nbsp;<span class="libray_title">인기 게시글</span>
+            </div>
             <ul class="contentsList">
             <c:forEach items="${blog }" var="b">
                 <li>
-                    <div class="leftTextBox">
+                    <div class="leftTextBox" onclick="location.href='selectBlog.do?blogno=${b.blogno}'">
                         <img src="resources/images/arial.jpg" alt="프로필이미지" class="profileImg">
                         <div class="infoBox">
                             <p class="userName">${b.membername }</p>
                             <p>
-                                <span class="uploadTime">${b.writerdate }</span>
+                                <span class="uploadTime">${b.writedate }</span>
                                 <span class="viewCount">View ${b.hits }</span>
                             </p>
                         </div>

@@ -92,11 +92,7 @@ public class HomeController {
 		
 		return "subscription/subscription";
 	}
-	@RequestMapping(value = "officialblog.do", method = RequestMethod.GET)
-	public String officialblog(Locale locale, Model model) {
-		
-		return "blog/officialblog";
-	}
+
 	@RequestMapping(value = "partnerblog.do", method = RequestMethod.GET)
 	public String partnerblog(Locale locale, Model model) {
 		
@@ -112,11 +108,7 @@ public class HomeController {
 		
 		return "library/laterview";
 	}
-	@RequestMapping(value = "likeview.do", method = RequestMethod.GET)
-	public String likeview(Locale locale, Model model) {
-		
-		return "library/likeview";
-	}
+
 	/*@RequestMapping(value = "personmain.do", method = RequestMethod.GET)
 	public String personmain(Locale locale, Model model) {
 		

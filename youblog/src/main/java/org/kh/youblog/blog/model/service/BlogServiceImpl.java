@@ -46,13 +46,30 @@ public class BlogServiceImpl implements BlogService{
 		return blogDao.categoryList_Level2();
 	}
 	
+	@Override
+	public ArrayList<Blog> officialblogList(int rowno1, int rowno2) {
+		return blogDao.officialblogList(rowno1, rowno2);
+	}
 
-	
-	public ArrayList<Blog> subsBlogList(String memberid){
-		return blogDao.subsBlogList(memberid);
+	@Override
+	public ArrayList<Blog> partnerblogList(int rowno1, int rowno2) {
+		return blogDao.partnerblogList(rowno1, rowno2);
 	}
 	
+	@Override
+	public ArrayList<Blog> likeblogList(String memberid, int rowno1, int rowno2) {
+		return blogDao.likeblogList(memberid, rowno1, rowno2);
+	}
+
+	@Override
+	public ArrayList<Blog> subsWriterList(String memberid) {
+		return blogDao.subsWriterList(memberid);
+	}
 	
+	@Override
+	public ArrayList<Blog> subsblogList(String memberid, int rowno1, int rowno2) {
+		return blogDao.subsblogList(memberid, rowno1, rowno2);
+	}
 
 	@Override
 	public ArrayList<Blog> selectBlogList(String writerid) {
@@ -120,7 +137,5 @@ public class BlogServiceImpl implements BlogService{
 		public ArrayList<Blog> selectBoardList(String writerid) {
 			return (ArrayList<Blog>)blogDao.selectBoardList(writerid);
 		}
-
-		
 
 }

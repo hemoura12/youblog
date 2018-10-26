@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -104,7 +103,7 @@
 
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
-<div class="conWrap">
+<div class = "conWrap" style = "width:100%; overflow:auto; margin-top:50px;">
         <!--4x4 배열 시작-->
     <div class="conBox" id="ctdiv">
         <div class = "ul-table">
@@ -112,7 +111,6 @@
                 <div class="category_nav"><a href="categorySelect.do?views=categoryAll&cate2=all" >전체</a>
                     &nbsp;<span class="glyphicon glyphicon-menu-right"></span>
                     <a class="second_ctg" href="categorySelect.do?views=sportCTG&cate2=all" >스포츠</a>
-
 
                 </div>
                 <div class="category_nav2">

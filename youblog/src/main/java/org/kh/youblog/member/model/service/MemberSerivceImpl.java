@@ -22,6 +22,7 @@ public class MemberSerivceImpl implements MemberService{
 		return memberDao.subsWriterList(memberid);
 	}
 	
+	
 	@Override
 	public Member selectBlogMember(String writerid) {		
 		return memberDao.selectBlogMember(writerid);

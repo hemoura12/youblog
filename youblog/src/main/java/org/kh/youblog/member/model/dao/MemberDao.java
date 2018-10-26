@@ -20,17 +20,15 @@ public class MemberDao {
 
 	public MemberDao(){}
 
-	
-	public ArrayList<Member> subsWriterList(String memberid) {
-		List<Member> result = sqlSession.selectList("memberMapper.subsWriterList", memberid);
-		return (ArrayList<Member>)result;
-	}
-
 	public Member selectBlogMember(String writerid) {
 
 		return (Member) sqlSession.selectOne("memberMapper.selectBlogMember", writerid);
 	}
 
+	public ArrayList<Member> subsWriterList(String memberid) {
+		List<Member> result = sqlSession.selectList("blogMapper.favoriteList");
+		return (ArrayList<Member>)result;
+	}
 
 	// 로그인 요청시, 회원 정보 리턴하는 메소드
 	public Member selectMember(Member member) {

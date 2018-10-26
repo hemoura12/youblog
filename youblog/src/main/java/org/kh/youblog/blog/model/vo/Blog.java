@@ -28,16 +28,17 @@ public class Blog implements java.io.Serializable {
 	private int likegood;
 	private String membername;
 	private int bedcount;
-
 	private int readercount;
 	private String readerid;
+	private String profilePhoto;
+	
 
 	public Blog(){}
-	
+
 	public Blog(String rowno, String blogno, String title, String writerid, String contents, String contentstag,
 			Date writedate, String thumbnail, String titleimage, String catename1, String catename2, String tag,
 			int hits, int hitstime, int likecount, String state, String notice, int bestno, int catelevel,
-			int cateparent, int likegood, String membername, int bedcount, int readercount, String readerid) {
+			int cateparent, int likegood, String membername, int bedcount, int readercount, String readerid, String profilePhoto) {
 		super();
 		this.rowno = rowno;
 		this.blogno = blogno;
@@ -64,7 +65,6 @@ public class Blog implements java.io.Serializable {
 		this.bedcount = bedcount;
 		this.readercount = readercount;
 		this.readerid = readerid;
-
 	}
 
 	public String getRowno() {
@@ -271,6 +271,14 @@ public class Blog implements java.io.Serializable {
 		return serialVersionUID;
 	}
 
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
+
 	@Override
 	public String toString() {
 		return "Blog [rowno=" + rowno + ", blogno=" + blogno + ", title=" + title + ", writerid=" + writerid
@@ -280,8 +288,7 @@ public class Blog implements java.io.Serializable {
 				+ ", likecount=" + likecount + ", state=" + state + ", notice=" + notice + ", bestno=" + bestno
 				+ ", catelevel=" + catelevel + ", cateparent=" + cateparent + ", likegood=" + likegood + ", membername="
 				+ membername + ", bedcount=" + bedcount + ", readercount=" + readercount + ", readerid=" + readerid
-				+ "]";
+				+ ", profilePhoto=" + profilePhoto + "]";
 	}
-	
 	
 }

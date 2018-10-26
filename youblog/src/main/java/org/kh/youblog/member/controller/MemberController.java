@@ -1,7 +1,5 @@
 package org.kh.youblog.member.controller;
 
-import org.springframework.stereotype.Controller;
-
 import java.util.ArrayList;
 
 import org.kh.youblog.member.model.service.MemberService;
@@ -192,4 +190,3 @@ public class MemberController {
 	
 	}
 }
-

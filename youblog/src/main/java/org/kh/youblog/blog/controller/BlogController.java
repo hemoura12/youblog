@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import org.kh.youblog.session.model.vo.Session;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +75,7 @@ public class BlogController {
 		} else
 			list =	blogService.categoryBlog(cate1, cate2, rowno1, rowno2);
 		//json 배열 객체 생성
+		System.out.println(list.toString());
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr 로 옮기기
@@ -88,6 +91,9 @@ public class BlogController {
 			juser.put("contents", blog.getContents());
 			juser.put("writerdate", blog.getWritedate().toString());
 			juser.put("hits", blog.getHits());
+			juser.put("profilePhoto", blog.getProfilePhoto());
+			juser.put("thumbnail", blog.getThumbnail());
+			juser.put("titleimage", blog.getTitleimage());
 			
 			//json 배열에 json 객체 저장
 			jarr.add(juser);
@@ -109,9 +115,6 @@ public class BlogController {
 	
 	@RequestMapping(value = "favoriteList.do")
 	public ModelAndView favoriteList(ModelAndView mv){
-		int a=19;
-		int b = a/10;
-		System.out.println(b);
 		mv.addObject("blog", blogService.favoriteList());
 		mv.setViewName("favorite/favorite");
 		
@@ -122,37 +125,187 @@ public class BlogController {
 	public ModelAndView subscriptionList(HttpServletRequest request, ModelAndView mv){
 		HttpSession session = request.getSession(true);
 		session.setAttribute("memberid", "user01");
-		//session.removeAttribute("memberid");
 		String memberid = (String)session.getAttribute("memberid");
-		System.out.println("memberid : " + memberid);
+		//session.removeAttribute("memberid");
+		
 		//로그인 안되어 있을 시
 		if(memberid==null){
-			System.out.println("로그인 필요");
 			mv.setViewName("subscription/subscription");
 		} else {
-			//ArrayList<Blog> blogList = blogService.subsBlogList(memberid);
-			//LinkedHashSet<String> writerSet = new LinkedHashSet<String>();
-			ArrayList<Member> subsWriterList = memberService.subsWriterList(memberid);
-			/*for(Blog list : blogList){
-				writerSet.add(list.getWriterid());
-			}*/
-			//ArrayList<String> writerList = new ArrayList<String>();
-			/*for(String w : writerSet){
-				writerList.add(w);
-			}*/
-			//저장된 아이디 리스트 넘김
-			//jsp에서 배열 아이디 리스트로 확인해서 해당 내용 파라메터로 받음
-			//System.out.println(writerArr);
+			//구독자 아이디 리스트 최신글 순으로 생성
+			ArrayList<Blog> subsWriterList = blogService.subsWriterList(memberid);	
 			System.out.println(subsWriterList.toString());
-			mv.addObject("subsWriterList", subsWriterList);
-			//mv.addObject("blog", blogService.subsBlogList(memberid));
+			mv.addObject("writerList", subsWriterList);
+			mv.addObject("writercount", subsWriterList.size());
 			mv.setViewName("subscription/subscription");
 		}
 		
 		return mv;
 	}
 	
-
+	@RequestMapping(value="pagingSubs.do", method=RequestMethod.POST)
+	public void pagingSubs(HttpServletResponse response,
+			@RequestParam(value="writerid") String writerid,
+			@RequestParam(value="rowno1") int rowno1,
+			@RequestParam(value="rowno2") int rowno2) throws IOException{
+		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
+		String memberid = "user01";
+		//ArrayList<Blog> list = blogService.subsblogList(writerid, rowno1, rowno2);
+		ArrayList<Blog> list = blogService.subsblogList(memberid, rowno1, rowno2);
+		//json 배열 객체 생성
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr 로 옮기기
+		for(Blog blog : list){
+			//추출한 user 를 json 객체에 저장하기
+			JSONObject juser = new JSONObject();
+			
+			juser.put("blogno", blog.getBlogno());
+			juser.put("rowno", blog.getRowno());
+			juser.put("title", blog.getTitle());
+			juser.put("writerid", blog.getWriterid());
+			juser.put("memberName", blog.getMembername());
+			juser.put("contents", blog.getContents());
+			juser.put("writerdate", blog.getWritedate().toString());
+			juser.put("hits", blog.getHits());
+			juser.put("profilePhoto", blog.getProfilePhoto());
+			juser.put("thumbnail", blog.getThumbnail());
+			juser.put("titleimage", blog.getTitleimage());
+			
+			//json 배열에 json 객체 저장
+			jarr.add(juser);
+		}
+		
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		//jarr 을 전송 객체에 저장
+		sendJson.put("list", jarr);
+		
+		//직접 요청자에게 내보내기
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value = "officialblog.do", method = RequestMethod.GET)
+	public String officialblog(Locale locale, Model model) {
+		
+		return "blog/officialblog";
+	}
+	
+	@RequestMapping(value="pagingParOff.do", method=RequestMethod.POST)
+	public void pagingOfficial(HttpServletResponse response,
+			@RequestParam(value="select") String select,
+			@RequestParam(value="rowno1") int rowno1,
+			@RequestParam(value="rowno2") int rowno2) throws IOException{
+		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
+		
+		ArrayList<Blog> list;
+		if(select.equals("formula")){
+			list =	blogService.officialblogList(rowno1, rowno2);
+		} else {
+			list =	blogService.partnerblogList(rowno1, rowno2);
+		}
+		//json 배열 객체 생성
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr 로 옮기기
+		for(Blog blog : list){
+			//추출한 user 를 json 객체에 저장하기
+			JSONObject juser = new JSONObject();
+			
+			juser.put("blogno", blog.getBlogno());
+			juser.put("rowno", blog.getRowno());
+			juser.put("title", blog.getTitle());
+			juser.put("writerid", blog.getWriterid());
+			juser.put("memberName", blog.getMembername());
+			juser.put("contents", blog.getContents());
+			juser.put("writerdate", blog.getWritedate().toString());
+			juser.put("hits", blog.getHits());
+			juser.put("profilePhoto", blog.getProfilePhoto());
+			juser.put("thumbnail", blog.getThumbnail());
+			juser.put("titleimage", blog.getTitleimage());
+			
+			//json 배열에 json 객체 저장
+			jarr.add(juser);
+		}
+		
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		//jarr 을 전송 객체에 저장
+		sendJson.put("list", jarr);
+		
+		//직접 요청자에게 내보내기
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value = "likeview.do", method = RequestMethod.GET)
+	public String likeview(Locale locale, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+		session.setAttribute("memberid", "user01");
+		//session.removeAttribute("memberid");
+		String memberid = (String)session.getAttribute("memberid");
+		
+		String reurl="";
+		//로그인 안되어 있을 시
+		if(memberid==null){
+			reurl="library/likeview";
+		} else
+			reurl="library/likeview";
+		
+		return reurl;
+	}
+	
+	@RequestMapping(value="pagingblog.do", method=RequestMethod.POST)
+	public void pagingblog(HttpServletResponse response,
+			@RequestParam(value="select") String select,
+			@RequestParam(value="rowno1") int rowno1,
+			@RequestParam(value="rowno2") int rowno2) throws IOException{
+		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
+		String memberid = "user01";
+		ArrayList<Blog> list =	blogService.likeblogList(memberid, rowno1, rowno2);
+		//json 배열 객체 생성
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr 로 옮기기
+		for(Blog blog : list){
+			//추출한 user 를 json 객체에 저장하기
+			JSONObject juser = new JSONObject();
+			
+			juser.put("blogno", blog.getBlogno());
+			juser.put("rowno", blog.getRowno());
+			juser.put("title", blog.getTitle());
+			juser.put("writerid", blog.getWriterid());
+			juser.put("memberName", blog.getMembername());
+			juser.put("contents", blog.getContents());
+			juser.put("writerdate", blog.getWritedate().toString());
+			juser.put("hits", blog.getHits());
+			juser.put("profilePhoto", blog.getProfilePhoto());
+			juser.put("thumbnail", blog.getThumbnail());
+			juser.put("titleimage", blog.getTitleimage());
+			
+			//json 배열에 json 객체 저장
+			jarr.add(juser);
+		}
+		
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		//jarr 을 전송 객체에 저장
+		sendJson.put("list", jarr);
+		
+		//직접 요청자에게 내보내기
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 	
 	//블로그 리스트 출력
 	@RequestMapping(value="personmain.do", method=RequestMethod.GET) //개인 블로그 리스트 호출
@@ -297,6 +450,7 @@ public class BlogController {
 		out.close();
 
 	}
+
 	
 
 	// 다중파일업로드

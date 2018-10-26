@@ -1,11 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!DOCTYPE html>
 <html>
 <head>
-  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    
+<meta charset="UTF-8">
+<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
+<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+var rowno = 0;
+
+function selectBlog(blogno) {
+	var url = "selectBlog/"+blogno+".do";
+	window.location.href=url;
+}
+
+$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
+	if($(window).scrollTop() >= $(document).height() - $(window).height()){
+		if(rowno == 0){
+			rowno = 10;
+		}else{
+			rowno += parseInt(10);
+			/*rowno = parseInt(document.location.hash.replace("#", "")) + parseInt(20); */
+		}
+	getList(parseInt(rowno)-parseInt(10), rowno);
+	/* document.location.hash = "#" + rowno; */
+	}
+});
+
+function getList(rowno1, rowno2) {
+	$.ajax({
+		url : "pagingblog.do",
+		data : {
+			select : "like",
+			rowno1 : rowno1,
+			rowno2 : rowno2
+		},
+		type : "post",
+		dataType: "json",
+		success: function(obj){
+			console.log(obj); //object 라고 출력함
+			//리턴된 객체를 문자열로 변환함
+			var objStr = JSON.stringify(obj);
+			//문자열을 json 객체로 바꿈
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "";
+			for(var i in jsonObj.list){
+				outValues += "<li><a href=\"#\"><div class=\"leftTextBox\"><img src=\"resources/images/arial.jpg\" alt=\"프로필이미지\" class=\"profileImg\">"
+							+ "<div class=\"infoBox\"><p class=\"userName\">"+jsonObj.list[i].memberName+"네</p><p><span class=\"uploadTime\">"+jsonObj.list[i].writerdate+"</span>"
+							+ "<span class=\"viewCount\">View "+jsonObj.list[i].hits+"회</span></p></div><div class=\"title\">"+jsonObj.list[i].writerdate+"</div>"
+							+ "<div class=\"content\">"+jsonObj.list[i].contents+"</div></div>"
+							+ "<div class=\"rightImgBox\"><img src=\"resources/images/4k.jpg\" alt=\"이미지\" class=\"mainImg\"></div></li>";
+			}
+			$('#ctdiv').append(outValues);
+			//$("#d3").html(outValues);
+			
+		},
+		error: function(request, status, errorData){
+			alert("error code : " + request.status + "\n"
+					+ "message : " + request.responseText + "\n"
+					+ "error : " + errorData);
+			}
+	});
+}
+
+$( document ).ready(function() {
+	getList(0, 10);
+	rowno=10;
+});
+</script>
+    <title>officialblog</title>
+</head> 
     <title>likeview</title>
 </head>
 <body>
@@ -16,137 +82,8 @@
             <div class="libray_title_box">
                 <i class="far fa-thumbs-up fa-lg"></i>&nbsp;&nbsp;&nbsp;<span class="libray_title">좋아요 표시한 게시글</span>
             </div>
-            <ul class="contentsList">
+            <ul class="contentsList" id="ctdiv">
 
-                <li>
-                    <div class="leftTextBox">
-                        <img src="resources/images/arial.jpg" alt="프로필이미지" class="profileImg">
-                        <div class="infoBox">
-                            <p class="userName">라이언네</p>
-                            <p>
-                                <span class="uploadTime">1시간전</span>
-                                <span class="viewCount">View 591만회</span>
-                            </p>
-                        </div>
-                        <div class="title">
-                            마! 꿀 갖고온나
-                        </div>
-                        <div class="content">
-                            그대가 받은 박수
-                            그대가 받은 찬사
-                            그대 어깨 위에는 벽돌 혹은 금괴
-                            둘 중 하나가 그대를 짓누르고 있겠죠
-                            그대도 가끔 시선이라는 게 조금 무겁겠죠
-                            난 티끌의 명성을 얻고서도 겁먹어
-                            빈첸 사회악이라 근절 되어야 한대요
-                            손가락질 받죠 나도 희망차고 싶죠
-                            웃음을 건네주고 싶죠 그래요
-                            그대도 카메라 뒤 울어본 적 있나요
-                            그대도 남을 위해 감정을 숨긴 적 있나요
-                            그대도 카메라 뒤 울어본 적 있나요
-                            그대도 남을 위해 감정을 숨긴 적 있나요
-                            우리 눈에 완벽하게만 보이는 그대도
-                            결함과 고민이 존재하고 불완전한가요
-                            영향력에 대한 책임감이 그대 힘들진 않나요
-                            그대 오늘 어떤 기분이신가요
-                            그대도 남을 위해 감정을 숨긴 적 있나요
-                            우리 눈에 완벽하게만 보이는 그대도
-                            결함과 고민이 존재하고 불완전한가요
-                            영향력에 대한 책임감이 그대 힘들진 않나요
-                            그대 오늘 어떤 기분이신가요
-
-                        </div>
-                    </div>
-                    <div class="rightImgBox">
-                        <img src="resources/images/4k.jpg" alt="이미지" class="mainImg">
-                    </div>
-                </li>
-                <li>
-                    <div class="leftTextBox">
-                        <img src="resources/images/arial.jpg" alt="프로필이미지" class="profileImg">
-                        <div class="infoBox">
-                            <p class="userName">라이언네</p>
-                            <p>
-                                <span class="uploadTime">1시간전</span>
-                                <span class="viewCount">View 591만회</span>
-                            </p>
-                        </div>
-                        <div class="title">
-                            마! 꿀 갖고온나
-                        </div>
-                        <div class="content">
-                            그대가 받은 박수
-                            그대가 받은 찬사
-                            그대 어깨 위에는 벽돌 혹은 금괴
-                            둘 중 하나가 그대를 짓누르고 있겠죠
-                            그대도 가끔 시선이라는 게 조금 무겁겠죠
-                            난 티끌의 명성을 얻고서도 겁먹어
-                            빈첸 사회악이라 근절 되어야 한대요
-                            손가락질 받죠 나도 희망차고 싶죠
-                            웃음을 건네주고 싶죠 그래요
-                            그대도 카메라 뒤 울어본 적 있나요
-                            그대도 남을 위해 감정을 숨긴 적 있나요
-                            그대도 카메라 뒤 울어본 적 있나요
-                            그대도 남을 위해 감정을 숨긴 적 있나요
-                            우리 눈에 완벽하게만 보이는 그대도
-                            결함과 고민이 존재하고 불완전한가요
-                            영향력에 대한 책임감이 그대 힘들진 않나요
-                            그대 오늘 어떤 기분이신가요
-                            그대도 남을 위해 감정을 숨긴 적 있나요
-                            우리 눈에 완벽하게만 보이는 그대도
-                            결함과 고민이 존재하고 불완전한가요
-                            영향력에 대한 책임감이 그대 힘들진 않나요
-                            그대 오늘 어떤 기분이신가요
-
-                        </div>
-                    </div>
-                    <div class="rightImgBox">
-                        <img src="resources/images/4k.jpg" alt="이미지" class="mainImg">
-                    </div>
-                </li><li>
-                <div class="leftTextBox">
-                    <img src="resources/images/arial.jpg" alt="프로필이미지" class="profileImg">
-                    <div class="infoBox">
-                        <p class="userName">라이언네</p>
-                        <p>
-                            <span class="uploadTime">1시간전</span>
-                            <span class="viewCount">View 591만회</span>
-                        </p>
-                    </div>
-                    <div class="title">
-                        마! 꿀 갖고온나
-                    </div>
-                    <div class="content">
-                        그대가 받은 박수
-                        그대가 받은 찬사
-                        그대 어깨 위에는 벽돌 혹은 금괴
-                        둘 중 하나가 그대를 짓누르고 있겠죠
-                        그대도 가끔 시선이라는 게 조금 무겁겠죠
-                        난 티끌의 명성을 얻고서도 겁먹어
-                        빈첸 사회악이라 근절 되어야 한대요
-                        손가락질 받죠 나도 희망차고 싶죠
-                        웃음을 건네주고 싶죠 그래요
-                        그대도 카메라 뒤 울어본 적 있나요
-                        그대도 남을 위해 감정을 숨긴 적 있나요
-                        그대도 카메라 뒤 울어본 적 있나요
-                        그대도 남을 위해 감정을 숨긴 적 있나요
-                        우리 눈에 완벽하게만 보이는 그대도
-                        결함과 고민이 존재하고 불완전한가요
-                        영향력에 대한 책임감이 그대 힘들진 않나요
-                        그대 오늘 어떤 기분이신가요
-                        그대도 남을 위해 감정을 숨긴 적 있나요
-                        우리 눈에 완벽하게만 보이는 그대도
-                        결함과 고민이 존재하고 불완전한가요
-                        영향력에 대한 책임감이 그대 힘들진 않나요
-                        그대 오늘 어떤 기분이신가요
-
-                    </div>
-                </div>
-
-                <div class="rightImgBox">
-                    <img src="resources/images/4k.jpg" alt="이미지" class="mainImg">
-                </div>
-            </li>
             </ul>
         </div> <!--contentsbox-->
     </div> <!--conbox-->

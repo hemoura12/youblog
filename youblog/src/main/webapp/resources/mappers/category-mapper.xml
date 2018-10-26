@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="categoryMapper">
+
+   <resultMap type="Category" id="resultCategory">
+      <id property="cate_name1" column="cate_name1" />
+      <result property="cate_name2" column="cate_name2" />
+     
+   </resultMap>
+   
+   <resultMap type="Category" id="resultList">
+      <result property="cate_name1" column="cate_name1" />
+      <result property="cate_name2" column="cate_name2" />
+     
+   </resultMap>
+   
+
+   <select id="selectList"  resultMap="resultList" >
+     select distinct cate_name1 from tb_category
+     
+   </select>
+   
+    <select id="selectList1" parameterType="String" resultMap="resultList" >
+     select distinct cate_name1, cate_name2 from tb_category
+     where cate_name1 = #{cate_name1}
+     
+   </select>
+   
+ 
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

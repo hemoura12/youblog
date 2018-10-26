@@ -21,8 +21,19 @@ public interface BlogService {
 	ArrayList<HashMap<String, String>> categoryList_Level2();
 
 	ArrayList<Blog> favoriteList();
-	ArrayList<Blog> subsBlogList(String memberid);
+
 	ArrayList<Blog> selectBlogList(String writerid);
+	//공식블로그
+	ArrayList<Blog> officialblogList(int rowno1, int rowno2);
+	//파트너블로그
+	ArrayList<Blog> partnerblogList(int rowno1, int rowno2);
+	//좋아요 블로그
+	ArrayList<Blog> likeblogList(String memberid, int rowno1, int rowno2);
+	//구독자 아이디 리스트
+	ArrayList<Blog> subsWriterList(String memberid);
+	//구독블로그 리스트
+	ArrayList<Blog> subsblogList(String writerid, int rowno1, int rowno2);
+	
 	int updateBlog(Blog blog);
 	int deleteBlog(Blog blog);
 	

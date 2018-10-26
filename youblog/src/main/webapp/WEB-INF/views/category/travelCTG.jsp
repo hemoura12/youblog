@@ -90,7 +90,7 @@
 
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
-<div class="conWrap">
+<div class = "conWrap" style = "width:100%; overflow:auto; margin-top:50px;">
 <!--4x4 배열 시작-->
 
     <div class="conBox" id="ctdiv">

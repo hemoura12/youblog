@@ -147,8 +147,6 @@
     <c:param name="cate2" value="all" />
 </c:url>
 
-<div class = "conWrap">
-
 <!-- side bar -->
 <div class="nav-side-menu" id ="menu-side">
     <div class="brand">Brand Logo</div>

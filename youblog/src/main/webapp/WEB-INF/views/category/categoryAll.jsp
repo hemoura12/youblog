@@ -10,19 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-	<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" id="bootstrap-css">
-
-	<!-- 부가적인 테마 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/styles/css/main.css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">
-
+	
 <script type="text/javascript">
 	var rowno = 0;
 	var cate2 = "<c:out value="${cate2}" />";
@@ -103,6 +91,7 @@
 	}
 	
 	$( document ).ready(function() {
+		console.log("시작");
 		getList(cate2, 0, 20);
 		rowno=20;
     });
@@ -111,7 +100,9 @@
 	<title>Main</title>
 </head>
 <body>
+
 <%@ include file = "/WEB-INF/views/header.jsp"  %>
+<div class = "conWrap" style = "width:100%; overflow:auto; margin-top:50px;">
 
 <!--4x4 배열 시작-->
     <div class="conBox" id="ctdiv">
@@ -131,7 +122,7 @@
             </div>
             <div class="division_line"></div>
         </div>
-</div> <!-- conwrap end-->
-
+	</div> 
+</div><!-- conwrap end-->
 </body>
 </html>

@@ -113,10 +113,43 @@ public class BlogDao {
 			return (ArrayList<Blog>)result;
 		}
 
-		public ArrayList<Blog> subsBlogList(String memberid) {
-			List<Blog> result = sqlSession.selectList("blogMapper.subsBlogList", memberid);
+		public ArrayList<Blog> subsblogList(String memberid, int row1, int row2) {
+			Map map = new HashMap();
+			map.put("memberid", memberid);		
+			map.put("row1", row1);
+			map.put("row2", row2);
+			List<Blog> result = sqlSession.selectList("blogMapper.subsAllblog", map);
 			return (ArrayList<Blog>)result;
 		}
 
+		public ArrayList<Blog> officialblogList(int row1, int row2) {
+			Map map = new HashMap();
+			map.put("row1", row1);
+			map.put("row2", row2);
+			List<Blog> result = sqlSession.selectList("blogMapper.officialblogList", map);
+			return (ArrayList<Blog>)result;
+		}
+
+		public ArrayList<Blog> partnerblogList(int row1, int row2) {
+			Map map = new HashMap();
+			map.put("row1", row1);
+			map.put("row2", row2);
+			List<Blog> result = sqlSession.selectList("blogMapper.partnerblogList", map);
+			return (ArrayList<Blog>)result;
+		}
+
+		public ArrayList<Blog> likeblogList(String memberid, int row1, int row2) {
+			Map map = new HashMap();
+			map.put("memberid", memberid);
+			map.put("row1", row1);
+			map.put("row2", row2);
+			List<Blog> result = sqlSession.selectList("blogMapper.likeblogList", map);
+			return (ArrayList<Blog>)result;
+		}
+
+		public ArrayList<Blog> subsWriterList(String memberid) {
+			List<Blog> result = sqlSession.selectList("blogMapper.subsWriterList", memberid);
+			return (ArrayList<Blog>)result;
+		}
 		
 }

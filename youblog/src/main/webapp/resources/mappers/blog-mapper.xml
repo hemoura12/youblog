@@ -23,8 +23,6 @@
 		<result property="state" column="state"/>
 		<result property="notice" column="notice"/>
 		<result property="bestno" column="bestno"/>
-		<result property="membername" column="member_name"/>
-		<result property="profilePhoto" column="profile_photo"/>
 	</resultMap>
 	
 	<resultMap type="Blog" id="resultList">
@@ -46,8 +44,6 @@
 		<result property="state" column="state"/>
 		<result property="notice" column="notice"/>
 		<result property="bestno" column="bestno"/>
-		<result property="membername" column="member_name"/>
-		<result property="profilePhoto" column="profile_photo"/>
 	</resultMap>
 	
 	<select id="selectBlog" parameterType="String" resultMap="resultBlog">
@@ -116,7 +112,7 @@
 	<select id="allCategory" resultMap="resultList" resultType="Blog">
 		select *
 		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST)
 		WHERE rowno <![CDATA[ > ]]> #{row1}
 		and rowno <![CDATA[ < ]]>= #{row2}
@@ -125,7 +121,7 @@
 	<select id="selectCategoryAll" resultMap="resultList" resultType="Blog">
 		select *
 		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
 		ORDER BY rowno ASC
 	</select>	
@@ -133,7 +129,7 @@
 	<select id="selectCTGLev2All" resultMap="resultList" resultType="Blog">
 		select *
 		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST WHERE CATE_NAME1 = #{cate1})
 		WHERE rowno <![CDATA[ > ]]> #{row1}
 		and rowno <![CDATA[ < ]]>= #{row2}
@@ -143,7 +139,7 @@
 	<select id="selectCTG" resultMap="resultList" resultType="Blog">
 		select *
 		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_BLOG_LIST 
 		WHERE CATE_NAME1 = #{cate1}
 		and CATE_NAME2 = #{cate2})
@@ -154,12 +150,22 @@
 	<select id="favoriteList" resultMap="resultList" resultType="Blog">
 		SELECT * FROM V_FAVORITE_BLOG
 	</select>
-
+	
+	<select id="subsBlogList" resultMap="resultList" resultType="Blog">
+		SELECT * FROM V_SUBSCRIBE_BLOG
+		WHERE reader_ID = #{memberid}
+		AND WRITER_ID IN (select WRITER_ID from
+  			(select * from 
+    			(select reader_ID, WRITER_ID, WRITE_DATE, RANK() OVER(PARTITION BY WRITER_ID ORDER BY WRITE_DATE desc) rank from V_SUBSCRIBE)
+ 			where reader_ID = #{memberid}
+  			and rank <![CDATA[ < ]]>= 1 order by WRITE_DATE desc) where rownum <![CDATA[ < ]]>= 3)
+  			<!-- SELECT * FROM V_SUBSCRIBE_BLOG where reader_ID = #{memberid} -->
+	</select>
 	
 	<select id="officialblogList" resultMap="resultList" resultType="Blog">
 		select *
 		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_FORMULA_BLOG_LIST)
 		WHERE rowno <![CDATA[ > ]]> #{row1}
 		and rowno <![CDATA[ < ]]>= #{row2}
@@ -169,44 +175,11 @@
 	<select id="partnerblogList" resultMap="resultList" resultType="Blog">
 		select *
 		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, CATE_NAME1, CATE_NAME2
 		from V_PARTNER_BLOG_LIST)
 		WHERE rowno <![CDATA[ > ]]> #{row1}
 		and rowno <![CDATA[ < ]]>= #{row2}
 		ORDER BY rowno ASC
-	</select>
-	
-	<select id="likeblogList" resultMap="resultList" resultType="Blog">
-		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, MEMBER_ID
-		from V_LIKE_BLOG_LIST WHERE member_id=#{memberid})
-		WHERE rowno <![CDATA[ > ]]> #{row1}
-		and rowno <![CDATA[ < ]]>= #{row2}
-	</select>
-	
-	<select id="subsWriterList" resultMap="resultList" resultType="Blog">
-		SELECT *
-		FROM V_SUBSCRIBE_WRITER
-		WHERE reader_id=#{memberid}
-	</select>
-	
-	<select id="subsblogList" resultMap="resultList" resultType="Blog">
-		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE
-		from V_BLOG_LIST WHERE WRITER_ID=#{memberid})
-		WHERE rowno <![CDATA[ > ]]> #{row1}
-		and rowno <![CDATA[ < ]]>= #{row2}
-	</select>
-	
-	<select id="subsAllblog" resultMap="resultList" resultType="Blog">
-		select *
-		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
-		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE
-		from V_SUBSCRIBE WHERE reader_id=#{memberid})
-		WHERE rowno <![CDATA[ > ]]> #{row1}
-		and rowno <![CDATA[ < ]]>= #{row2}
 	</select>
 	
 	<select id="categoryList" resultType="java.util.HashMap">
