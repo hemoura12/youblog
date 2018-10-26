@@ -22,6 +22,15 @@ public class BlogServiceImpl implements BlogService{
 	
 	public BlogServiceImpl(){}
 	
+	@Override
+	public ArrayList<Blog> favoriteList(int rowno1, int rowno2) {
+		return blogDao.favoriteList(rowno1, rowno2);
+	}
+	
+	public ArrayList<Blog> newblogList(int rowno1, int rowno2){
+		return blogDao.newblogList(rowno1, rowno2);
+	}
+	
 	public ArrayList<Blog> categoryAllBlog(int row1, int row2){
 		return blogDao.categoryAllBlog(row1, row2);
 	}
@@ -137,5 +146,6 @@ public class BlogServiceImpl implements BlogService{
 		public ArrayList<Blog> selectBoardList(String writerid) {
 			return (ArrayList<Blog>)blogDao.selectBoardList(writerid);
 		}
+
 
 }

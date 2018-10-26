@@ -41,11 +41,6 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		return "main";
 	}
-  
-	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
-		return "main";
-	}
 	
 	@RequestMapping(value = "categoryall.do", method = RequestMethod.GET)
 	public String categoryall(Locale locale, Model model) {

@@ -47,7 +47,7 @@ function getList(rowno1, rowno2) {
 			
 			var outValues = "";
 			for(var i in jsonObj.list){
-				outValues += "<li><a href=\"#\"><div class=\"leftTextBox\"><img src=\"resources/images/arial.jpg\" alt=\"프로필이미지\" class=\"profileImg\">"
+				outValues += "<li><a href=\"detailpage?blogno="+jsonObj.list[i].blogno+"\"><div class=\"leftTextBox\"><img src=\"resources/images/arial.jpg\" alt=\"프로필이미지\" class=\"profileImg\">"
 							+ "<div class=\"infoBox\"><p class=\"userName\">"+jsonObj.list[i].memberName+"네</p><p><span class=\"uploadTime\">"+jsonObj.list[i].writerdate+"</span>"
 							+ "<span class=\"viewCount\">View "+jsonObj.list[i].hits+"회</span></p></div><div class=\"title\">"+jsonObj.list[i].writerdate+"</div>"
 							+ "<div class=\"content\">"+jsonObj.list[i].contents+"</div></div>"

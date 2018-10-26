@@ -104,7 +104,7 @@
    select * from tb_board
    where blog_no = #{blogno}
    </select>
-   
+	
    <select id="selectBoardList" parameterType="String" resultMap="resultBlog">
 		select * 
 		from TB_BLOG
@@ -151,10 +151,23 @@
 		and rowno <![CDATA[ < ]]>= #{row2}
 	</select>
 	
+	<select id="favoriteList5" resultMap="resultList" resultType="Blog">
+		SELECT * FROM V_FAVORITE_BLOG
+		WHERE BESTNO <![CDATA[ < ]]>= #{row2}
+	</select>
+	
 	<select id="favoriteList" resultMap="resultList" resultType="Blog">
 		SELECT * FROM V_FAVORITE_BLOG
 	</select>
 
+   	<select id="newblogList" resultMap="resultList" resultType="Blog">
+		select *
+		FROM (select ROW_NUMBER() OVER (ORDER BY to_number(replace(BLOG_NO,' ' ,'')) DESC) AS rowno, 
+		BLOG_NO, TITLE, WRITER_ID, MEMBER_NAME, CONTENTS, WRITE_DATE, HITS, PROFILE_PHOTO, THUMBNAIL, TITLE_IMAGE, CATE_NAME1, CATE_NAME2
+		from V_BLOG_LIST)
+		WHERE rowno <![CDATA[ > ]]> #{row1}
+		and rowno <![CDATA[ < ]]>= #{row2}
+	</select>
 	
 	<select id="officialblogList" resultMap="resultList" resultType="Blog">
 		select *

@@ -24,6 +24,15 @@ public class BlogDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	//최신글 5개
+	public ArrayList<Blog> favoriteList(int row1, int row2) {
+		Map map = new HashMap();
+		map.put("row1", row1);
+		map.put("row2", row2);
+		List<Blog> result = sqlSession.selectList("blogMapper.favoriteList5", map);
+		return (ArrayList<Blog>)result;
+	}
+	
 	//블로그 개인채널 출력
 	public List<Blog> selectBlogList(String writerid) {
 		return sqlSession.selectList("blogMapper.selectBlog", writerid);
@@ -149,6 +158,14 @@ public class BlogDao {
 
 		public ArrayList<Blog> subsWriterList(String memberid) {
 			List<Blog> result = sqlSession.selectList("blogMapper.subsWriterList", memberid);
+			return (ArrayList<Blog>)result;
+		}
+
+		public ArrayList<Blog> newblogList(int row1, int row2) {
+			Map map = new HashMap();
+			map.put("row1", row1);
+			map.put("row2", row2);
+			List<Blog> result = sqlSession.selectList("blogMapper.newblogList", map);
 			return (ArrayList<Blog>)result;
 		}
 		

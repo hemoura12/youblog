@@ -12,6 +12,10 @@ import org.kh.youblog.session.model.vo.Session;
 import org.kh.youblog.blog.model.vo.Blog;
 
 public interface BlogService {
+	//인기글 5개
+	ArrayList<Blog> favoriteList(int rowno1, int rowno2);
+	//최신글보기
+	ArrayList<Blog> newblogList(int rowno1, int rowno2);
 	
 	ArrayList<Blog> categoryAllBlog(int row1, int rowno2);
 	ArrayList<Blog> categoryLev2All(String cate1, int rowno1, int rowno2);
@@ -54,6 +58,9 @@ public interface BlogService {
 
 	// 블로그 게시판 출력
 	ArrayList<Blog> selectBoardList(String writerid);
+
+
+
 
 	
 }

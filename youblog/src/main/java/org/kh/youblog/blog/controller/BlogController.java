@@ -46,6 +46,16 @@ public class BlogController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
+	@RequestMapping(value = "main.do", method = RequestMethod.GET)
+	public ModelAndView main(ModelAndView mv) {
+		
+		ArrayList<Blog> list =	blogService.favoriteList(0, 5);
+		mv.addObject("favoritelist", list);
+		mv.setViewName("main");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value = "categorySelect.do")
 	public ModelAndView categorySelect(
 			@RequestParam(value="views") String views, 
@@ -75,7 +85,6 @@ public class BlogController {
 		} else
 			list =	blogService.categoryBlog(cate1, cate2, rowno1, rowno2);
 		//json 배열 객체 생성
-		System.out.println(list.toString());
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr 로 옮기기
@@ -269,8 +278,14 @@ public class BlogController {
 			@RequestParam(value="rowno2") int rowno2) throws IOException{
 		//List 를 json 배열로 옮겨서, 전송객체에 담아서 전송 처리
 		String memberid = "user01";
-		ArrayList<Blog> list =	blogService.likeblogList(memberid, rowno1, rowno2);
+		ArrayList<Blog> list =	new ArrayList<Blog>();
+		
+		if(select.equals("like"))
+			list = blogService.likeblogList(memberid, rowno1, rowno2);
+		else
+			list = blogService.newblogList(rowno1, rowno2);
 		//json 배열 객체 생성
+		System.out.println(list.toString());
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr 로 옮기기
@@ -278,6 +293,7 @@ public class BlogController {
 			//추출한 user 를 json 객체에 저장하기
 			JSONObject juser = new JSONObject();
 			
+			juser.put("rowno", blog.getRowno());
 			juser.put("blogno", blog.getBlogno());
 			juser.put("rowno", blog.getRowno());
 			juser.put("title", blog.getTitle());

@@ -62,7 +62,7 @@
  					if(i==0){
 						outValues += "<div class = 'ul-table'><div class='ul-row'><div class='ul-table__tables'>";
 					}
-					outValues += "<div class='table_1' onclick='location.href=\"selectBlog("+jsonObj.list[i].blogno+")\"''><img src='resources/images/라이언 썸네일.png'/>"
+					outValues += "<div class='table_1' onclick='location.href=\"detailpage?blogno="+jsonObj.list[i].blogno+"\"''><img src='resources/images/라이언 썸네일.png'/>"
 		                 + "<label class ='blog_title'>" + jsonObj.list[i].title + "</label>"
 		                 + "<label class ='blog_name'>" + jsonObj.list[i].memberName + "</label>"
 		                 + "<label class ='blog_view_time'>" + jsonObj.list[i].writerdate +" · " + jsonObj.list[i].hits + "</label></div>";
@@ -75,7 +75,7 @@
 				outValues += "</div></div><div class='division_line'></div></div>";
 				
 				for(var i in jsonObj.list){
-					outValues_u += "<li><a href=\"#\"><div class=\"leftTextBox\"><img src=\"resources/images/arial.jpg\" alt=\"프로필이미지\" class=\"profileImg\">"
+					outValues_u += "<li><a href=\"detailpage?blogno="+jsonObj.list[i].blogno+"\"><div class=\"leftTextBox\"><img src=\"resources/images/arial.jpg\" alt=\"프로필이미지\" class=\"profileImg\">"
 								+ "<div class=\"infoBox\"><p class=\"userName\">"+jsonObj.list[i].memberName+"네</p><p><span class=\"uploadTime\">"+jsonObj.list[i].writerdate+"</span>"
 								+ "<span class=\"viewCount\">View "+jsonObj.list[i].hits+"회</span></p></div><div class=\"title\">"+jsonObj.list[i].writerdate+"</div>"
 								+ "<div class=\"content\">"+jsonObj.list[i].contents+"</div></div>"
@@ -136,12 +136,15 @@
         <a href="#" class="badukarray" onclick="changebadukarray()"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a>
         <a href="#" class="listarray" onclick="changelistarray()"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
     </div>
-
+	<div>
+	</div>
     <div class="s_conBox" id="ctdiv">
         <!--4x4 배열 시작-->
         <div class = "ul-table">
             <div class="ul-row">
-                <div class="session_name"></div>
+                <div class="session_name">
+                <i class="fa fa-bell fa-lg"></i>&nbsp;&nbsp;&nbsp;<span class="libray_title">구독 게시글</span>
+                </div>
                 
             </div>
             <div class="division_line"></div>

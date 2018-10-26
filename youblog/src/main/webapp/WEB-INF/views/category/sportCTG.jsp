@@ -1,19 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<title>sportCTG</title>
-</head>
-
-<body>
-<%@ include file = "/WEB-INF/views/header.jsp"  %>
-<div class="conWrap">
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
@@ -70,7 +56,7 @@
  					if(i==0){
 						outValues += "<div class = 'ul-table'><div class='ul-row'><div class='ul-table__tables'>";
 					}
-					outValues += "<div class='table_1' onclick='location.href=\"selectBlog("+jsonObj.list[i].blogno+")\"''><img src='resources/images/라이언 썸네일.png'/>"
+					outValues += "<div class='table_1' onclick='location.href=\"detailpage?blogno="+jsonObj.list[i].blogno+"\"''><img src='resources/images/라이언 썸네일.png'/>"
 		                 + "<label class ='blog_title'>" + jsonObj.list[i].title + "</label>"
 		                 + "<label class ='blog_name'>" + jsonObj.list[i].memberName + "</label>"
 		                 + "<label class ='blog_view_time'>" + jsonObj.list[i].writerdate +" · " + jsonObj.list[i].hits + "</label></div>";

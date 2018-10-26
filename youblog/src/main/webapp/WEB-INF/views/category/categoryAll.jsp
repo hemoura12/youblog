@@ -10,6 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name = "viewport" content ="width=deivce-width, initial-scale=1">
+	<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
 	
 <script type="text/javascript">
 	var rowno = 0;
@@ -89,12 +90,12 @@
 				}
 		});
 	}
-	
 	$( document ).ready(function() {
 		console.log("시작");
 		getList(cate2, 0, 20);
 		rowno=20;
     });
+	
 </script>
 
 	<title>Main</title>

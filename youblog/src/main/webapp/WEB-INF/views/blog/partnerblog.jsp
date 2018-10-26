@@ -53,7 +53,7 @@ function getList(rowno1, rowno2) {
 					if(i==0){
 					outValues += "<div class = 'ul-table'><div class='ul-row'><div class='ul-table__tables'>";
 				}
-				outValues += "<div class='table_1' onclick='location.href=\"selectBlog("+jsonObj.list[i].blogno+")\"''><img src='resources/images/라이언 썸네일.png'/>"
+				outValues += "<div class='table_1' onclick='location.href=\"detailpage?blogno="+jsonObj.list[i].blogno+"\"''><img src='resources/images/라이언 썸네일.png'/>"
 	                 + "<label class ='blog_title'>" + jsonObj.list[i].title + "</label>"
 	                 + "<label class ='blog_name'>" + jsonObj.list[i].memberName + "</label>"
 	                 + "<label class ='blog_view_time'>" + jsonObj.list[i].writerdate +" · " + jsonObj.list[i].hits + "</label></div>";
